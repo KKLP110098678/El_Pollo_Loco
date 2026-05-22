@@ -11,6 +11,17 @@ class World {
         new Cloud(),
         new Cloud()
     ]
+
+    backgroundObjects = [
+        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0, 0, 720, 480),
+        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0, 0, 720, 480),
+        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 720, 0, 720, 480),
+        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 720, 0, 720, 480)
+    ];
+
+    sky = new Sky();
+
+    canvas;
     ctx;
     constructor(canvas) {
         this.canvas = canvas;
@@ -19,6 +30,10 @@ class World {
     }
 
     draw() {
+        this.ctx.drawImage(this.sky.img, this.sky.x, this.sky.y, this.sky.width, this.sky.height);
+        this.backgroundObjects.forEach(backgroundObject => {
+            this.ctx.drawImage(backgroundObject.img, backgroundObject.x, backgroundObject.y, backgroundObject.width, backgroundObject.height);
+        });
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         this.chicken.forEach(chicken => {
             this.ctx.drawImage(chicken.img, chicken.x, chicken.y, chicken.width, chicken.height);
@@ -26,5 +41,7 @@ class World {
         this.clouds.forEach(cloud => {
             this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
         });
+
+        requestAnimationFrame(() => this.draw());
     }
 }

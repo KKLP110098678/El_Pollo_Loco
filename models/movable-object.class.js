@@ -5,6 +5,6 @@ class MovableObject {
     }
 
     moveRight() {
-        console.log('move right');
+        this.x += 5;
     }
 }
