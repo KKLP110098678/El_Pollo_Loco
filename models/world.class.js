@@ -1,5 +1,10 @@
 class World {
     character = new Character();
+    chicken = [
+        new Chicken(),
+        new Chicken(),
+        new Chicken()
+    ]
     ctx;
     constructor(canvas) {
         this.canvas = canvas;
@@ -9,5 +14,8 @@ class World {
 
     draw() {
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
+        this.chicken.forEach(chicken => {
+            this.ctx.drawImage(chicken.img, chicken.x, chicken.y, chicken.width, chicken.height);
+        });
     }
 }
