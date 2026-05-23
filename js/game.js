@@ -13,3 +13,12 @@ function initGame() {
     world = new World(canvas);
     console.log('My Character is: ', world.character);
 }
+
+window.addEventListener("keypress", (event) => {
+    if (event.code === 'KeyD') {
+        world.character.moveRight();
+    }
+    else if (event.code === 'KeyA') {
+        world.character.moveLeft();
+    }
+});
