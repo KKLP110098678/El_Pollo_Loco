@@ -59,15 +59,23 @@ class Character extends MovableObject {
         this.width = 50;
         this.height = 150;
         this.animate();
+        this.jump();
+    }
+
+    isAboveGround() {
+        return this.y < 270;
     }
 
     jump() {
-        this.y -= 150;
-        setTimeout(() => {
-            this.y += 150;
-        }, 700);
+        setInterval(() => {
+            if (!this.isAboveGround() && this.world.keyboard.SPACE) {
+                this.y -= 15;
+                setTimeout(() => {
+                    this.y += 15;
+                }, 700);
+            }
+        }, 1000 / 60);
     }
-
 
     animate() {
         setInterval(() => {
