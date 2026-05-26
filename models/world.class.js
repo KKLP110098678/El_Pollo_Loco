@@ -24,6 +24,8 @@ class World {
     canvas;
     ctx;
     keyboard;
+    camera_x = -100;
+
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
@@ -37,6 +39,7 @@ class World {
     }
 
     draw() {
+        this.ctx.translate(this.camera_x, 0);
         this.ctx.drawImage(this.sky.img, this.sky.x, this.sky.y, this.sky.width, this.sky.height);
         this.backgroundObjects.forEach(backgroundObject => {
             this.ctx.drawImage(backgroundObject.img, backgroundObject.x, backgroundObject.y, backgroundObject.width, backgroundObject.height);
@@ -57,7 +60,7 @@ class World {
         this.clouds.forEach(cloud => {
             this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
         });
-
+        this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => this.draw());
     }
 }
