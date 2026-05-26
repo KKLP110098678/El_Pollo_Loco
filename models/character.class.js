@@ -59,7 +59,7 @@ class Character extends MovableObject {
         this.width = 50;
         this.height = 150;
         this.animate();
-        this.jump();
+        this.move();
     }
 
     isAboveGround() {
@@ -67,15 +67,26 @@ class Character extends MovableObject {
     }
 
     jump() {
+        this.y -= 15;
+        setTimeout(() => {
+            this.y += 15;
+        }, 500);
+    }
+
+    move() {
         setInterval(() => {
-            if (!this.isAboveGround() && this.world.keyboard.SPACE) {
-                this.y -= 15;
-                setTimeout(() => {
-                    this.y += 15;
-                }, 700);
+            if (this.world.keyboard.RIGHT && this.x < this.world.canvas.width - this.width) {
+                this.moveRight();
+            }
+            if (this.world.keyboard.LEFT && this.x > 0) {
+                this.moveLeft();
+            }
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
             }
         }, 1000 / 60);
     }
+
 
     animate() {
         setInterval(() => {
