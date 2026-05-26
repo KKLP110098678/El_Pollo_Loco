@@ -1,23 +1,9 @@
 class World {
     character = new Character();
-    chicken = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken()
-    ]
 
-    clouds = [
-        new Cloud(),
-        new Cloud(),
-        new Cloud()
-    ]
-
-    backgroundObjects = [
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0, 0, 720, 480),
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0, 0, 720, 480),
-        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 720, 0, 720, 480),
-        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 720, 0, 720, 480)
-    ];
+    chicken = level1.chicken;
+    clouds = level1.clouds;
+    backgroundObjects = level1.backgroundObjects;
 
     sky = new Sky();
 
@@ -39,6 +25,7 @@ class World {
     }
 
     draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.ctx.drawImage(this.sky.img, this.sky.x, this.sky.y, this.sky.width, this.sky.height);
         this.backgroundObjects.forEach(backgroundObject => {
