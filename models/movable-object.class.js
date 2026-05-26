@@ -1,6 +1,7 @@
 class MovableObject {
     imageCache = {};
     currentImage = 0;
+    otherDirection = false;
     speedY = 0;
     acceleration = 1;
 
@@ -19,10 +20,12 @@ class MovableObject {
 
     moveRight() {
         this.x += 5;
+        this.otherDirection = false;
     }
 
     moveLeft() {
         this.x -= 5;
+        this.otherDirection = true;
     }
 
     applyGravity() {

@@ -41,7 +41,16 @@ class World {
         this.backgroundObjects.forEach(backgroundObject => {
             this.ctx.drawImage(backgroundObject.img, backgroundObject.x, backgroundObject.y, backgroundObject.width, backgroundObject.height);
         });
+        if (this.character.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(this.character.x + this.character.width / 2, 0);
+            this.ctx.scale(-1, 1);
+            this.ctx.translate(-this.character.x - this.character.width / 2, 0);
+        }
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
+        if (this.character.otherDirection) {
+            this.ctx.restore();
+        }
         this.chicken.forEach(chicken => {
             this.ctx.drawImage(chicken.img, chicken.x, chicken.y, chicken.width, chicken.height);
         });
