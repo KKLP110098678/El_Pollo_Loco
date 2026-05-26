@@ -59,6 +59,7 @@ class Character extends MovableObject {
         this.width = 50;
         this.height = 150;
         this.animate();
+        this.applyGravity();
         this.move();
     }
 
@@ -67,10 +68,7 @@ class Character extends MovableObject {
     }
 
     jump() {
-        this.y -= 15;
-        setTimeout(() => {
-            this.y += 15;
-        }, 500);
+        this.speedY = 10;
     }
 
     move() {

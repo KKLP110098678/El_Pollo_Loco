@@ -1,6 +1,9 @@
 class MovableObject {
     imageCache = {};
     currentImage = 0;
+    speedY = 0;
+    acceleration = 1;
+
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
@@ -20,5 +23,14 @@ class MovableObject {
 
     moveLeft() {
         this.x -= 5;
+    }
+
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25);
     }
 }
