@@ -32,6 +32,7 @@ class World {
         this.addObjectToMap(this.sky);
         this.addObjectsToMap(this.backgroundObjects);
         this.addObjectToMap(this.character);
+        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.chicken);
         this.addObjectsToMap(this.clouds);
         this.ctx.translate(-this.camera_x, 0);

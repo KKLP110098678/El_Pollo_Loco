@@ -38,13 +38,34 @@ window.addEventListener("keyup", (event) => {
     }
 });
 
+window.addEventListener("keypress", (event) => {
+    if (event.code === 'KeyF') {
+        world.character.throwBottle();
+    }
+});
+/* 
 window.addEventListener("click", (event) => {
     if (event.button === 0) {
         keyboard.LEFT_CLICK = true;
-        console.log('Left click detected');
+        keyboard.RIGHT_CLICK = false;
     }
     if (event.button === 2) {
         keyboard.RIGHT_CLICK = true;
-        console.log('Right click detected');
+        keyboard.LEFT_CLICK = false;
     }
 });
+
+window.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+    keyboard.RIGHT_CLICK = false;
+});
+
+window.addEventListener("mouseup", (event) => {
+    if (event.button === 0) {
+        keyboard.LEFT_CLICK = false;
+    }
+    if (event.button === 2) {
+        keyboard.RIGHT_CLICK = false;
+    }
+});
+ */

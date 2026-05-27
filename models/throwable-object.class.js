@@ -33,7 +33,30 @@ class ThrowableObject extends MovableObject {
         } else {
             this.speedX = 20;
         }
+        this.applyAcceleration();
         this.applyGravity();
         this.animate();
+        console.log('Bottle thrown with speedX:', this.speedX, 'and speedY:', this.speedY);
+    }
+
+    animate() {
+        setInterval(() => {
+            if (this.speedY == 0) {
+                this.playAnimation(this.IMAGES_SPLASH);
+            } else {
+                this.playAnimation(this.IMAGES_ROTATION);
+            }
+        }, 100);
+    }
+
+    isAboveGround() {
+        return this.y < 270;
+    }
+
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
 }

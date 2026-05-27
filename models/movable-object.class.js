@@ -37,4 +37,13 @@ class MovableObject {
             }
         }, 1000 / 25);
     }
+
+    applyAcceleration() {
+        setInterval(() => {
+            if (this.speedX > 0) {
+                this.x += this.speedX;
+                this.speedX -= this.acceleration;
+            } 
+        }, 1000 / 25);
+    }
 }

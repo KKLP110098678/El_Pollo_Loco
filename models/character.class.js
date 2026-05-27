@@ -61,7 +61,6 @@ class Character extends MovableObject {
         this.animate();
         this.applyGravity();
         this.move();
-        this.throwBottle();
     }
 
     isAboveGround() {
@@ -88,13 +87,9 @@ class Character extends MovableObject {
     }
 
     throwBottle() {
-        setInterval(() => {
-            if (this.world.keyboard.LEFT_CLICK || this.world.keyboard.RIGHT_CLICK) {
-                let bottle = new ThrowableObject(this.x + 100, this.y + 100);
-                bottle.throw(this.otherDirection);
-                this.world.throwableObjects.push(bottle);
-            }
-        }, 1000 / 60);
+        let bottle = new ThrowableObject(this.x, this.y + 50);
+        bottle.throw(this.otherDirection);
+        this.world.throwableObjects.push(bottle);
     }
 
 
