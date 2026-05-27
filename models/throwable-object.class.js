@@ -50,7 +50,7 @@ class ThrowableObject extends MovableObject {
     }
 
     isAboveGround() {
-        return this.y < 270;
+        return this.y < 380;
     }
 
     playAnimation(images) {

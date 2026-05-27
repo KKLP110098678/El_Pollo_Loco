@@ -34,6 +34,8 @@ class MovableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
+            } else {
+                this.speedY = 0;
             }
         }, 1000 / 25);
     }
@@ -44,6 +46,10 @@ class MovableObject {
                 this.x += this.speedX;
                 this.speedX -= this.acceleration;
             } 
+            if (this.speedX < 0) {
+                this.x += this.speedX;
+                this.speedX += this.acceleration;
+            }
         }, 1000 / 25);
     }
 }
