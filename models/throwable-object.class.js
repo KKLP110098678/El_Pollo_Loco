@@ -36,13 +36,22 @@ class ThrowableObject extends MovableObject {
         this.applyAcceleration();
         this.applyGravity();
         this.animate();
-        console.log('Bottle thrown with speedX:', this.speedX, 'and speedY:', this.speedY);
     }
 
     animate() {
+        let splashing = false;
         setInterval(() => {
             if (this.speedY == 0) {
                 this.playAnimation(this.IMAGES_SPLASH);
+                if (!splashing) {
+                    splashing = true;
+                    setTimeout(() => {
+                        let index = world.throwableObjects.indexOf(this);
+                        if (index >= 0) {
+                            world.throwableObjects.splice(index, 1);
+                        }
+                    }, 1000);
+                }
             } else {
                 this.playAnimation(this.IMAGES_ROTATION);
             }
