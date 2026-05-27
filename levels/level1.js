@@ -22,5 +22,6 @@ const level1 = new Level(
         new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 2160, 0, 720, 480),
         new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 2160, 0, 720, 480),
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 2160, 0, 720, 480)
-    ]
+    ],
+    2880
 );
