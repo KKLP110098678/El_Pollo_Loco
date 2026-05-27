@@ -12,7 +12,6 @@ let keyboard = new Keyboard();
 function initGame() {
     canvas = document.getElementById('gameCanvas');
     world = new World(canvas, keyboard);
-    console.log('My Character is: ', world.character);
 }
 
 window.addEventListener("keydown", (event) => {
@@ -36,5 +35,16 @@ window.addEventListener("keyup", (event) => {
     }
     if (event.code === 'Space') {
         keyboard.SPACE = false;
+    }
+});
+
+window.addEventListener("click", (event) => {
+    if (event.button === 0) {
+        keyboard.LEFT_CLICK = true;
+        console.log('Left click detected');
+    }
+    if (event.button === 2) {
+        keyboard.RIGHT_CLICK = true;
+        console.log('Right click detected');
     }
 });
