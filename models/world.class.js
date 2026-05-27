@@ -47,6 +47,11 @@ class World {
             this.ctx.translate(-object.x - object.width / 2, 0);
         }
         this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '5';
+        this.ctx.strokeStyle = 'red';
+        this.ctx.rect(object.x, object.y, object.width, object.height);
+        this.ctx.stroke();
         if (object.otherDirection) {
             this.ctx.restore();
         }
