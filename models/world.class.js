@@ -74,6 +74,13 @@ class World {
         this.ctx.strokeStyle = 'red';
         this.ctx.rect(object.x, object.y, object.width, object.height);
         this.ctx.stroke();
+        if (object.hitboxHeight) {
+            this.ctx.beginPath();
+            this.ctx.lineWidth = '2';
+            this.ctx.strokeStyle = 'blue';
+            this.ctx.rect(object.x, object.y + (object.height - object.hitboxHeight), object.width, object.hitboxHeight);
+            this.ctx.stroke();
+        }
         if (object.otherDirection) {
             this.ctx.restore();
         }
