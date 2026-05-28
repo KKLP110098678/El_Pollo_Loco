@@ -1,3 +1,8 @@
+/**
+ * @author Ramon Kunz
+ * @description This class represents the main character in the game, extending the MovableObject class. It handles the character's animations (idle, walking, jumping, hurt, dead), movement (left, right, jump), and interactions (throwing bottles). The character's state is updated based on keyboard input and its position is updated accordingly.
+ */
+
 class Character extends MovableObject {
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -63,14 +68,27 @@ class Character extends MovableObject {
         this.move();
     }
 
+    /**
+     * @method isAboveGround
+     * @description Checks if the character is above the ground level (y < 270). This is used to determine if the character can jump or if it should be affected by gravity.
+     * @returns {boolean} - Returns true if the character is above the ground, false otherwise.
+     */
     isAboveGround() {
         return this.y < 270;
     }
 
+    /**
+     * @method jump
+     * @description Makes the character jump by setting its vertical speed.
+     */
     jump() {
         this.speedY = 10;
     }
 
+    /**
+     * @method move
+     * @description Handles the character's movement based on keyboard input. It checks for right and left movement, as well as jumping. The character's position is updated accordingly, and the camera position is adjusted to follow the character.
+     */
     move() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX - this.width) {
@@ -86,6 +104,10 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * @method throwBottle
+     * @description Creates a new throwable object (bottle) at the character's position and adds it to the world's throwable objects array. The bottle is thrown in the direction the character is facing.
+     */
     throwBottle() {
         let bottle = new ThrowableObject(this.x, this.y + 50);
         bottle.throw(this.otherDirection);
@@ -93,6 +115,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * @method animate
+     * @description Handles the character's animations based on the current state (idle, walking, jumping) and keyboard input.
+     */
     animate() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
