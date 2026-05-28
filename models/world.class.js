@@ -1,3 +1,11 @@
+/**
+ * @author Ramon Kunz
+ * 
+ * @description This class represents the game world, containing all game objects and handling the rendering of the game.
+ * It manages the character, chickens, clouds, background objects, and throwable objects.
+ * The world also handles the camera movement and the main game loop for rendering.
+ */
+
 class World {
     character = new Character();
 
@@ -22,10 +30,19 @@ class World {
         this.level = level1;
     }
 
+    /**
+     * @method setWorld
+     * @description Sets the world reference for the character, allowing the character to interact with the world and other objects.
+     */
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * @method draw
+     * Main game loop for rendering the game. It clears the canvas, translates the context based on the camera position, and draws all game objects in the correct order (sky, background objects, character, throwable objects, chickens, clouds).
+     * It uses requestAnimationFrame for smooth rendering.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -39,6 +56,11 @@ class World {
         requestAnimationFrame(() => this.draw());
     }
 
+    /**
+     * @method addObjectToMap
+     * Adds a single object to the map, handling its rendering and any transformations (e.g., flipping for direction).
+     * @param {MovableObject} object - The object to be added to the map.
+     */
     addObjectToMap(object) {
         if (object.otherDirection) {
             this.ctx.save();
@@ -57,6 +79,11 @@ class World {
         }
     }
 
+    /**
+     * @method addObjectsToMap
+     * @description Adds multiple objects to the map by iterating over the array and adding each object individually.
+     * @param {MovableObject[]} objects - The array of objects to be added to the map.
+     */
     addObjectsToMap(objects) {
         objects.forEach(object => {
             this.addObjectToMap(object);
