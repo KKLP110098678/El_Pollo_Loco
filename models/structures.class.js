@@ -8,11 +8,11 @@ class Structure extends MovableObject {
 }
 
 class Ground extends Structure {
-    constructor(id, y, x) {
+    constructor(id, y, x, width, height) {
         super(id, y, x);
         this.loadImage('img/10_platforms/wood-ground.png');
-        this.width = 120;
-        this.height = 80;
+        this.width = width;
+        this.height = height;
     }
 
 }
