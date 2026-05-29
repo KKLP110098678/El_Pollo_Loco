@@ -1,4 +1,4 @@
-class Npc extends MovableObject {
+class Npc extends Creature {
     
     constructor() {
         super();

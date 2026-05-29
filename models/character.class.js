@@ -1,8 +1,8 @@
 /**
  * @author Ramon Kunz
- * @description This class represents the main character in the game, extending the MovableObject class. It handles the character's animations (idle, walking, jumping, hurt, dead), movement (left, right, jump), and interactions (throwing bottles). The character's state is updated based on keyboard input and its position is updated accordingly.
+ * @description This class represents the main character in the game, extending the Creature class. It handles the character's animations (idle, walking, jumping, hurt, dead), movement (left, right, jump), and interactions (throwing bottles). The character's state is updated based on keyboard input and its position is updated accordingly.
  */
-class Character extends MovableObject {
+class Character extends Creature {
     constructor() {
         super();
         this.x = 120;
@@ -19,6 +19,7 @@ class Character extends MovableObject {
         this.animate();
         this.applyGravity();
         this.move();
+        this.life = 5;
     }
 
     /**
@@ -81,6 +82,10 @@ class Character extends MovableObject {
             } else if (this.world.keyboard.SPACE) {
                 let i = this.currentImage % characterImages.JUMPING.length;
                 this.img = this.imageCache[characterImages.JUMPING[i]];
+                this.currentImage++;
+            } else if (this.isHurt) {
+                let i = this.currentImage % characterImages.HURT.length;
+                this.img = this.imageCache[characterImages.HURT[i]];
                 this.currentImage++;
             } else {
                 let i = this.currentImage % characterImages.IDLE.length;

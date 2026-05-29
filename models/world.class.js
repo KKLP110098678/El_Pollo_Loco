@@ -27,6 +27,7 @@ class World {
         this.keyboard = keyboard;
         this.setWorld();
         this.draw();
+        this.checkCollisions();
         this.level = level1;
     }
 
@@ -69,21 +70,21 @@ class World {
             this.ctx.translate(-object.x - object.width / 2, 0);
         }
         this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '5';
-        this.ctx.strokeStyle = 'red';
-        this.ctx.rect(object.x, object.y, object.width, object.height);
-        this.ctx.stroke();
+        this.createRect(object, object.height, 'red');
         if (object.hitboxHeight) {
-            this.ctx.beginPath();
-            this.ctx.lineWidth = '2';
-            this.ctx.strokeStyle = 'blue';
-            this.ctx.rect(object.x, object.y + (object.height - object.hitboxHeight), object.width, object.hitboxHeight);
-            this.ctx.stroke();
+            this.createRect(object, object.hitboxHeight);
         }
         if (object.otherDirection) {
             this.ctx.restore();
         }
+    }
+    
+    createRect(object, height, color) {
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '2';
+        this.ctx.strokeStyle = color || 'blue';
+        this.ctx.rect(object.x, object.y + (object.height - height), object.width, height);
+        this.ctx.stroke();
     }
 
     /**
@@ -95,5 +96,23 @@ class World {
         objects.forEach(object => {
             this.addObjectToMap(object);
         });
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+        this.chicken.forEach(chicken => {
+            if (this.character.isColliding(chicken) && !chicken.isDead()) {
+                this.character.hit();
+            }
+        });
+        this.throwableObjects.forEach(bottle => {
+            this.chicken.forEach(chicken => {
+                if (bottle.isColliding(chicken) && !chicken.isDead()) {
+                    chicken.hit();
+                    bottle.explode();
+                }
+            });
+        });
+    }, 1000 / 25);
     }
 }
