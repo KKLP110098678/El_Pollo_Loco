@@ -4,6 +4,7 @@ class Npc extends Creature {
         super();
         this.isWalking = false;
         this.detectionRange = 150; // Range within which the NPC detects the character
+        this.world = null;
     }
 
     walkRandomly() {
@@ -28,5 +29,28 @@ class Npc extends Creature {
                 this.isWalking = false;
             }, randomSteps * 100);
         }, 1000 * 5); // Change direction every 5 seconds
+    }
+
+    walkTowardsCharacter(character) {
+        setInterval(() => {
+            if (character.x < this.x) {
+                this.moveLeft();
+            } else if (character.x > this.x) {
+                this.moveRight();
+            }
+        }, 1000 / 5);
+
+    }
+
+    detectCharacter(character) {
+        setInterval(() => {
+        let distanceX = Math.abs(this.x - character.x);
+        let distanceY = Math.abs(this.y - character.y);
+        let isDetected = distanceX < this.detectionRange && distanceY < this.detectionRange;
+        if (isDetected) {
+            this.walkTowardsCharacter(character);
+        }
+        return isDetected;
+    }, 1000 / 10);
     }
 }

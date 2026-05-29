@@ -37,6 +37,10 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.chicken.forEach(npc => {
+            npc.world = this;
+            npc.detectCharacter(this.character);
+        });
     }
 
     /**
