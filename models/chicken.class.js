@@ -9,7 +9,6 @@ class Chicken extends Npc {
         this.width = 50;
         this.height = 50;
         this.hitboxHeight = this.height;
-        this.walkRandomly();
         this.animate();
     }
 
