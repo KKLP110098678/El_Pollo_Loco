@@ -14,13 +14,13 @@ class Npc extends Creature {
             if (randomDirection === 'LEFT') {
                 for (let i = 0; i < randomSteps; i++) {
                     setTimeout(() => {
-                        this.moveLeft();
+                        this.moveLeft(3);
                     }, i * 100);
                 }
             } else {
                 for (let i = 0; i < randomSteps; i++) {
                     setTimeout(() => {
-                        this.moveRight();
+                        this.moveRight(3);
                     }, i * 100);
                 }
             }
@@ -34,9 +34,9 @@ class Npc extends Creature {
     walkTowardsCharacter(character) {
         setInterval(() => {
             if (character.x < this.x) {
-                this.moveLeft();
+                this.moveLeft(1);
             } else if (character.x > this.x) {
-                this.moveRight();
+                this.moveRight(1);
             }
         }, 1000 / 5);
 

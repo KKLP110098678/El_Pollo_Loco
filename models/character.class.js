@@ -46,10 +46,10 @@ class Character extends Creature {
     move() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX - this.width) {
-                this.moveRight();
+                this.moveRight(5);
             }
             if (this.world.keyboard.LEFT && this.x > 100) {
-                this.moveLeft();
+                this.moveLeft(5);
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();

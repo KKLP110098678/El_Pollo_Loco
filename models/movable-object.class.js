@@ -38,8 +38,8 @@ class MovableObject {
      * @method moveRight
      * @description Moves the object to the right by increasing its x-coordinate. It also sets the otherDirection property to false, indicating that the object is facing right.
      */
-    moveRight() {
-        this.x += 5;
+    moveRight(px) {
+        this.x += px;
         this.otherDirection = false;
     }
 
@@ -47,8 +47,8 @@ class MovableObject {
      * @method moveLeft
      * @description Moves the object to the left by decreasing its x-coordinate. It also sets the otherDirection property to true, indicating that the object is facing left.
      */
-    moveLeft() {
-        this.x -= 5;
+    moveLeft(px) {
+        this.x -= px;
         this.otherDirection = true;
     }
 
