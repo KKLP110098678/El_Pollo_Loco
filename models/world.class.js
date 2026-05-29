@@ -74,6 +74,9 @@ class World {
         if (object.hitboxHeight) {
             this.createRect(object, object.hitboxHeight);
         }
+        if (object.detectionRange) {
+            this.createDetectionRange(object);
+        }
         if (object.otherDirection) {
             this.ctx.restore();
         }
@@ -84,6 +87,15 @@ class World {
         this.ctx.lineWidth = '2';
         this.ctx.strokeStyle = color || 'blue';
         this.ctx.rect(object.x, object.y + (object.height - height), object.width, height);
+        this.ctx.stroke();
+    }
+
+    createDetectionRange(object) {
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '2';
+        this.ctx.strokeStyle = 'green';
+        this.ctx.beginPath();
+        this.ctx.arc(object.x + object.width / 2, object.y + object.height / 2, object.detectionRange, 0, 2 * Math.PI);
         this.ctx.stroke();
     }
 

@@ -3,7 +3,7 @@ class Npc extends Creature {
     constructor() {
         super();
         this.isWalking = false;
-        this.detectionRange = 200; // Range within which the NPC detects the character
+        this.detectionRange = 150; // Range within which the NPC detects the character
     }
 
     walkRandomly() {
