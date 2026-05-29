@@ -3,7 +3,7 @@ class Npc extends Creature {
     constructor() {
         super();
         this.isWalking = false;
-        this.detectionRange = 150; // Range within which the NPC detects the character
+        this.detectionRange = 140; // Range within which the NPC detects the character
         this.world = null;
     }
 
@@ -32,13 +32,12 @@ class Npc extends Creature {
     }
 
     walkTowardsCharacter(character) {
-        setInterval(() => {
             if (character.x < this.x) {
                 this.moveLeft(1);
             } else if (character.x > this.x) {
                 this.moveRight(1);
             }
-        }, 1000 / 5);
+
 
     }
 
