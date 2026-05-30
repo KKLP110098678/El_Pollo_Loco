@@ -12,6 +12,7 @@ class World {
     chicken = level1.chicken;
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
+    groundObjects = level1.groundObjects;
     throwableObjects = [];
 
     sky = new Sky();
@@ -56,6 +57,7 @@ class World {
         this.addObjectToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.chicken);
+        this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.clouds);
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => this.draw());
@@ -133,6 +135,17 @@ class World {
                 }
             });
         });
+        let onGround = false;
+        this.groundObjects.forEach(ground => {
+            if (this.character.isColliding(ground)) {
+                this.character.currentFallingY = ground.y - this.character.height;
+                onGround = true;
+            }
+        });
+        
+        if (!onGround) {
+            this.character.currentFallingY = 270;
+        }
     }, 1000 / 60);
     }
 }

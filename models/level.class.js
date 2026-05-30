@@ -7,12 +7,14 @@ class Level {
     chicken;
     clouds;
     backgroundObjects;
+    groundObjects;
     levelEndX;
 
-    constructor(chicken, clouds, backgroundObjects, levelEndX) {
+    constructor(chicken, clouds, backgroundObjects, groundObjects, levelEndX) {
         this.chicken = chicken;
         this.clouds = clouds;
         this.backgroundObjects = backgroundObjects;
+        this.groundObjects = groundObjects;
         this.levelEndX = levelEndX;
     }
 }    

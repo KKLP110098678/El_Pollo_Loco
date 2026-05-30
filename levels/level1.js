@@ -23,5 +23,10 @@ const level1 = new Level(
         new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 2160, 0, 720, 480),
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 2160, 0, 720, 480)
     ],
-    2310
+    [
+        new Ground('ground1', 305, 200, 200, 20),
+        new Ground('ground2', 335, 720, 200, 20),
+        new Ground('ground3', 335, 1440, 200, 20),
+        new Ground('ground4', 335, 2160, 200, 20)
+    ],2310
 );

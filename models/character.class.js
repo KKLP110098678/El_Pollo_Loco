@@ -7,6 +7,7 @@ class Character extends Creature {
         super();
         this.x = 120;
         this.y = 270;
+        this.currentFallingY = this.y;
         this.loadImage(characterImages.IDLE[0]);
         this.loadImages(characterImages.IDLE);
         this.loadImages(characterImages.WALKING);
@@ -28,7 +29,7 @@ class Character extends Creature {
      * @returns {boolean} - Returns true if the character is above the ground, false otherwise.
      */
     isAboveGround() {
-        return this.y < 270;
+        return this.y < this.currentFallingY;
     }
 
     /**
@@ -36,7 +37,7 @@ class Character extends Creature {
      * @description Makes the character jump by setting its vertical speed.
      */
     jump() {
-        this.speedY = 10;
+        this.speedY = 17;
     }
 
     /**
