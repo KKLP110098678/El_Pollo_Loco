@@ -65,11 +65,11 @@ class Npc extends Creature {
     walkRandomly() {
             let randomSteps = Math.floor(Math.random() * 20) + 10; // Random steps between 10 and 60
             for (let i = 0; i < randomSteps; i++) {
-                    if (this.direction === 'LEFT') {
+                    if (this.direction === 'LEFT' && this.x > this.spawnAreaX[0]) {
                         this.moveLeft(1);
                         this.isWalking = true;
 
-                    } else {
+                    } else if (this.direction === 'RIGHT' && this.x < this.spawnAreaX[1]) {
                         this.moveRight(1);
                         this.isWalking = true;
                 }

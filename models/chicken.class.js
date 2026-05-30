@@ -8,6 +8,7 @@ class Chicken extends Npc {
         super();
         this.x = 260 + Math.random() * 200;
         this.y = 370;
+        this.spawnAreaX = [this.x, this.x + 200]; // Define the spawn area for chickens (between x=260 and x=460)
         this.loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(chickenImages.WALKING);
         this.loadImages(chickenImages.DEAD);
