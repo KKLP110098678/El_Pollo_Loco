@@ -137,9 +137,10 @@ class World {
         });
         let onGround = false;
         this.groundObjects.forEach(ground => {
-            if (this.character.isColliding(ground)) {
+            if (this.character.isColliding(ground) && this.character.y + this.character.height <= ground.y + 10) {
                 this.character.currentFallingY = ground.y - this.character.height;
                 onGround = true;
+                console.log(this.character.y + this.character.height, ground.y);
             }
         });
         

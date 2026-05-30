@@ -29,7 +29,7 @@ class Character extends Creature {
      * @returns {boolean} - Returns true if the character is above the ground, false otherwise.
      */
     isAboveGround() {
-        return this.y < this.currentFallingY;
+        return this.y <= this.currentFallingY;
     }
 
     /**
@@ -37,7 +37,7 @@ class Character extends Creature {
      * @description Makes the character jump by setting its vertical speed.
      */
     jump() {
-        this.speedY = 17;
+        this.speedY = 16;
     }
 
     /**
