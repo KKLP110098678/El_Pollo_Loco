@@ -72,6 +72,11 @@ class ThrowableObject extends MovableObject {
         }, 100);
     }
 
+    explode() {
+        this.speedX = 0;
+        this.speedY = 0;
+    }
+
     /**
      * @method isAboveGround
      * @description Checks if the bottle is above the ground level (y < 380). This is used to determine if the bottle should continue falling or if it has hit the ground.

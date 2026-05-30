@@ -114,6 +114,10 @@ class World {
         });
     }
 
+    /**
+     * @method checkCollisions
+     * @description Checks for collisions between the main character and chickens, as well as between throwable objects and chickens. If a collision is detected, the appropriate hit or explode methods are called on the involved objects.
+     */
     checkCollisions() {
         setInterval(() => {
         this.chicken.forEach(chicken => {
