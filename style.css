@@ -1,5 +1,10 @@
+@font-face {
+    font-family: 'rye';
+    src: url('./fonts/Rye-Regular.ttf') format('truetype');
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'rye', Arial, sans-serif;
     background-color: #f0f0f0;
     min-height: 100vh;
     display: flex;
