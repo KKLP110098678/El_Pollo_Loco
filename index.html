@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>El Pollo Loco</title>
 </head>
 <body onload="initGame()">
-    <h1>El Pollo Loco</h1>
-
-    <canvas id="gameCanvas" width="720" height="480" style="border:1px solid #000000;">
-
-    </canvas>
+    <div class="content">
+        <h1>El Pollo Loco</h1>
+        <canvas id="gameCanvas" width="720" height="480">
+        </canvas>
+    </div>
     <script src="./models/level.class.js"></script>
     <script src="./models/world.class.js"></script>
     <script src="./models/movable-object.class.js"></script>
     <script src="./models/throwable-object.class.js"></script>
     <script src="./models/creature.class.js"></script>
-    <script src="./path/character-imgages.js"></script>
+    <script src="./path/character-images.js"></script>
     <script src="./models/character.class.js"></script>
     <script src="./models/npc.class.js"></script>
     <script src="./path/chicken-images.js"></script>
