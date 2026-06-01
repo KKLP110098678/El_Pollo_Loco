@@ -86,6 +86,7 @@ class World {
         if (object.otherDirection) {
             this.ctx.restore();
         }
+        this.drawControlsOnMobile();
     }
     
     createRect(object, height, color) {
@@ -103,6 +104,48 @@ class World {
         this.ctx.beginPath();
         this.ctx.arc(object.x + object.width / 2, object.y + object.height / 2, object.detectionRange, 0, 2 * Math.PI);
         this.ctx.stroke();
+    }
+
+    drawButtonRight() {
+        this.ctx.beginPath();
+        this.ctx.moveTo(60, this.canvas.height - 80);
+        this.ctx.lineTo(100, this.canvas.height - 80);
+        this.ctx.moveTo(100, this.canvas.height - 80);
+        this.ctx.lineTo(80, this.canvas.height - 60);
+        this.ctx.moveTo(100, this.canvas.height - 80);
+        this.ctx.lineTo(80, this.canvas.height - 100);
+        this.ctx.lineWidth = '2';
+        this.ctx.strokeStyle = 'black';
+        this.ctx.stroke();
+        this.ctx.beginPath();
+        this.ctx.arc(80, this.canvas.height - 80, 30, 0, 2 * Math.PI);
+        this.ctx.lineWidth = '2';
+        this.ctx.strokeStyle = 'black';
+        this.ctx.stroke();
+    }
+
+    drawButtonLeft() {
+        this.ctx.beginPath();
+        this.ctx.moveTo(60, this.canvas.height - 80);
+        this.ctx.lineTo(100, this.canvas.height - 80);
+        this.ctx.moveTo(100, this.canvas.height - 80);
+        this.ctx.lineTo(80, this.canvas.height - 60);
+        this.ctx.moveTo(100, this.canvas.height - 80);
+        this.ctx.lineTo(80, this.canvas.height - 100);
+        this.ctx.lineWidth = '2';
+        this.ctx.strokeStyle = 'black';
+        this.ctx.stroke();
+        this.ctx.beginPath();
+        this.ctx.arc(140, this.canvas.height - 80, 30, 0, 2 * Math.PI);
+        this.ctx.lineWidth = '2';
+        this.ctx.strokeStyle = 'black';
+        this.ctx.stroke();
+    }
+    drawControlsOnMobile() {
+        if ("ontouchstart" in window) {
+            this.drawButtonRight();
+            this.drawButtonLeft();
+        }
     }
 
     /**
@@ -140,7 +183,6 @@ class World {
             if (this.character.isColliding(ground) && this.character.y + this.character.height <= ground.y + 10) {
                 this.character.currentFallingY = ground.y - this.character.height;
                 onGround = true;
-                console.log(this.character.y + this.character.height, ground.y);
             }
         });
         
