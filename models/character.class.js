@@ -29,7 +29,7 @@ class Character extends Creature {
      * @returns {boolean} - Returns true if the character is above the ground, false otherwise.
      */
     isAboveGround() {
-        return this.y <= this.currentFallingY;
+        return this.y < this.currentFallingY;
     }
 
     /**
