@@ -63,6 +63,9 @@ class MovableObject {
                 this.speedY -= this.acceleration;
             } else {
                 this.speedY = 0;
+                if (this.currentFallingY !== undefined) {
+                    this.y = this.currentFallingY;
+                }
             }
         }, 1000 / 25);
     }
