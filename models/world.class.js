@@ -126,12 +126,12 @@ class World {
 
     drawButtonLeft() {
         this.ctx.beginPath();
-        this.ctx.moveTo(60, this.canvas.height - 80);
-        this.ctx.lineTo(100, this.canvas.height - 80);
-        this.ctx.moveTo(100, this.canvas.height - 80);
-        this.ctx.lineTo(80, this.canvas.height - 60);
-        this.ctx.moveTo(100, this.canvas.height - 80);
-        this.ctx.lineTo(80, this.canvas.height - 100);
+        this.ctx.moveTo(120, this.canvas.height - 80);
+        this.ctx.lineTo(160, this.canvas.height - 80);
+        this.ctx.moveTo(120, this.canvas.height - 80);
+        this.ctx.lineTo(140, this.canvas.height - 60);
+        this.ctx.moveTo(120, this.canvas.height - 80);
+        this.ctx.lineTo(140, this.canvas.height - 100);
         this.ctx.lineWidth = '2';
         this.ctx.strokeStyle = 'black';
         this.ctx.stroke();
