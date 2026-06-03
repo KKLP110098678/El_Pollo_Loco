@@ -23,9 +23,9 @@ class World {
     camera_x = -100;
     
 
-    move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 20, 400);
-    move_right_button = new MobileButton('move_right', 'img/11_mobile_controls/right_arrow.png', 100, 400);
-    jump_button = new MobileButton('jump', 'img/11_mobile_controls/jump_arrow.png', 180, 400);
+    move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 580, 400);
+    move_right_button = new MobileButton('move_right', 'img/11_mobile_controls/right_arrow.png', 650, 400);
+    jump_button = new MobileButton('jump', 'img/11_mobile_controls/jump_arrow.png', 20, 400);
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
