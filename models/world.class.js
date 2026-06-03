@@ -8,19 +8,24 @@
 
 class World {
     character = new Character();
-
+    
     chicken = level1.chicken;
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
     groundObjects = level1.groundObjects;
     throwableObjects = [];
-
+    
     sky = new Sky();
-
+    
     canvas;
     ctx;
     keyboard;
     camera_x = -100;
+    
+
+    move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 20, 400);
+    move_right_button = new MobileButton('move_right', 'img/11_mobile_controls/right_arrow.png', 100, 400);
+    jump_button = new MobileButton('jump', 'img/11_mobile_controls/jump_arrow.png', 180, 400);
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -42,6 +47,9 @@ class World {
             npc.world = this;
             npc.detectCharacter(this.character);
         });
+        this.move_left_button.world = this;
+        this.move_right_button.world = this;
+        this.jump_button.world = this;
     }
 
     /**
@@ -59,6 +67,11 @@ class World {
         this.addObjectsToMap(this.chicken);
         this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.clouds);
+        if ("ontouchstart" in window) {
+            this.addObjectToMap(this.move_left_button);
+            this.addObjectToMap(this.move_right_button);
+            this.addObjectToMap(this.jump_button);
+        }
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => this.draw());
     }
@@ -86,7 +99,6 @@ class World {
         if (object.otherDirection) {
             this.ctx.restore();
         }
-        this.drawControlsOnMobile();
     }
     
     createRect(object, height, color) {
@@ -104,48 +116,6 @@ class World {
         this.ctx.beginPath();
         this.ctx.arc(object.x + object.width / 2, object.y + object.height / 2, object.detectionRange, 0, 2 * Math.PI);
         this.ctx.stroke();
-    }
-
-    drawButtonRight() {
-        this.ctx.beginPath();
-        this.ctx.moveTo(60, this.canvas.height - 80);
-        this.ctx.lineTo(100, this.canvas.height - 80);
-        this.ctx.moveTo(100, this.canvas.height - 80);
-        this.ctx.lineTo(80, this.canvas.height - 60);
-        this.ctx.moveTo(100, this.canvas.height - 80);
-        this.ctx.lineTo(80, this.canvas.height - 100);
-        this.ctx.lineWidth = '2';
-        this.ctx.strokeStyle = 'black';
-        this.ctx.stroke();
-        this.ctx.beginPath();
-        this.ctx.arc(80, this.canvas.height - 80, 30, 0, 2 * Math.PI);
-        this.ctx.lineWidth = '2';
-        this.ctx.strokeStyle = 'black';
-        this.ctx.stroke();
-    }
-
-    drawButtonLeft() {
-        this.ctx.beginPath();
-        this.ctx.moveTo(120, this.canvas.height - 80);
-        this.ctx.lineTo(160, this.canvas.height - 80);
-        this.ctx.moveTo(120, this.canvas.height - 80);
-        this.ctx.lineTo(140, this.canvas.height - 60);
-        this.ctx.moveTo(120, this.canvas.height - 80);
-        this.ctx.lineTo(140, this.canvas.height - 100);
-        this.ctx.lineWidth = '2';
-        this.ctx.strokeStyle = 'black';
-        this.ctx.stroke();
-        this.ctx.beginPath();
-        this.ctx.arc(140, this.canvas.height - 80, 30, 0, 2 * Math.PI);
-        this.ctx.lineWidth = '2';
-        this.ctx.strokeStyle = 'black';
-        this.ctx.stroke();
-    }
-    drawControlsOnMobile() {
-        if ("ontouchstart" in window) {
-            this.drawButtonRight();
-            this.drawButtonLeft();
-        }
     }
 
     /**
