@@ -67,12 +67,12 @@ class World {
         this.addObjectsToMap(this.chicken);
         this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.clouds);
+        this.ctx.translate(-this.camera_x, 0);
         if ("ontouchstart" in window) {
             this.addObjectToMap(this.move_left_button);
             this.addObjectToMap(this.move_right_button);
             this.addObjectToMap(this.jump_button);
         }
-        this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(() => this.draw());
     }
 
