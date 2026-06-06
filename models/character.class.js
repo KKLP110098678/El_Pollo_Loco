@@ -22,6 +22,7 @@ class Character extends Creature {
         this.move();
         this.life = 5;
         this.coins = 0;
+        this.ammo = 5;
         this.bottle_throwed = false;
     }
 

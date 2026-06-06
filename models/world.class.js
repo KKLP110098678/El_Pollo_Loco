@@ -132,7 +132,7 @@ class World {
         if (object instanceof StatusCounter) {
             this.ctx.font = "20px Arial";
             this.ctx.fillStyle = "white";
-            this.ctx.fillText(this.coinCounter.value, object.x + 60, object.y + 30);
+            this.ctx.fillText(object.value, object.x + 60, object.y + 30);
         }
             
 
