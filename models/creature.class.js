@@ -27,8 +27,11 @@ class Creature extends MovableObject {
      * @description Reduces the creature's life by one and sets the isHurt property to true. After a short delay, the isHurt property is reset to false, allowing the creature to be hit again.
      */
     hit() {
+        if (this.isHurt) return;
+        
         this.life -= 1;
         this.isHurt = true;
+        
         setTimeout(() => {
             this.isHurt = false;
         }, 1000);
