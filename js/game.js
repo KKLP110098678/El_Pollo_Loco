@@ -43,6 +43,7 @@ window.addEventListener("keypress", (event) => {
         world.character.throwBottle();
     }
 });
+
 /* 
 window.addEventListener("click", (event) => {
     if (event.button === 0) {
