@@ -22,7 +22,7 @@ class World {
     keyboard;
     camera_x = -100;
 
-    statusBar = new StatusBar(20, 'img/7_statusbars/3_icons/icon_health.png', 'img/7_statusbars/4_bar_elements/statusbar_green.png');
+    healthBar = new StatusBar(20, 'img/7_statusbars/3_icons/icon_health.png', 'img/7_statusbars/4_bar_elements/statusbar_green.png');
     
 
     move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 580, 400);
@@ -80,8 +80,8 @@ class World {
         }
         
         // Berechne Prozentwert für das Leben (max 5)
-        this.statusBar.setPercentage((this.character.life / 5) * 100);
-        this.addObjectToMap(this.statusBar);
+        this.healthBar.setPercentage((this.character.life / 5) * 100);
+        this.addObjectToMap(this.healthBar);
         
         requestAnimationFrame(() => this.draw());
     }
