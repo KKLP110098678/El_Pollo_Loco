@@ -25,6 +25,7 @@ class World {
 
     healthBar = new StatusBar(20, 'img/7_statusbars/3_icons/icon_health.png', 'img/7_statusbars/4_bar_elements/statusbar_green.png');
     coinCounter = new StatusCounter(60, 'img/7_statusbars/3_icons/icon_coin.png');
+    ammoCounter = new StatusCounter(100, 'img/7_statusbars/3_icons/icon_salsa_bottle.png');
     
 
     move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 580, 400);
@@ -87,6 +88,8 @@ class World {
         this.addObjectToMap(this.healthBar);
         this.coinCounter.value = this.character.coins;
         this.addObjectToMap(this.coinCounter);
+        this.ammoCounter.value = this.character.ammo;
+        this.addObjectToMap(this.ammoCounter);
         
         requestAnimationFrame(() => this.draw());
     }

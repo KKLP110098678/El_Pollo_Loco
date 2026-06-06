@@ -30,12 +30,12 @@ const level1 = new Level(
         new Ground('ground4', 335, 2160, 200, 20)
     ],
     [
-        new Coin(250, 270),
-        new Coin(200, 200),
-        new Coin(300, 200),
-        new Coin(400, 200),
-        new Coin(500, 200),
-        new Coin(600, 200),
+        new Coin(250, 270, 'img/8_coin/coin_2.png'),
+        new Coin(200, 200, 'img/8_coin/coin_2.png'),
+        new Coin(300, 200, 'img/8_coin/coin_2.png'),
+        new Coin(400, 200, 'img/8_coin/coin_2.png'),
+        new Coin(500, 200, 'img/8_coin/coin_2.png'),
+        new Coin(600, 200, 'img/8_coin/coin_2.png')
     ],
     2310
 );
