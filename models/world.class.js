@@ -24,6 +24,7 @@ class World {
     camera_x = -100;
 
     healthBar = new StatusBar(20, 'img/7_statusbars/3_icons/icon_health.png', 'img/7_statusbars/4_bar_elements/statusbar_green.png');
+    coinCounter = new StatusCounter(60, 'img/7_statusbars/3_icons/icon_coin.png');
     
 
     move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 580, 400);
@@ -84,6 +85,8 @@ class World {
         // Berechne Prozentwert für das Leben (max 5)
         this.healthBar.setPercentage((this.character.life / 5) * 100);
         this.addObjectToMap(this.healthBar);
+        this.coinCounter.value = this.character.coins;
+        this.addObjectToMap(this.coinCounter);
         
         requestAnimationFrame(() => this.draw());
     }
@@ -122,6 +125,13 @@ class World {
                 this.ctx.drawImage(object.iconInfo, object.x - 15, object.y , 50, 50);
             }
         }
+
+        if (object instanceof StatusCounter) {
+            this.ctx.font = "20px Arial";
+            this.ctx.fillStyle = "white";
+            this.ctx.fillText(this.coinCounter.value, object.x + 60, object.y + 30);
+        }
+            
 
         if (object instanceof Character || object instanceof Chicken) {
         this.createRect(object, object.height, 'red');
@@ -189,6 +199,14 @@ class World {
             if (this.character.isColliding(ground) && this.character.y + this.character.height <= ground.y + 10) {
                 this.character.currentFallingY = ground.y - this.character.height;
                 onGround = true;
+            }
+        });
+
+        this.coins.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                this.character.coins += 1;
+                this.coinCounter.increase(1);
+                this.coins.splice(index, 1);
             }
         });
         
