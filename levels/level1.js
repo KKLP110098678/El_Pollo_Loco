@@ -30,7 +30,7 @@ const level1 = new Level(
         new Ground('ground4', 335, 2160, 200, 20)
     ],
     [
-        new Coin(100, 200),
+        new Coin(250, 270),
         new Coin(200, 200),
         new Coin(300, 200)
     ],

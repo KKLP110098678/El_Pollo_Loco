@@ -3,36 +3,13 @@
  * @description This class represents a movable object in the game. It handles the object's movement, gravity, and acceleration. Other classes, such as Character, extend this class to inherit these functionalities.
  */
 
-class MovableObject {
+class MovableObject extends DrawableObject {
     imageCache = {};
     currentImage = 0;
     otherDirection = false;
     speedY = 0;
     speedX = 0;
     acceleration = 1;
-
-    /**
-     * @method loadImage
-     * @description Loads a single image and sets it as the current image for the object.
-     * @param {string} path - The path to the image to be loaded.
-     */
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    /**
-     * @method loadImages
-     * @description Loads an array of images into the image cache for later use in animations. Each image is created as a new Image object and stored in the cache with its path as the key.
-     * @param {string[]} array - An array of image paths to be loaded into the cache.
-     */
-    loadImages(array) {
-        array.forEach(path => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
 
     /**
      * @method moveRight

@@ -8,4 +8,11 @@ class Coin extends MovableObject {
         this.width = 50;
         this.height = 50;
     }
+
+    destroy() {
+        let index = world.coins.indexOf(this);
+        if (index > -1) {
+            world.coins.splice(index, 1);
+        }
+    }
 }
