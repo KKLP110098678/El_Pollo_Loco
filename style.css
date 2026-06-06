@@ -7,7 +7,7 @@ body {
     margin: 0;
     font-family: 'rye', Arial, sans-serif;
     background-color: #f0f0f0;
-    height: 100vh;
+    height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,5 +26,12 @@ body {
     #gameCanvas {
         width: 100%;
         height: auto;
+    }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+    #gameCanvas {
+        width: auto;
+        height: 100svh;
     }
 }
