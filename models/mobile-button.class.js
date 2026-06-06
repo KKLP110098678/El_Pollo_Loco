@@ -69,6 +69,12 @@ class MobileButton extends MovableObject {
             case 'jump':
                 this.world.keyboard.SPACE = isPressed;
                 break;
+            case 'throw_bottle':
+                this.world.keyboard.F = isPressed;
+                if (isPressed) {
+                    this.world.character.throwBottle();
+                }
+                break;
         }
     }
 

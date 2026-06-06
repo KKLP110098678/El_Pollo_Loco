@@ -26,6 +26,7 @@ class World {
     move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 580, 400);
     move_right_button = new MobileButton('move_right', 'img/11_mobile_controls/right_arrow.png', 650, 400);
     jump_button = new MobileButton('jump', 'img/11_mobile_controls/jump_arrow.png', 20, 400);
+    throw_bottle_button = new MobileButton('throw_bottle', 'img/11_mobile_controls/throw_bottle.png', 20, 330);
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -50,6 +51,7 @@ class World {
         this.move_left_button.world = this;
         this.move_right_button.world = this;
         this.jump_button.world = this;
+        this.throw_bottle_button.world = this;
     }
 
     /**
@@ -72,6 +74,7 @@ class World {
             this.addObjectToMap(this.move_left_button);
             this.addObjectToMap(this.move_right_button);
             this.addObjectToMap(this.jump_button);
+            this.addObjectToMap(this.throw_bottle_button);
         }
         requestAnimationFrame(() => this.draw());
     }
