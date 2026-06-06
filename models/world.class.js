@@ -21,6 +21,8 @@ class World {
     ctx;
     keyboard;
     camera_x = -100;
+
+    statusBar = new StatusBar(20, 'img/7_statusbars/3_icons/icon_health.png', 'img/7_statusbars/4_bar_elements/statusbar_green.png');
     
 
     move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 580, 400);
@@ -76,6 +78,11 @@ class World {
             this.addObjectToMap(this.jump_button);
             this.addObjectToMap(this.throw_bottle_button);
         }
+        
+        // Berechne Prozentwert für das Leben (max 5)
+        this.statusBar.setPercentage((this.character.life / 5) * 100);
+        this.addObjectToMap(this.statusBar);
+        
         requestAnimationFrame(() => this.draw());
     }
 
@@ -92,12 +99,36 @@ class World {
             this.ctx.translate(-object.x - object.width / 2, 0);
         }
         this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
-        this.createRect(object, object.height, 'red');
-        if (object.hitboxHeight) {
-            this.createRect(object, object.hitboxHeight);
+        
+        if (object instanceof StatusBar) {
+            // Zeichne den gefüllten farbigen Balken als zweite Ebene basierend auf percentage
+            if (object.percentageBar && object.percentageBar.complete) {
+                let ratio = Math.max(0, Math.min(1, object.percentage / 100));
+                let sWidth = object.percentageBar.width * ratio;
+                let dWidth = object.width * ratio;
+                if (sWidth > 0 && dWidth > 0) {
+                    this.ctx.drawImage(
+                        object.percentageBar,
+                        0, 0, sWidth, object.percentageBar.height,
+                        object.x, object.y, dWidth, object.height
+                    );
+                }
+            }
+
+            if (object.iconInfo) {
+                // Zeichne das Icon leicht versetzt über der Statusbar
+                this.ctx.drawImage(object.iconInfo, object.x - 15, object.y , 50, 50);
+            }
         }
-        if (object.detectionRange) {
-            this.createDetectionRange(object);
+
+        if (object instanceof Character || object instanceof Chicken) {
+        this.createRect(object, object.height, 'red');
+            if (object.hitboxHeight) {
+                this.createRect(object, object.hitboxHeight);
+            }
+            if (object.detectionRange) {
+                this.createDetectionRange(object);
+            }
         }
         if (object.otherDirection) {
             this.ctx.restore();
