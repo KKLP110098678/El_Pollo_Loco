@@ -28,5 +28,11 @@ const level1 = new Level(
         new Ground('ground2', 335, 720, 200, 20),
         new Ground('ground3', 335, 1440, 200, 20),
         new Ground('ground4', 335, 2160, 200, 20)
-    ],2310
+    ],
+    [
+        new Coin(100, 200),
+        new Coin(200, 200),
+        new Coin(300, 200)
+    ],
+    2310
 );

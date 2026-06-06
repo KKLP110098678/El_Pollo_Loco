@@ -13,6 +13,7 @@ class World {
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
     groundObjects = level1.groundObjects;
+    coins = level1.coins;
     throwableObjects = [];
     
     sky = new Sky();
@@ -71,6 +72,7 @@ class World {
         this.addObjectsToMap(this.chicken);
         this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.coins);
         this.ctx.translate(-this.camera_x, 0);
         if ("ontouchstart" in window) {
             this.addObjectToMap(this.move_left_button);

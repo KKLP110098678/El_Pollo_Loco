@@ -21,6 +21,7 @@ class Character extends Creature {
         this.applyGravity();
         this.move();
         this.life = 5;
+        this.coins = 0;
         this.bottle_throwed = false;
     }
 
