@@ -185,7 +185,7 @@ class World {
     checkCollisions() {
         setInterval(() => {
         this.chicken.forEach(chicken => {
-            if (this.character.isColliding(chicken) && !chicken.isDead()) {
+            if (this.character.isColliding(chicken) && !chicken.isDead) {
                 this.character.hit();
             }
         });
