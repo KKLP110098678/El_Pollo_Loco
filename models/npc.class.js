@@ -47,7 +47,7 @@ class Npc extends Creature {
      * @param {boolean} isDetected - Indicates whether the main character is detected by the NPC.
      */
     choseBehavior(character, isDetected) {
-        if (this.health < 1) {
+        if (this.isDead) {
             this.havingABreak = true;
         }
         else if (isDetected) {

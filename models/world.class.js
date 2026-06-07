@@ -191,7 +191,7 @@ class World {
         });
         this.throwableObjects.forEach(bottle => {
             this.chicken.forEach(chicken => {
-                if (bottle.isColliding(chicken) && !chicken.isDead()) {
+                if (bottle.isColliding(chicken) && !chicken.isDead) {
                     chicken.hit();
                     bottle.explode();
                 }

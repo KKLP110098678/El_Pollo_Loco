@@ -17,15 +17,19 @@ class Chicken extends Npc {
         this.hitboxHeight = this.height;
         this.animate();
         this.health = 1;
+        this.isDead = false;
     }
 
     hit() {
         this.health -= 1;
+        if (this.health < 1) {
+            this.isDead = true;
+        }
     }
 
     animate() {
         setInterval(() => {
-            if (this.health < 1) {
+            if (this.isDead) {
                 this.img = this.imageCache[chickenImages.DEAD[0]];
             } else if (this.isWalking) {
                 let i = this.currentImage % chickenImages.WALKING.length;
