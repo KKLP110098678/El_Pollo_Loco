@@ -1,5 +1,5 @@
 class Collectable extends MovableObject {
-    constructor(x, y, img) {
+    constructor(img, x, y) {
         super();
         this.loadImage(img);
         this.x = x;

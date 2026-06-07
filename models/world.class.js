@@ -12,7 +12,8 @@ class World {
     chicken = level1.chicken;
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
-    groundObjects = level1.groundObjects;
+    groundObjects = level1.groundObjects;    
+    collectableObjects = level1.collectableObjects;
     coins = level1.coins;
     throwableObjects = [];
     
@@ -75,6 +76,7 @@ class World {
         this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.coins);
+        this.addObjectsToMap(this.collectableObjects);
         this.ctx.translate(-this.camera_x, 0);
         if ("ontouchstart" in window) {
             this.addObjectToMap(this.move_left_button);
