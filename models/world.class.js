@@ -78,6 +78,15 @@ class World {
         this.addObjectsToMap(this.coins);
         this.addObjectsToMap(this.collectableObjects);
         this.ctx.translate(-this.camera_x, 0);
+        this.drawGui();
+        requestAnimationFrame(() => this.draw());
+    }
+    
+    /**
+     * @method drawGui
+     * @description Draws the graphical user interface (GUI) elements on the screen, such as the health bar, coin counter, ammo counter, and mobile control buttons. It updates the health bar percentage based on the character's life and updates the coin and ammo counters with the current values.
+     */
+    drawGui() {
         if ("ontouchstart" in window) {
             this.addObjectToMap(this.move_left_button);
             this.addObjectToMap(this.move_right_button);
@@ -92,8 +101,6 @@ class World {
         this.addObjectToMap(this.coinCounter);
         this.ammoCounter.value = this.character.ammo;
         this.addObjectToMap(this.ammoCounter);
-        
-        requestAnimationFrame(() => this.draw());
     }
 
     /**
