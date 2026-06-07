@@ -30,8 +30,8 @@ const level1 = new Level(
         new Ground('ground4', 335, 2160, 200, 20)
     ],
     [
-        new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 100, 100),
-        new Collectable('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 200, 200)
+        new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 160, 370),
+        new Collectable('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 260, 260),
     ],
     [
         new Coin('img/8_coin/coin_2.png', 250, 270),

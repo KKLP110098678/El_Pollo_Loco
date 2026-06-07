@@ -221,7 +221,15 @@ class World {
                 this.coins.splice(index, 1);
             }
         });
-        
+
+        this.collectableObjects.forEach((collectable, index) => {
+            if (this.character.isColliding(collectable)) {
+                this.character.ammo += 1;
+                this.ammoCounter.increase(1);
+                this.collectableObjects.splice(index, 1);
+            }
+        });
+
         if (!onGround) {
             this.character.currentFallingY = 270;
         }
