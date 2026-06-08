@@ -73,6 +73,7 @@ class Character extends Creature {
         this.bottle_throwed = true;
         bottle.throw(this.otherDirection);
         this.world.throwableObjects.push(bottle);
+        this.ammo -= 1;
         setTimeout(() => {
             this.bottle_throwed = false;
         }, 500);
