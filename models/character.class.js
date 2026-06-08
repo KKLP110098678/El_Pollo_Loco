@@ -68,7 +68,7 @@ class Character extends Creature {
      * @description Creates a new throwable object (bottle) at the character's position and adds it to the world's throwable objects array. The bottle is thrown in the direction the character is facing.
      */
     throwBottle() {
-        if (this.bottle_throwed) return;
+        if (this.bottle_throwed || this.ammo <= 0) return;
         let bottle = new ThrowableObject(this.x, this.y + 50);
         this.bottle_throwed = true;
         bottle.throw(this.otherDirection);
