@@ -3,7 +3,7 @@
  * @description This class represents a chicken NPC in the game, extending the Npc class. It initializes the chicken's position, loads its images for walking and dead states, and handles its animation. The chicken randomly walks around and can be detected by the main character, which will trigger it to walk towards the character.
  */
 
-class Chicken extends Npc {
+class Chicken extends Enemy {
     constructor() {
         super();
         this.x = 260 + Math.random() * 200;
@@ -18,13 +18,6 @@ class Chicken extends Npc {
         this.animate();
         this.health = 1;
         this.isDead = false;
-    }
-
-    hit() {
-        this.health -= 1;
-        if (this.health < 1) {
-            this.isDead = true;
-        }
     }
 
     animate() {
