@@ -26,10 +26,24 @@ class DrawableObject {
         });
     }
     
+    getHitbox() {
+        let hHeight = this.hitboxHeight || this.height;
+        return {
+            x: this.x,
+            y: this.y + (this.height - hHeight),
+            width: this.width,
+            height: hHeight
+        };
+    }
+
     isColliding(object) {
-        return this.x <= object.x + object.width &&
-               this.x + this.width >= object.x &&
-               this.y <= object.y + object.height &&
-               this.y + this.height >= object.y;
+        let h1 = this.getHitbox();
+        let h2 = object.getHitbox();
+        
+        return h1.x <= h2.x + h2.width &&
+               h1.x + h1.width >= h2.x &&
+               h1.y <= h2.y + h2.height &&
+               h1.y + h1.height >= h2.y;
     }
 }
+df
