@@ -85,8 +85,16 @@ class Character extends Creature {
      * @description Handles the character's animations based on the current state (idle, walking, jumping) and keyboard input.
      */
     animate() {
-        setInterval(() => {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.animateInterval = setInterval(() => {
+            if (this.isDead) {
+                for (let j = 0; j < characterImages.DEAD.length; j++) {
+                    setTimeout(() => {
+                        this.img = this.imageCache[characterImages.DEAD[j]];
+                    }, j * 100);
+                }
+                clearInterval(this.animateInterval);
+            }
+            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 let i = this.currentImage % characterImages.WALKING.length;
                 this.img = this.imageCache[characterImages.WALKING[i]];
                 this.currentImage++;

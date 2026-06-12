@@ -17,7 +17,6 @@ class Chicken extends Enemy {
         this.hitboxHeight = this.height;
         this.animate();
         this.health = 1;
-        this.isDead = false;
     }
 
     animate() {

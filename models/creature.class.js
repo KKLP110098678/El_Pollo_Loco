@@ -10,6 +10,7 @@ class Creature extends MovableObject {
         super();
         this.hitboxHeight = this.height;
         this.isHurt = false;
+        this.isDead = false;
     }
 
     /**
@@ -19,7 +20,7 @@ class Creature extends MovableObject {
      * @return {boolean} - Returns true if the creature is dead, false otherwise.
      */
     isDead() {
-        return this.energy <= 0; 
+        return this.health <= 0; 
     }
 
     /**
@@ -27,13 +28,17 @@ class Creature extends MovableObject {
      * @description Reduces the creature's life by one and sets the isHurt property to true. After a short delay, the isHurt property is reset to false, allowing the creature to be hit again.
      */
     hit() {
+        if (this.isDead) return;
         if (this.isHurt) return;
-        
+
         this.life -= 1;
-        this.isHurt = true;
-        
-        setTimeout(() => {
-            this.isHurt = false;
-        }, 1000);
+        if (this.life <= 0) {
+            this.isDead = true;
+        } else {
+            this.isHurt = true;
+            setTimeout(() => {
+                this.isHurt = false;
+            }, 1000);
+        }
     }
 }
