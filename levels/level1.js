@@ -32,6 +32,14 @@ const level1 = new Level(
     [
         new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 160, 370),
         new Collectable('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 260, 260),
+        new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 360, 370),
+        new Collectable('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 460, 260),
+        new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 560, 370),
+        new Collectable('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 660, 260),
+        new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 760, 370),
+        new Collectable('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 860, 260),
+        new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 960, 370),
+        new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1060, 260)
     ],
     [
         new Coin('img/8_coin/coin_2.png', 250, 270),
@@ -43,7 +51,7 @@ const level1 = new Level(
     ],
     [
 
-        new BossChicken(635, 300),
+        new BossChicken(1435, 200),
     ],
     2310
 );

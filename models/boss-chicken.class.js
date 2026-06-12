@@ -7,11 +7,13 @@ class BossChicken extends Chicken {
         this.loadImages(BossChickenImages.ATTACK);
         this.loadImages(BossChickenImages.HURT);
         this.loadImages(BossChickenImages.DEAD);
-        this.width = 150;
-        this.height = 150;
+        this.width = 250;
+        this.height = 250;
         this.hitboxHeight = this.height;
         this.health = 5;
         this.isBoss = true;
+        this.detectionRange = 330;
+        this.spawnAreaX = [x - 100, x + 100]; // Define the spawn area for the boss chicken
         this.x = x;
         this.y = y;
     }
