@@ -17,9 +17,16 @@ class BossChicken extends Chicken {
     }
 
     animate() {
-        setInterval(() => {
+        this.animateInterval = setInterval(() => {
             if (this.isDead) {
                 this.img = this.imageCache[BossChickenImages.DEAD[0]];
+                setTimeout(() => {
+                    this.img = this.imageCache[BossChickenImages.DEAD[1]];
+                }, 500);
+                setTimeout(() => {                    
+                    this.img = this.imageCache[BossChickenImages.DEAD[2]];
+                }, 1000);
+                clearInterval(this.animateInterval);
             } else if (this.isHurt) {
                 let i = this.currentImage % BossChickenImages.HURT.length;
                 this.img = this.imageCache[BossChickenImages.HURT[i]];
