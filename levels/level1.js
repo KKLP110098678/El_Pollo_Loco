@@ -26,8 +26,7 @@ const level1 = new Level(
     [
         new Ground('ground1', 304, 200, 200, 20),
         new Ground('ground2', 335, 720, 200, 20),
-        new Ground('ground3', 335, 1440, 200, 20),
-        new Ground('ground4', 335, 2160, 200, 20)
+        new Ground('ground3', 335, 1440, 200, 20)
     ],
     [
         new Collectable('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 160, 370),
@@ -51,7 +50,7 @@ const level1 = new Level(
     ],
     [
 
-        new BossChicken(1435, 200),
+        new BossChicken(1650, 200),
     ],
     2310
 );
