@@ -41,5 +41,9 @@ const level1 = new Level(
         new Coin('img/8_coin/coin_2.png', 500, 200),
         new Coin('img/8_coin/coin_2.png', 600, 200)
     ],
+    [
+
+        new BossChicken(635, 300),
+    ],
     2310
 );

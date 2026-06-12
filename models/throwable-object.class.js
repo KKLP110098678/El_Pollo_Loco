@@ -73,6 +73,7 @@ class ThrowableObject extends MovableObject {
     }
 
     explode() {
+        this.hasExploded = true;
         this.speedX = 0;
         this.speedY = 0;
     }

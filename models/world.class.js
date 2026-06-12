@@ -15,6 +15,7 @@ class World {
     groundObjects = level1.groundObjects;    
     collectableObjects = level1.collectableObjects;
     coins = level1.coins;
+    bossChickens = level1.bossChickens;
     throwableObjects = [];
     
     sky = new Sky();
@@ -54,6 +55,10 @@ class World {
             npc.world = this;
             npc.detectCharacter(this.character);
         });
+        this.bossChickens.forEach(npc => {
+            npc.world = this;
+            npc.detectCharacter(this.character);
+        });
         this.move_left_button.world = this;
         this.move_right_button.world = this;
         this.jump_button.world = this;
@@ -76,6 +81,7 @@ class World {
         this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.coins);
+        this.addObjectsToMap(this.bossChickens);
         this.addObjectsToMap(this.collectableObjects);
         this.drawGui();
         requestAnimationFrame(() => this.draw());
@@ -198,10 +204,23 @@ class World {
                 this.character.hit();
             }
         });
+        this.bossChickens.forEach(bossChicken => {
+            if (this.character.isColliding(bossChicken) && !bossChicken.isDead) {
+                this.character.hit();
+            }
+        });
         this.throwableObjects.forEach(bottle => {
+            if (bottle.hasExploded) return;
             this.chicken.forEach(chicken => {
                 if (bottle.isColliding(chicken) && !chicken.isDead) {
                     chicken.hit();
+                    bottle.explode();
+                }
+            });
+            if (bottle.hasExploded) return;
+            this.bossChickens.forEach(bossChicken => {
+                if (bottle.isColliding(bossChicken) && !bossChicken.isDead) {
+                    bossChicken.hit();
                     bottle.explode();
                 }
             });

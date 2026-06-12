@@ -46,4 +46,3 @@ class DrawableObject {
                h1.y + h1.height >= h2.y;
     }
 }
-df
