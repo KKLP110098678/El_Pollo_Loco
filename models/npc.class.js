@@ -106,7 +106,7 @@ class Npc extends Creature {
         setInterval(() => {
         let distanceX = Math.abs(this.x - character.x);
         let distanceY = Math.abs(this.y - character.y);
-        let isDetected = distanceX < this.detectionRange && distanceY < this.detectionRange;
+        let isDetected = distanceX < this.detectionRange && distanceY < this.detectionRange && character.isDead === false;
         this.choseBehavior(character, isDetected);
         return isDetected;
     }, 1000 / 10);

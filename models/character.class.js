@@ -50,6 +50,7 @@ class Character extends Creature {
      */
     move() {
         setInterval(() => {
+            if (this.isDead) return;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX - this.width) {
                 this.moveRight(5);
             }
