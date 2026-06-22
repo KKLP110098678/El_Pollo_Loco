@@ -9,6 +9,17 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+function startGame(levelNumber) {
+    let startScreen = document.getElementById('startScreen');
+    if (startScreen) {
+        startScreen.style.display = 'none';
+    }
+    
+    if (levelNumber === 1) {
+        initGame();
+    }
+}
+
 function initGame() {
     canvas = document.getElementById('gameCanvas');
     world = new World(canvas, keyboard);

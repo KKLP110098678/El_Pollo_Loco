@@ -1,5 +1,5 @@
 class BossChicken extends Chicken {
-    constructor(x, y) {
+    constructor(x, y, isFinalBoss) {
         super(x, y);
         this.loadImage('img/4_enemie_boss_chicken/1_walk/G1.png');
         this.loadImages(BossChickenImages.WALKING);
@@ -16,7 +16,7 @@ class BossChicken extends Chicken {
         this.spawnAreaX = [x - 100, x + 100]; // Define the spawn area for the boss chicken
         this.x = x;
         this.y = y;
-        this.isFinalBoss = true; // Flag to indicate that this is the final boss
+        this.isFinalBoss = isFinalBoss; // Flag to indicate that this is the final boss
     }
 
     animate() {
