@@ -16,6 +16,7 @@ class BossChicken extends Chicken {
         this.spawnAreaX = [x - 100, x + 100]; // Define the spawn area for the boss chicken
         this.x = x;
         this.y = y;
+        this.isFinalBoss = true; // Flag to indicate that this is the final boss
     }
 
     animate() {

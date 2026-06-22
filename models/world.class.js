@@ -35,7 +35,11 @@ class World {
     jump_button = new MobileButton('jump', 'img/11_mobile_controls/jump_arrow.png', 20, 400);
     throw_bottle_button = new MobileButton('throw_bottle', 'img/11_mobile_controls/throw_bottle.png', 20, 330);
 
+    winImage = new Image();
+    showWinScreenStatus = false;
+
     constructor(canvas, keyboard) {
+        this.winImage.src = 'img/You won, you lost/You won A.png';
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
@@ -107,6 +111,10 @@ class World {
         this.addObjectToMap(this.coinCounter);
         this.ammoCounter.value = this.character.ammo;
         this.addObjectToMap(this.ammoCounter);
+
+        if (this.showWinScreenStatus) {
+            this.ctx.drawImage(this.winImage, 0, 0, this.canvas.width, this.canvas.height);
+        }
     }
 
     /**
@@ -208,6 +216,9 @@ class World {
             if (this.character.isColliding(bossChicken) && !bossChicken.isDead) {
                 this.character.hit();
             }
+            if (bossChicken.isFinalBoss && bossChicken.isDead) {
+                this.showWinScreen();
+            }
         });
         this.throwableObjects.forEach(bottle => {
             if (bottle.hasExploded) return;
@@ -253,5 +264,23 @@ class World {
             this.character.currentFallingY = 270;
         }
     }, 1000 / 60);
+    }
+
+    /**
+     * @method showWinScreen
+     * @description Displays the win screen when the final boss is defeated and stops the game.
+     */
+    showWinScreen() {
+        if (this.gameWon) return;
+        this.gameWon = true;
+
+        setTimeout(() => {
+            this.showWinScreenStatus = true;
+            
+            // Stoppe alle Intervalle, um das Spiel zu beenden
+            for (let i = 1; i < 9999; i++) {
+                window.clearInterval(i);
+            }
+        }, 1500); // 1.5 Sekunden warten, damit die Sterbeanimation des Bosses noch abspielen kann
     }
 }

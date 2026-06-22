@@ -50,7 +50,7 @@ const level1 = new Level(
     ],
     [
 
-        new BossChicken(1650, 200),
+        new BossChicken(1650, 200, true),
     ],
     2310
 );
