@@ -9,13 +9,13 @@
 class World {
     character = new Character();
     
-    chicken = level1.chicken;
-    clouds = level1.clouds;
-    backgroundObjects = level1.backgroundObjects;
-    groundObjects = level1.groundObjects;    
-    collectableObjects = level1.collectableObjects;
-    coins = level1.coins;
-    bossChickens = level1.bossChickens;
+    chicken;
+    clouds;
+    backgroundObjects;
+    groundObjects;    
+    collectableObjects;
+    coins;
+    bossChickens;
     throwableObjects = [];
     
     sky = new Sky();
@@ -38,7 +38,16 @@ class World {
     winImage = new Image();
     showWinScreenStatus = false;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, level) {
+        this.level = level;
+        this.chicken = level.chicken;
+        this.clouds = level.clouds;
+        this.backgroundObjects = level.backgroundObjects;
+        this.groundObjects = level.groundObjects;
+        this.collectableObjects = level.collectableObjects;
+        this.coins = level.coins;
+        this.bossChickens = level.bossChickens;
+        
         this.winImage.src = 'img/You won, you lost/You won A.png';
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
@@ -46,7 +55,6 @@ class World {
         this.setWorld();
         this.draw();
         this.checkCollisions();
-        this.level = level1;
     }
 
     /**
@@ -281,6 +289,14 @@ class World {
             for (let i = 1; i < 9999; i++) {
                 window.clearInterval(i);
             }
+
+            setTimeout(() => {
+                this.showWinScreenStatus = false;
+                let startScreen = document.getElementById('startScreen');
+                if (startScreen) {
+                    startScreen.style.display = 'flex';
+                }
+            }, 3000);
         }, 1500); // 1.5 Sekunden warten, damit die Sterbeanimation des Bosses noch abspielen kann
     }
 }

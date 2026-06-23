@@ -16,13 +16,15 @@ function startGame(levelNumber) {
     }
     
     if (levelNumber === 1) {
-        initGame();
+        initGame(level1);
+    } else if (levelNumber === 2) {
+        initGame(level2);
     }
 }
 
-function initGame() {
+function initGame(level) {
     canvas = document.getElementById('gameCanvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, level);
 }
 
 window.addEventListener("keydown", (event) => {
