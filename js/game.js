@@ -9,6 +9,11 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+/**
+ * @function startGame
+ * @description Starts the game by hiding the start screen and initializing the game world with the selected level. It takes a level number as an argument to determine which level to load.
+ * @param {number} levelNumber - The number of the level to start (e.g., 1 or 2).
+ */
 function startGame(levelNumber) {
     let startScreen = document.getElementById('startScreen');
     if (startScreen) {
@@ -22,6 +27,11 @@ function startGame(levelNumber) {
     }
 }
 
+ /**
+ * @function initGame
+ * @description Initializes the game by setting up the canvas and creating a new world with the specified level.
+ * @param {Object} level - The level configuration object to initialize the game with.
+ */
 function initGame(level) {
     canvas = document.getElementById('gameCanvas');
     world = new World(canvas, keyboard, level);
