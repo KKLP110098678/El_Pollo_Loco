@@ -8,6 +8,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let currentLevelNumber = null;
+let completedLevels = new Set();
 
 /**
  * @function startGame
@@ -15,15 +17,29 @@ let keyboard = new Keyboard();
  * @param {number} levelNumber - The number of the level to start (e.g., 1 or 2).
  */
 function startGame(levelNumber) {
+    currentLevelNumber = levelNumber;
     let startScreen = document.getElementById('startScreen');
     if (startScreen) {
         startScreen.style.display = 'none';
     }
     
     if (levelNumber === 1) {
-        initGame(level1);
+        initGame(createLevel1());
     } else if (levelNumber === 2) {
-        initGame(level2);
+        initGame(createLevel2());
+    }
+}
+
+/**
+ * @function markLevelCompleted
+ * @description Marks the current level as completed and shows the green badge next to the level button.
+ */
+function markLevelCompleted() {
+    if (currentLevelNumber === null) return;
+    completedLevels.add(currentLevelNumber);
+    let badge = document.getElementById('level' + currentLevelNumber + 'Badge');
+    if (badge) {
+        badge.style.display = 'inline-block';
     }
 }
 

@@ -1,4 +1,4 @@
-const level2 = new Level(
+function createLevel2() { return new Level(
     [
         new Chicken(500, 370),
         new Chicken(900, 370),
@@ -56,4 +56,4 @@ const level2 = new Level(
         new BossChicken(1650, 200, true),
     ],
     2310
-);
+); }

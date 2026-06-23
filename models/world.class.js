@@ -336,6 +336,7 @@ class World {
 
         setTimeout(() => {
             this.showWinScreenStatus = true;
+            markLevelCompleted();
             
             // Stoppe alle Intervalle, um das Spiel zu beenden
             for (let i = 1; i < 9999; i++) {
