@@ -181,6 +181,13 @@ class World {
         }
     }
     
+    /**
+     * @method createRect
+     * @description Draws a rectangle around the specified object, indicating its hitbox or other relevant area.
+     * @param {MovableObject} object - The object for which to draw the rectangle.
+     * @param {number} height - The height of the rectangle.
+     * @param {string} [color] - The color of the rectangle. Defaults to blue if not specified.
+     */
     createRect(object, height, color) {
         this.ctx.beginPath();
         this.ctx.lineWidth = '2';
@@ -189,6 +196,11 @@ class World {
         this.ctx.stroke();
     }
 
+    /**
+     * @method createDetectionRange
+     * @description Draws a circular detection range around the specified object, indicating the area in which the object can detect other entities (e.g., the character).
+     * @param {MovableObject} object - The object for which to draw the detection range.
+     */
     createDetectionRange(object) {
         this.ctx.beginPath();
         this.ctx.lineWidth = '2';
@@ -222,6 +234,10 @@ class World {
         }, 1000 / 60);
     }
 
+    /**
+     * @method checkEnemyCollisions
+     * @description Checks for collisions between the main character and chickens. If a collision is detected, the character is hit. The method also checks for collisions with boss chickens and handles the win condition if the final boss is defeated.
+     */
     checkEnemyCollisions() {
         this.chicken.forEach(chicken => {
             if (this.character.isColliding(chicken) && !chicken.isDead) {
@@ -238,6 +254,10 @@ class World {
         });
     }
 
+    /**
+     * @method checkThrowableCollisions
+     * @description Checks for collisions between throwable objects (bottles) and chickens. If a collision is detected, the chicken is hit, and the bottle explodes. The method also checks for collisions with boss chickens.
+     */
     checkThrowableCollisions() {
         this.throwableObjects.forEach(bottle => {
             if (bottle.hasExploded) return;
@@ -257,6 +277,10 @@ class World {
         });
     }
 
+    /**
+     * @method checkGroundCollisions
+     * @description Checks for collisions between the main character and the ground. If a collision is detected, the character's falling position is adjusted accordingly.
+     */
     checkGroundCollisions() {
         let onGround = false;
         this.groundObjects.forEach(ground => {
@@ -271,6 +295,10 @@ class World {
         }
     }
 
+    /**
+     * @method checkItemCollisions
+     * @description Checks for collisions between the main character and collectible items (coins and collectable objects). If a collision is detected, the character's coin or ammo count is increased, and the item is removed from the world.
+     */
     checkItemCollisions() {
         this.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
