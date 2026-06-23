@@ -72,6 +72,10 @@ class ThrowableObject extends MovableObject {
         }, 100);
     }
 
+    /**
+     * @method explode
+     * @description Sets the bottle's state to exploded, stopping its movement and preventing further interactions. This method is called when the bottle hits an object or the ground, triggering the splash animation.
+     */
     explode() {
         this.hasExploded = true;
         this.speedX = 0;

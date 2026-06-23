@@ -13,6 +13,11 @@ class StatusBar extends MovableObject {
         this.percentageBar.src = percentageBar;
     }
 
+    /**
+     * @method setPercentage
+     * @description Sets the percentage value for the status bar. This value is used to determine how much of the bar is filled based on the current state of the game (e.g., health, ammo).
+     * @param {number} percentage - The new percentage value to set for the status bar.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
     }
