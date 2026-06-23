@@ -9,7 +9,7 @@ class Chicken extends Enemy {
         this.x = x;
         this.y = y;
         this.spawnAreaX = [this.x, this.x + 200]; // Define the spawn area for chickens (between x=260 and x=460)
-        this.loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+        this.loadImage('assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(chickenImages.WALKING);
         this.loadImages(chickenImages.DEAD);
         this.width = 50;

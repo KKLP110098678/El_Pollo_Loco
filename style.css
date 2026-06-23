@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'rye';
-    src: url('./fonts/Rye-Regular.ttf') format('truetype');
+    src: url('./assets/fonts/Rye-Regular.ttf') format('truetype');
 }
 
 body {

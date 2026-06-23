@@ -25,15 +25,15 @@ class World {
     keyboard;
     camera_x = -100;
 
-    healthBar = new StatusBar(20, 'img/7_statusbars/3_icons/icon_health.png', 'img/7_statusbars/4_bar_elements/statusbar_green.png');
-    coinCounter = new StatusCounter(60, 'img/7_statusbars/3_icons/icon_coin.png');
-    ammoCounter = new StatusCounter(100, 'img/7_statusbars/3_icons/icon_salsa_bottle.png');
+    healthBar = new StatusBar(20, 'assets/img/7_statusbars/3_icons/icon_health.png', 'assets/img/7_statusbars/4_bar_elements/statusbar_green.png');
+    coinCounter = new StatusCounter(60, 'assets/img/7_statusbars/3_icons/icon_coin.png');
+    ammoCounter = new StatusCounter(100, 'assets/img/7_statusbars/3_icons/icon_salsa_bottle.png');
     
 
-    move_left_button = new MobileButton('move_left', 'img/11_mobile_controls/left_arrow.png', 580, 400);
-    move_right_button = new MobileButton('move_right', 'img/11_mobile_controls/right_arrow.png', 650, 400);
-    jump_button = new MobileButton('jump', 'img/11_mobile_controls/jump_arrow.png', 20, 400);
-    throw_bottle_button = new MobileButton('throw_bottle', 'img/11_mobile_controls/throw_bottle.png', 20, 330);
+    move_left_button = new MobileButton('move_left', 'assets/img/11_mobile_controls/left_arrow.png', 580, 400);
+    move_right_button = new MobileButton('move_right', 'assets/img/11_mobile_controls/right_arrow.png', 650, 400);
+    jump_button = new MobileButton('jump', 'assets/img/11_mobile_controls/jump_arrow.png', 20, 400);
+    throw_bottle_button = new MobileButton('throw_bottle', 'assets/img/11_mobile_controls/throw_bottle.png', 20, 330);
 
     winImage = new Image();
     showWinScreenStatus = false;
@@ -48,7 +48,7 @@ class World {
         this.coins = level.coins;
         this.bossChickens = level.bossChickens;
         
-        this.winImage.src = 'img/You won, you lost/You won A.png';
+        this.winImage.src = 'assets/img/You won, you lost/You won A.png';
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;

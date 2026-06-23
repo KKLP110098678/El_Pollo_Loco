@@ -1,7 +1,7 @@
 class BossChicken extends Chicken {
     constructor(x, y, isFinalBoss) {
         super(x, y);
-        this.loadImage('img/4_enemie_boss_chicken/1_walk/G1.png');
+        this.loadImage('assets/img/4_enemie_boss_chicken/1_walk/G1.png');
         this.loadImages(BossChickenImages.WALKING);
         this.loadImages(BossChickenImages.ALERT);
         this.loadImages(BossChickenImages.ATTACK);
