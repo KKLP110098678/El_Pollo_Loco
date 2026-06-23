@@ -215,6 +215,14 @@ class World {
      */
     checkCollisions() {
         setInterval(() => {
+            this.checkEnemyCollisions();
+            this.checkThrowableCollisions();
+            this.checkGroundCollisions();
+            this.checkItemCollisions();
+        }, 1000 / 60);
+    }
+
+    checkEnemyCollisions() {
         this.chicken.forEach(chicken => {
             if (this.character.isColliding(chicken) && !chicken.isDead) {
                 this.character.hit();
@@ -228,6 +236,9 @@ class World {
                 this.showWinScreen();
             }
         });
+    }
+
+    checkThrowableCollisions() {
         this.throwableObjects.forEach(bottle => {
             if (bottle.hasExploded) return;
             this.chicken.forEach(chicken => {
@@ -244,6 +255,9 @@ class World {
                 }
             });
         });
+    }
+
+    checkGroundCollisions() {
         let onGround = false;
         this.groundObjects.forEach(ground => {
             if (this.character.isColliding(ground) && this.character.y + this.character.height <= ground.y + 10) {
@@ -252,6 +266,12 @@ class World {
             }
         });
 
+        if (!onGround) {
+            this.character.currentFallingY = 270;
+        }
+    }
+
+    checkItemCollisions() {
         this.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.coins += 1;
@@ -267,11 +287,6 @@ class World {
                 this.collectableObjects.splice(index, 1);
             }
         });
-
-        if (!onGround) {
-            this.character.currentFallingY = 270;
-        }
-    }, 1000 / 60);
     }
 
     /**
