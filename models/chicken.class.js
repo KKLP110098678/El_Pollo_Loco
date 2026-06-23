@@ -19,6 +19,10 @@ class Chicken extends Enemy {
         this.health = 1;
     }
 
+    /**
+     * @method animate
+     * @description Animates the chicken based on its current state (walking or dead). The method uses setInterval to continuously update the chicken's image based on its state and current image index. If the chicken is dead, it displays the dead image; if it's walking, it cycles through the walking images.
+     */
     animate() {
         setInterval(() => {
             if (this.isDead) {

@@ -19,6 +19,10 @@ class BossChicken extends Chicken {
         this.isFinalBoss = isFinalBoss; // Flag to indicate that this is the final boss
     }
 
+    /**
+     * @method animate
+     * @description Animates the boss chicken based on its current state (walking, alert, attacking, hurt, or dead). The method uses setInterval to continuously update the boss chicken's image based on its state and current image index. If the boss chicken is dead, it displays the dead images in sequence and stops the animation.
+     */
     animate() {
         this.animateInterval = setInterval(() => {
             if (this.isDead) {

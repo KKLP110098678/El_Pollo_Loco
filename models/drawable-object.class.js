@@ -26,6 +26,11 @@ class DrawableObject {
         });
     }
     
+    /**
+     * @method getHitbox
+     * @description Returns the hitbox of the object, which is used for collision detection. The hitbox is defined by the object's position and dimensions, and can be adjusted using the hitboxHeight property if specified.
+     * @returns {Object} An object representing the hitbox with properties x, y, width, and height.
+     */
     getHitbox() {
         let hHeight = this.hitboxHeight || this.height;
         return {
@@ -36,6 +41,12 @@ class DrawableObject {
         };
     }
 
+    /**
+     * @method isColliding
+     * @description Checks if the current object is colliding with another object based on their hitboxes. It compares the positions and dimensions of both hitboxes to determine if they overlap.
+     * @param {DrawableObject} object - The other object to check for collision against.
+     * @returns {boolean} - Returns true if the objects are colliding, false otherwise.
+     */
     isColliding(object) {
         let h1 = this.getHitbox();
         let h2 = object.getHitbox();
