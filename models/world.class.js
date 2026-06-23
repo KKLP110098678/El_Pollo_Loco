@@ -26,6 +26,7 @@ class World {
     camera_x = -100;
 
     healthBar = new StatusBar(20, 'assets/img/7_statusbars/3_icons/icon_health.png', 'assets/img/7_statusbars/4_bar_elements/statusbar_green.png');
+    bossHealthBar = new StatusBar(20, 'assets/img/7_statusbars/3_icons/icon_health_endboss.png', 'assets/img/7_statusbars/4_bar_elements/statusbar_orange.png');
     coinCounter = new StatusCounter(60, 'assets/img/7_statusbars/3_icons/icon_coin.png');
     ammoCounter = new StatusCounter(100, 'assets/img/7_statusbars/3_icons/icon_salsa_bottle.png');
     
@@ -49,6 +50,7 @@ class World {
         this.bossChickens = level.bossChickens;
         
         this.winImage.src = 'assets/img/You won, you lost/You won A.png';
+        this.bossHealthBar.x = canvas.width - 220;
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
@@ -115,6 +117,13 @@ class World {
         // Berechne Prozentwert für das Leben (max 5)
         this.healthBar.setPercentage((this.character.life / 5) * 100);
         this.addObjectToMap(this.healthBar);
+
+        let nearBoss = this.bossChickens.find(boss => !boss.isDead && Math.abs(boss.x - this.character.x) < boss.detectionRange);
+        if (nearBoss) {
+            this.bossHealthBar.setPercentage((nearBoss.health / 5) * 100);
+            this.addObjectToMap(this.bossHealthBar);
+        }
+
         this.coinCounter.value = this.character.coins;
         this.addObjectToMap(this.coinCounter);
         this.ammoCounter.value = this.character.ammo;
