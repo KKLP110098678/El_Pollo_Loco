@@ -119,6 +119,22 @@ body {
     align-items: center;
 }
 
+.settings-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .keybindings-modal {
     position: absolute;
     top: 0;

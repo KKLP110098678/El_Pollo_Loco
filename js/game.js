@@ -11,6 +11,14 @@ let keyboard = new Keyboard();
 let currentLevelNumber = null;
 let completedLevels = new Set();
 
+function showSettings() {
+    document.getElementById('settingsModal').style.display = 'flex';
+}
+
+function hideSettings() {
+    document.getElementById('settingsModal').style.display = 'none';
+}
+
 function showKeybindings() {
     document.getElementById('keybindingsModal').style.display = 'flex';
 }
