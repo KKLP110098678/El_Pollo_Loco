@@ -16,6 +16,7 @@
                 <p class="intro-text">Press a key to continue</p>
             </div>
             <div id="startScreen" class="overlay" style="display:none;">
+                <button class="keybindings-btn" onclick="showKeybindings()" title="Tastenbelegung">!</button>
                 <h2>Select Level</h2>
                 <div class="level-button-wrapper">
                     <button onclick="startGame(1)">Level 1</button>
@@ -24,6 +25,18 @@
                 <div class="level-button-wrapper">
                     <button onclick="startGame(2)">Level 2</button>
                     <div id="level2Badge" class="level-completed-badge" style="display:none;">✓</div>
+                </div>
+            </div>
+            <div id="keybindingsModal" class="keybindings-modal" style="display:none;">
+                <div class="keybindings-content">
+                    <h3>Tastenbelegung</h3>
+                    <table class="keybindings-table">
+                        <tr><td><kbd>A</kbd></td><td>Nach links laufen</td></tr>
+                        <tr><td><kbd>D</kbd></td><td>Nach rechts laufen</td></tr>
+                        <tr><td><kbd>Space</kbd></td><td>Springen</td></tr>
+                        <tr><td><kbd>F</kbd></td><td>Flasche werfen</td></tr>
+                    </table>
+                    <button onclick="hideKeybindings()">Schließen</button>
                 </div>
             </div>
         </div>

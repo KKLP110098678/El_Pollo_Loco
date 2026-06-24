@@ -11,6 +11,14 @@ let keyboard = new Keyboard();
 let currentLevelNumber = null;
 let completedLevels = new Set();
 
+function showKeybindings() {
+    document.getElementById('keybindingsModal').style.display = 'flex';
+}
+
+function hideKeybindings() {
+    document.getElementById('keybindingsModal').style.display = 'none';
+}
+
 /**
  * @function startGame
  * @description Starts the game by hiding the start screen and initializing the game world with the selected level. It takes a level number as an argument to determine which level to load.
