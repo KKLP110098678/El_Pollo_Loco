@@ -6,7 +6,9 @@
 body {
     margin: 0;
     font-family: 'rye', Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-image: url('./assets/img/5_background/layers/air.png');
+    background-size: cover;
+    background-position: center;
     height: 100svh;
     display: flex;
     justify-content: center;
