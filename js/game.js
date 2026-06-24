@@ -83,6 +83,19 @@ window.addEventListener("keypress", (event) => {
     }
 });
 
+(function initIntroScreen() {
+    let introScreen = document.getElementById('introScreen');
+    let startScreen = document.getElementById('startScreen');
+
+    function proceedToLevelMenu() {
+        introScreen.style.display = 'none';
+        startScreen.style.display = 'flex';
+        window.removeEventListener('keydown', proceedToLevelMenu);
+    }
+
+    window.addEventListener('keydown', proceedToLevelMenu);
+})();
+
 /* 
 window.addEventListener("click", (event) => {
     if (event.button === 0) {

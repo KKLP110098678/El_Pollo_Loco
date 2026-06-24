@@ -71,7 +71,6 @@ class Npc extends Creature {
                     if (this.direction === 'LEFT' && this.x > this.spawnAreaX[0]) {
                         this.moveLeft(1);
                         this.isWalking = true;
-
                     } else if (this.direction === 'RIGHT' && this.x < this.spawnAreaX[1]) {
                         this.moveRight(1);
                         this.isWalking = true;

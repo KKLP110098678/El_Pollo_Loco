@@ -12,7 +12,10 @@
         <h1>El Pollo Loco</h1>
         <div style="position: relative; display: inline-block;">
             <canvas id="gameCanvas" width="720" height="480"></canvas>
-            <div id="startScreen" class="overlay">
+            <div id="introScreen" class="overlay">
+                <p class="intro-text">Press a key to continue</p>
+            </div>
+            <div id="startScreen" class="overlay" style="display:none;">
                 <h2>Select Level</h2>
                 <div class="level-button-wrapper">
                     <button onclick="startGame(1)">Level 1</button>

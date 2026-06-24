@@ -83,3 +83,22 @@ body {
     border-radius: 4px;
     border: 2px solid #fff;
 }
+
+#introScreen {
+    background: url('./assets/img/9_intro_outro_screens/start/startscreen_1.png') 65% center / cover no-repeat, #000;
+}
+
+.intro-text {
+    position: absolute;
+    bottom: 30px;
+    margin: 0;
+    color: white;
+    font-size: 20px;
+    text-shadow: 2px 2px 6px #000, 0 0 10px #000;
+    animation: blink 1.2s step-start infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
