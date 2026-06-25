@@ -10,6 +10,7 @@ let world;
 let keyboard = new Keyboard();
 let currentLevelNumber = null;
 let completedLevels = new Set();
+let isFullscreen = false;
 
 function showSettings() {
     document.getElementById('settingsModal').style.display = 'flex';
@@ -39,6 +40,9 @@ function startGame(levelNumber) {
         startScreen.style.display = 'none';
     }
     
+    if (isFullscreen) {
+        document.getElementById('gameCanvas').requestFullscreen();
+    }
     if (levelNumber === 1) {
         initGame(createLevel1());
     } else if (levelNumber === 2) {
@@ -111,3 +115,12 @@ window.addEventListener("keypress", (event) => {
 
     window.addEventListener('keydown', proceedToLevelMenu);
 })();
+
+function toggleFullscreen() {
+    let canvas = document.getElementById('gameCanvas');
+    if (!isFullscreen) {
+        isFullscreen = true;
+    } else {
+        isFullscreen = false;
+    }
+}
