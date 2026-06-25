@@ -43,8 +43,11 @@
             <div id="settingsModal" class="keybindings-modal" style="display:none;">
                 <div class="keybindings-content">
                     <h3>Einstellungen</h3>
-                    <p style="opacity:0.8; font-size:16px;">Hier kommen bald Einstellungen hin.</p>
-                    <button onclick="hideSettings()">Schließen</button>
+                    <div class="settings-body">
+                        <label for="fullscreenCheckbox">Fullscreen</label>
+                        <input type="checkbox" id="fullscreenCheckbox" onchange="toggleFullscreen()">
+                    </div>
+                    <div class="settings-footer"><button onclick="hideSettings()">Schließen</button></div>
                 </div>
             </div>
         </div>
