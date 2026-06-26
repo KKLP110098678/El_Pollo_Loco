@@ -120,7 +120,9 @@ function toggleFullscreen() {
     let canvas = document.getElementById('gameCanvas');
     if (!isFullscreen) {
         isFullscreen = true;
+        document.documentElement.requestFullscreen();
     } else {
         isFullscreen = false;
+        document.exitFullscreen();
     }
 }
