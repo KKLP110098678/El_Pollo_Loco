@@ -121,8 +121,10 @@ function toggleFullscreen() {
     if (!isFullscreen) {
         isFullscreen = true;
         document.documentElement.requestFullscreen();
+        document.getElementById('startScreen').classList.add('fullscreen-container');
     } else {
         isFullscreen = false;
         document.exitFullscreen();
+        document.getElementById('startScreen').classList.remove('fullscreen-container');
     }
 }

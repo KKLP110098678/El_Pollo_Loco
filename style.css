@@ -187,3 +187,10 @@ kbd {
     font-family: monospace;
     font-size: 16px;
 }
+
+.fullscreen-container {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    
+}
