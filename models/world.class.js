@@ -38,6 +38,9 @@ class World {
 
     winImage = new Image();
     showWinScreenStatus = false;
+    gameoverImage = new Image();
+    showGameOverScreenStatus = false;
+    
 
     constructor(canvas, keyboard, level) {
         this.level = level;
@@ -50,6 +53,7 @@ class World {
         this.bossChickens = level.bossChickens;
         
         this.winImage.src = 'assets/img/You won, you lost/You won A.png';
+        this.gameoverImage.src = 'assets/img/9_intro_outro_screens/game_over/game over!.png';
         this.bossHealthBar.x = canvas.width - 220;
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
@@ -58,6 +62,36 @@ class World {
         this.draw();
         this.checkCollisions();
     }
+
+    handleGameOver() {
+       if (this.gameLost) return;
+        this.gameLost = true;
+        setTimeout(() => {
+            this.showGameOverScreenStatus = true;
+            
+            // Stoppe alle Intervalle, um das Spiel zu beenden
+            for (let i = 1; i < 9999; i++) {
+                window.clearInterval(i);
+            }
+            setTimeout(() => {
+                this.showGameOverScreenStatus = false;
+                let startScreen = document.getElementById('startScreen');
+                if (startScreen) {
+                    startScreen.style.display = 'flex';
+                    if (isFullscreen) {
+                        this.exitToStartScreen();
+                    }
+                }
+            }, 3000);
+        }, 1500); // 1.5 Sekunden warten, damit die Sterbeanimation des Bosses noch abspielen kann
+    }
+    
+    exitToStartScreen() {
+        document.exitFullscreen();
+        document.documentElement.requestFullscreen();
+        document.getElementById('startScreen').classList.add('fullscreen-container');
+    }
+
 
     /**
      * @method setWorld
@@ -131,6 +165,10 @@ class World {
 
         if (this.showWinScreenStatus) {
             this.ctx.drawImage(this.winImage, 0, 0, this.canvas.width, this.canvas.height);
+        }
+
+        if (this.showGameOverScreenStatus) {
+            this.ctx.drawImage(this.gameoverImage, 0, 0, this.canvas.width, this.canvas.height);
         }
     }
 
@@ -261,6 +299,9 @@ class World {
                 this.showWinScreen();
             }
         });
+        if (this.character.isDead) {
+            this.handleGameOver();
+        }
     }
 
     /**
@@ -349,9 +390,7 @@ class World {
                 if (startScreen) {
                     startScreen.style.display = 'flex';
                     if (isFullscreen) {
-                        document.exitFullscreen();
-                        document.documentElement.requestFullscreen();
-                        document.getElementById('startScreen').classList.add('fullscreen-container');
+                        this.exitToStartScreen();
                     }
                 }
             }, 3000);
