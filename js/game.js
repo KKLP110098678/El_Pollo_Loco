@@ -111,9 +111,11 @@ window.addEventListener("keypress", (event) => {
         introScreen.style.display = 'none';
         startScreen.style.display = 'flex';
         window.removeEventListener('keydown', proceedToLevelMenu);
+        window.removeEventListener('click', proceedToLevelMenu);
     }
 
     window.addEventListener('keydown', proceedToLevelMenu);
+    window.addEventListener('click', proceedToLevelMenu);
 })();
 
 function toggleFullscreen() {
