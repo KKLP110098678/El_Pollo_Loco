@@ -75,21 +75,21 @@ class World {
             }
             setTimeout(() => {
                 this.showGameOverScreenStatus = false;
-                let startScreen = document.getElementById('startScreen');
-                if (startScreen) {
-                    startScreen.style.display = 'flex';
-                    if (isFullscreen) {
-                        this.exitToStartScreen();
-                    }
-                }
+                this.exitToStartScreen();
             }, 3000);
         }, 1500); // 1.5 Sekunden warten, damit die Sterbeanimation des Bosses noch abspielen kann
     }
     
     exitToStartScreen() {
-        document.exitFullscreen();
-        document.documentElement.requestFullscreen();
-        document.getElementById('startScreen').classList.add('fullscreen-container');
+        let startScreen = document.getElementById('startScreen');
+        if (startScreen) {
+            startScreen.style.display = 'flex';
+            if (isFullscreen) {
+                document.exitFullscreen();
+                document.documentElement.requestFullscreen();
+                document.getElementById('startScreen').classList.add('fullscreen-container');
+            }
+        }
     }
 
 
@@ -386,13 +386,7 @@ class World {
 
             setTimeout(() => {
                 this.showWinScreenStatus = false;
-                let startScreen = document.getElementById('startScreen');
-                if (startScreen) {
-                    startScreen.style.display = 'flex';
-                    if (isFullscreen) {
-                        this.exitToStartScreen();
-                    }
-                }
+                this.exitToStartScreen();
             }, 3000);
         }, 1500); // 1.5 Sekunden warten, damit die Sterbeanimation des Bosses noch abspielen kann
     }
