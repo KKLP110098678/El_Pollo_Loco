@@ -24,6 +24,7 @@ class Character extends Creature {
         this.coins = 0;
         this.ammo = 5;
         this.bottle_throwed = false;
+        this.throw_audio = new Audio('assets/sounds/throw.wav');
     }
 
 
@@ -70,6 +71,7 @@ class Character extends Creature {
      */
     throwBottle() {
         if (this.bottle_throwed || this.ammo <= 0) return;
+        this.throw_audio.play();
         let bottle = new ThrowableObject(this.x, this.y + 50);
         this.bottle_throwed = true;
         bottle.throw(this.otherDirection);

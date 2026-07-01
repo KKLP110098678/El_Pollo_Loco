@@ -355,6 +355,7 @@ class World {
                 this.character.coins += 1;
                 this.coinCounter.increase(1);
                 this.coins.splice(index, 1);
+                coin.audio.play();
             }
         });
 
@@ -363,6 +364,7 @@ class World {
                 this.character.ammo += 1;
                 this.ammoCounter.increase(1);
                 this.collectableObjects.splice(index, 1);
+                collectable.audio.play();
             }
         });
     }
