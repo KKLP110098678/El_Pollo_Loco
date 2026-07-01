@@ -34,7 +34,7 @@ class MovableObject extends DrawableObject {
      * @description Applies gravity to the object, causing it to fall downwards if it is above the ground. The method uses setInterval to continuously update the object's vertical position based on its speed and acceleration.
      */
     applyGravity() {
-        setInterval(() => {
+        this.gravityInterval = setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;

@@ -80,6 +80,7 @@ class ThrowableObject extends MovableObject {
         this.hasExploded = true;
         this.speedX = 0;
         this.speedY = 0;
+        clearInterval(this.gravityInterval);
     }
 
     /**
