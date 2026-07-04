@@ -10,10 +10,12 @@ class Character extends Creature {
         this.currentFallingY = this.y;
         this.loadImage(characterImages.IDLE[0]);
         this.loadImages(characterImages.IDLE);
+        this.loadImages(characterImages.SLEEPING);
         this.loadImages(characterImages.WALKING);
         this.loadImages(characterImages.JUMPING);
         this.loadImages(characterImages.HURT);
         this.loadImages(characterImages.DEAD);
+        this.lastMoveTime = Date.now();
         this.width = 50;
         this.height = 150;
         this.hitboxHeight = 90;
@@ -54,12 +56,15 @@ class Character extends Creature {
             if (this.isDead) return;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX - this.width) {
                 this.moveRight(5);
+                this.lastMoveTime = Date.now();
             }
             if (this.world.keyboard.LEFT && this.x > 100) {
                 this.moveLeft(5);
+                this.lastMoveTime = Date.now();
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.lastMoveTime = Date.now();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
@@ -71,6 +76,7 @@ class Character extends Creature {
      */
     throwBottle() {
         if (this.bottle_throwed || this.ammo <= 0) return;
+        this.throw_audio.volume = typeof gameVolume !== 'undefined' ? gameVolume : 1;
         this.throw_audio.play();
         let bottle = new ThrowableObject(this.x, this.y + 50);
         this.bottle_throwed = true;
@@ -108,6 +114,10 @@ class Character extends Creature {
             } else if (this.isHurt) {
                 let i = this.currentImage % characterImages.HURT.length;
                 this.img = this.imageCache[characterImages.HURT[i]];
+                this.currentImage++;
+            } else if (Date.now() - this.lastMoveTime > 20000) {
+                let i = this.currentImage % characterImages.SLEEPING.length;
+                this.img = this.imageCache[characterImages.SLEEPING[i]];
                 this.currentImage++;
             } else {
                 let i = this.currentImage % characterImages.IDLE.length;

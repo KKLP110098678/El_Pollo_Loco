@@ -7,6 +7,18 @@ const characterImages = {
         "assets/img/2_character_pepe/1_idle/idle/I-5.png",
         "assets/img/2_character_pepe/1_idle/idle/I-6.png"
     ],
+    "SLEEPING": [
+        "assets/img/2_character_pepe/1_idle/long_idle/I-11.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-12.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-13.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-14.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-15.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-16.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-17.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-18.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-19.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-20.png"
+    ],
     "WALKING": [
         "assets/img/2_character_pepe/2_walk/W-21.png",
         "assets/img/2_character_pepe/2_walk/W-22.png",

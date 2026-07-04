@@ -11,6 +11,11 @@ let keyboard = new Keyboard();
 let currentLevelNumber = null;
 let completedLevels = new Set();
 let isFullscreen = false;
+let gameVolume = 1;
+
+function setGameVolume(value) {
+    gameVolume = parseFloat(value);
+}
 
 function showSettings() {
     document.getElementById('settingsModal').style.display = 'flex';

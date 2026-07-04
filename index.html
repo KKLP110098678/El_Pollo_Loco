@@ -47,6 +47,12 @@
                     <div class="settings-body">
                         <label for="fullscreenCheckbox">Fullscreen</label>
                         <input type="checkbox" id="fullscreenCheckbox" onchange="toggleFullscreen()">
+                        <label for="volumeSlider">Volume</label>
+                        <div class="volume-slider-row">
+                            <span>🔇</span>
+                            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="setGameVolume(this.value)">
+                            <span>🔊</span>
+                        </div>
                     </div>
                     <div class="settings-footer">
                         <button class="btn-close" onclick="hideSettings()">Schließen</button>
@@ -54,6 +60,20 @@
                 </div>
             </div>
         </div>
+        <footer>
+            <h2>Impressum</h2>
+            <p>El Pollo Loco is a project created by Ramon Kunz and is not affiliated with any official game or company. All assets used in this project are for educational purposes only.</p>
+            <p>Contact: <a href="mailto:ram.kunz99@gmail.com">ram.kunz99@gmail.com</a></p>
+            <p>Address: 
+                <br>Ramon Kunz
+                <br>Mattenweg 28
+                <br>6252 Dagmersellen
+                <br>Switzerland
+            </p>
+            <p>Source code: <a href="https://github.com/KKLP110098678/El_Pollo_Loco" target="_blank">GitHub</a></p>
+            <p>© 2024 Ramon Kunz. All rights reserved.</p>
+
+        </footer>
     </div>
     <script src="./models/level.class.js"></script>
     <script src="./models/world.class.js"></script>
