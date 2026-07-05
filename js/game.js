@@ -47,10 +47,6 @@ function startGame(levelNumber) {
     if (startScreen) {
         startScreen.style.display = 'none';
     }
-    
-    if (isFullscreen) {
-        document.getElementById('gameCanvas').requestFullscreen();
-    }
     if (levelNumber === 1) {
         initGame(createLevel1());
     } else if (levelNumber === 2) {

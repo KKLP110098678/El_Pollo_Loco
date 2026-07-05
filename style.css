@@ -192,7 +192,43 @@ kbd {
     position: fixed;
     height: 100vh;
     width: 100vw;
-    
+}
+
+/* Fullscreen-Modus: Canvas füllt immer den gesamten Viewport →
+   getBoundingClientRect() liefert zuverlässig left=0 / top=0,
+   damit die Touch-Koordinaten korrekt berechnet werden. */
+:fullscreen #gameCanvas,
+:-webkit-full-screen #gameCanvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    z-index: 0;
+}
+
+:fullscreen .overlay,
+:-webkit-full-screen .overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    box-sizing: border-box;
+    border: none;
+}
+
+:fullscreen .keybindings-modal,
+:-webkit-full-screen .keybindings-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    box-sizing: border-box;
 }
 
 .settings-body {
