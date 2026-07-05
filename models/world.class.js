@@ -107,6 +107,9 @@ class World {
             npc.world = this;
             npc.detectCharacter(this.character);
         });
+        this.clouds.forEach(cloud => {
+            cloud.world = this;
+        });
         this.move_left_button.world = this;
         this.move_right_button.world = this;
         this.jump_button.world = this;
