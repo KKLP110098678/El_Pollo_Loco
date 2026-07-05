@@ -194,9 +194,90 @@ kbd {
     width: 100vw;
 }
 
+.pause-btn {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.pause-btn:hover {
+    background-color: rgba(255, 170, 0, 0.8);
+}
+
+.pause-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.pause-menu-content {
+    background: radial-gradient(circle, #f5b25c, #bd7e2d);
+    border: 2px solid #fff;
+    border-radius: 12px;
+    padding: 32px 48px;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pause-menu-content h2 {
+    margin: 0 0 6px;
+    font-size: 28px;
+    font-family: 'rye', Arial, sans-serif;
+}
+
+.pause-menu-content button {
+    padding: 10px 24px;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: 'rye', Arial, sans-serif;
+    background-color: #ffaa00;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    color: white;
+}
+
+.pause-menu-content button:hover {
+    background-color: #ffcc00;
+}
+
 /* Fullscreen-Modus: Canvas füllt immer den gesamten Viewport →
    getBoundingClientRect() liefert zuverlässig left=0 / top=0,
    damit die Touch-Koordinaten korrekt berechnet werden. */
+:fullscreen .pause-btn,
+:-webkit-full-screen .pause-btn {
+    position: fixed;
+    z-index: 10;
+}
+
+:fullscreen .pause-menu,
+:-webkit-full-screen .pause-menu {
+    position: fixed;
+    z-index: 9;
+}
+
 :fullscreen #gameCanvas,
 :-webkit-full-screen #gameCanvas {
     position: fixed;

@@ -40,6 +40,7 @@ class World {
     showWinScreenStatus = false;
     gameoverImage = new Image();
     showGameOverScreenStatus = false;
+    isPaused = false;
     
 
     constructor(canvas, keyboard, level) {
@@ -81,6 +82,14 @@ class World {
     }
     
     exitToStartScreen() {
+        let pauseBtn = document.getElementById('pauseBtn');
+        if (pauseBtn) {
+            pauseBtn.style.display = 'none';
+            pauseBtn.textContent = '⏸';
+        }
+        let pauseMenu = document.getElementById('pauseMenu');
+        if (pauseMenu) pauseMenu.style.display = 'none';
+        this.isPaused = false;
         let startScreen = document.getElementById('startScreen');
         if (startScreen) {
             startScreen.style.display = 'flex';
@@ -135,6 +144,7 @@ class World {
         this.addObjectsToMap(this.bossChickens);
         this.addObjectsToMap(this.collectableObjects);
         this.drawGui();
+        if (this.isPaused) return;
         requestAnimationFrame(() => this.draw());
     }
     
@@ -279,6 +289,7 @@ class World {
      */
     checkCollisions() {
         setInterval(() => {
+            if (this.isPaused) return;
             this.checkEnemyCollisions();
             this.checkThrowableCollisions();
             this.checkGroundCollisions();
@@ -293,7 +304,12 @@ class World {
     checkEnemyCollisions() {
         this.chicken.forEach(chicken => {
             if (this.character.isColliding(chicken) && !chicken.isDead) {
-                this.character.hit();
+                if (this.character.isStomping(chicken)) {
+                    chicken.hit();
+                    this.character.speedY = 12;
+                } else {
+                    this.character.hit();
+                }
             }
         });
         this.bossChickens.forEach(bossChicken => {

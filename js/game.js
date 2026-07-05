@@ -36,6 +36,34 @@ function hideKeybindings() {
     document.getElementById('keybindingsModal').style.display = 'none';
 }
 
+function togglePause() {
+    if (!world) return;
+    let btn = document.getElementById('pauseBtn');
+    let menu = document.getElementById('pauseMenu');
+    if (world.isPaused) {
+        world.isPaused = false;
+        world.draw();
+        if (btn) btn.textContent = '⏸';
+        if (menu) menu.style.display = 'none';
+    } else {
+        world.isPaused = true;
+        if (btn) btn.textContent = '▶';
+        if (menu) menu.style.display = 'flex';
+    }
+}
+
+function returnToMainMenu() {
+    for (let i = 1; i < 9999; i++) {
+        window.clearInterval(i);
+    }
+    if (world) {
+        world.isPaused = false;
+        world.exitToStartScreen();
+    }
+    let menu = document.getElementById('pauseMenu');
+    if (menu) menu.style.display = 'none';
+}
+
 /**
  * @function startGame
  * @description Starts the game by hiding the start screen and initializing the game world with the selected level. It takes a level number as an argument to determine which level to load.
@@ -46,6 +74,11 @@ function startGame(levelNumber) {
     let startScreen = document.getElementById('startScreen');
     if (startScreen) {
         startScreen.style.display = 'none';
+    }
+    let pauseBtn = document.getElementById('pauseBtn');
+    if (pauseBtn) {
+        pauseBtn.style.display = 'block';
+        pauseBtn.textContent = '⏸';
     }
     if (levelNumber === 1) {
         initGame(createLevel1());

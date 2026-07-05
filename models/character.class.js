@@ -40,6 +40,19 @@ class Character extends Creature {
     }
 
     /**
+     * @method isStomping
+     * @description Returns true when the character is falling downward and the character's
+     * feet are in the upper half of the enemy – i.e. a jump-stomp from above.
+     * @param {MovableObject} enemy - The enemy to check against.
+     * @returns {boolean}
+     */
+    isStomping(enemy) {
+        let charFeet = this.y + this.height;
+        let enemyMid = enemy.y + enemy.height * 0.5;
+        return this.speedY < 0 && charFeet <= enemyMid;
+    }
+
+    /**
      * @method jump
      * @description Makes the character jump by setting its vertical speed.
      */
@@ -54,6 +67,7 @@ class Character extends Creature {
     move() {
         setInterval(() => {
             if (this.isDead) return;
+            if (this.world && this.world.isPaused) return;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX - this.width) {
                 this.moveRight(5);
                 this.lastMoveTime = Date.now();
