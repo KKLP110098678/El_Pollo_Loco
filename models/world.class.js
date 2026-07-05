@@ -215,12 +215,14 @@ class World {
             
 
         if (object instanceof Character || object instanceof Chicken) {
-        this.createRect(object, object.height, 'red');
-            if (object.hitboxHeight) {
-                this.createRect(object, object.hitboxHeight);
-            }
-            if (object.detectionRange) {
-                this.createDetectionRange(object);
+            if (debugMode) {
+                this.createRect(object, object.height, 'red');
+                if (object.hitboxHeight) {
+                    this.createRect(object, object.hitboxHeight);
+                }
+                if (object.detectionRange) {
+                    this.createDetectionRange(object);
+                }
             }
         }
         if (object.otherDirection) {

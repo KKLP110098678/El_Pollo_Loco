@@ -10,8 +10,11 @@ let world;
 let keyboard = new Keyboard();
 let currentLevelNumber = null;
 let completedLevels = new Set();
+
+/* Game settings */
 let isFullscreen = false;
 let gameVolume = 1;
+let debugMode = false;
 
 function setGameVolume(value) {
     gameVolume = parseFloat(value);
