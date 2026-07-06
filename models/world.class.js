@@ -315,6 +315,16 @@ class World {
                 }
             }
         });
+        this.smallChickens.forEach(smallChicken => {
+            if (this.character.isColliding(smallChicken) && !smallChicken.isDead) {
+                if (this.character.isStomping(smallChicken)) {
+                    smallChicken.hit();
+                    this.character.speedY = 12;
+                } else {
+                    this.character.hit();
+                }
+            }
+        });
         this.bossChickens.forEach(bossChicken => {
             if (this.character.isColliding(bossChicken) && !bossChicken.isDead) {
                 this.character.hit();
@@ -338,6 +348,13 @@ class World {
             this.chicken.forEach(chicken => {
                 if (bottle.isColliding(chicken) && !chicken.isDead) {
                     chicken.hit();
+                    bottle.explode();
+                }
+            });
+            if (bottle.hasExploded) return;
+            this.smallChickens.forEach(smallChicken => {
+                if (bottle.isColliding(smallChicken) && !smallChicken.isDead) {
+                    smallChicken.hit();
                     bottle.explode();
                 }
             });
