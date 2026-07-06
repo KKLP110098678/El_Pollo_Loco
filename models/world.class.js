@@ -10,6 +10,7 @@ class World {
     character = new Character();
     
     chicken;
+    smallChickens;
     clouds;
     backgroundObjects;
     groundObjects;    
@@ -46,6 +47,7 @@ class World {
     constructor(canvas, keyboard, level) {
         this.level = level;
         this.chicken = level.chicken;
+        this.smallChickens = level.smallChickens;
         this.clouds = level.clouds;
         this.backgroundObjects = level.backgroundObjects;
         this.groundObjects = level.groundObjects;
@@ -138,6 +140,7 @@ class World {
         this.addObjectToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.chicken);
+        this.addObjectsToMap(this.smallChickens);
         this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.coins);

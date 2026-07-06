@@ -5,6 +5,7 @@
 
 class Level {
     chicken;
+    smallChickens;
     clouds;
     backgroundObjects;
     groundObjects;
@@ -13,8 +14,9 @@ class Level {
     bossChickens;
     levelEndX;
 
-    constructor(chicken, clouds, backgroundObjects, groundObjects, collectableObjects, coins, bossChickens, levelEndX) {
+    constructor(chicken, smallChickens, clouds, backgroundObjects, groundObjects, collectableObjects, coins, bossChickens, levelEndX) {
         this.chicken = chicken;
+        this.smallChickens = smallChickens;
         this.clouds = clouds;
         this.backgroundObjects = backgroundObjects;
         this.groundObjects = groundObjects;

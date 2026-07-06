@@ -5,6 +5,11 @@ function createLevel1() { return new Level(
         new Chicken(1100, 370)
     ],
     [
+        new SmallChicken(500, 370),
+        new SmallChicken(800, 370),
+        new SmallChicken(1200, 370)
+    ],
+    [
         new Cloud(),
         new Cloud(),
         new Cloud()
