@@ -419,6 +419,7 @@ class World {
     showWinScreen() {
         if (this.gameWon) return;
         this.gameWon = true;
+        playVictorySoundWithDrums(gameVolume);
 
         setTimeout(() => {
             this.showWinScreenStatus = true;
