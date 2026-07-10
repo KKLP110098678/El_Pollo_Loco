@@ -15,6 +15,32 @@ let completedLevels = new Set();
 let isFullscreen = false;
 let gameVolume = 1;
 let debugMode = false;
+let isPausedByOrientation = false;
+
+function checkOrientation() {
+    const isPortrait = window.innerHeight > window.innerWidth;
+    const hint = document.getElementById('orientationHint');
+    if (isPortrait) {
+        hint.style.display = 'flex';
+        if (world && !world.isPaused) {
+            world.isPaused = true;
+            isPausedByOrientation = true;
+            const btn = document.getElementById('pauseBtn');
+            if (btn) btn.textContent = '▶';
+        }
+    } else {
+        hint.style.display = 'none';
+        if (world && isPausedByOrientation) {
+            isPausedByOrientation = false;
+            world.isPaused = false;
+            world.draw();
+            const btn = document.getElementById('pauseBtn');
+            if (btn) btn.textContent = '⏸';
+        }
+    }
+}
+
+window.addEventListener('resize', checkOrientation);
 
 function setGameVolume(value) {
     gameVolume = parseFloat(value);
