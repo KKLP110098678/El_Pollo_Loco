@@ -68,6 +68,7 @@ class World {
 
     handleGameOver() {
        if (this.gameLost) return;
+        playGameOverSound();
         this.gameLost = true;
         setTimeout(() => {
             this.showGameOverScreenStatus = true;
