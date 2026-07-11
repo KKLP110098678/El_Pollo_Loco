@@ -27,6 +27,7 @@ class Character extends Creature {
         this.ammo = 5;
         this.bottle_throwed = false;
         this.throw_audio = new Audio('assets/sounds/throw.wav');
+        this.bottomOffset = 7;
     }
 
 

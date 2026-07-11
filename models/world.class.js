@@ -376,14 +376,14 @@ class World {
     checkGroundCollisions() {
         let onGround = false;
         this.groundObjects.forEach(ground => {
-            if (this.character.isColliding(ground) && this.character.y + this.character.height <= ground.y + 10) {
-                this.character.currentFallingY = ground.y - this.character.height;
+            if (this.character.isColliding(ground) && this.character.y < ground.y) {
+                this.character.currentFallingY = ground.y - this.character.height + this.character.bottomOffset;
                 onGround = true;
             }
         });
 
         if (!onGround) {
-            this.character.currentFallingY = 270;
+            this.character.currentFallingY = 270 + this.character.bottomOffset;
         }
     }
 
