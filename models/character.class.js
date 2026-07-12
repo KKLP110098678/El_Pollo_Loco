@@ -132,13 +132,11 @@ class Character extends Creature {
                     this.img = this.imageCache[characterImages.JUMPING_DOWN[i]];
                     this.currentImage++;
                 }
-            } 
-            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 let i = this.currentImage % characterImages.WALKING.length;
                 this.img = this.imageCache[characterImages.WALKING[i]];
                 this.currentImage++;
-            } 
-            else if (this.isHurt) {
+            } else if (this.isHurt) {
                 let i = this.currentImage % characterImages.HURT.length;
                 this.img = this.imageCache[characterImages.HURT[i]];
                 this.currentImage++;

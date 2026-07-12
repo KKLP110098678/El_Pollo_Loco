@@ -13,7 +13,7 @@
         <h1>El Pollo Loco</h1>
         <div style="position: relative; display: inline-block;">
             <canvas id="gameCanvas" width="720" height="480"></canvas>
-            <button id="pauseBtn" class="pause-btn" style="display:none;" onclick="togglePause()">⏸</button>
+            <button id="pauseBtn" class="pause-btn" style="display:none;" onclick="togglePause(); this.blur();">⏸</button>
             <div id="pauseMenu" class="pause-menu" style="display:none;">
                 <div class="pause-menu-content">
                     <h2>Pause</h2>
