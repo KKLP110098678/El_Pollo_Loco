@@ -18,6 +18,7 @@ class Character extends Creature {
         this.lastMoveTime = Date.now();
         this.width = 50;
         this.height = 150;
+        this.hitboxWidth = 27;
         this.hitboxHeight = 90;
         this.animate();
         this.applyGravity();

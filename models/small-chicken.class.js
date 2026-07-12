@@ -5,6 +5,8 @@ class SmallChicken extends Chicken {
         this.y = y;
         this.width = 40;
         this.height = 40;
+        this.hitboxWidth = 36;
+        this.hitboxHeight = 38;
         this.loadImage(smallChickenImages.WALKING[0]);
         this.loadImages(smallChickenImages.WALKING);
         this.loadImages(smallChickenImages.DEAD);

@@ -14,7 +14,7 @@ let completedLevels = new Set();
 /* Game settings */
 let isFullscreen = false;
 let gameVolume = 1;
-let debugMode = false;
+let debugMode = true;
 let isPausedByOrientation = false;
 
 function checkOrientation() {

@@ -6,6 +6,9 @@ class Collectable extends MovableObject {
         this.y = y;
         this.width = 50;
         this.height = 50;
+        this.hitboxHeight = 40;
+        this.hitboxWidth = 20;
+        this.bottomOffset = 3;
         this.audio = new Audio('assets/sounds/pickupBottle.wav');
     }
 }

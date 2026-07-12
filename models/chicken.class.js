@@ -14,6 +14,7 @@ class Chicken extends Enemy {
         this.loadImages(chickenImages.DEAD);
         this.width = 50;
         this.height = 50;
+        this.hitboxWidth = this.width;
         this.hitboxHeight = this.height;
         this.animate();
         this.health = 1;

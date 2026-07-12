@@ -9,7 +9,9 @@ class BossChicken extends Chicken {
         this.loadImages(BossChickenImages.DEAD);
         this.width = 250;
         this.height = 250;
-        this.hitboxHeight = this.height;
+        this.hitboxHeight = 202;
+        this.hitboxWidth = 240;
+        this.bottomOffset = 5;
         this.health = 5;
         this.isBoss = true;
         this.detectionRange = 330;

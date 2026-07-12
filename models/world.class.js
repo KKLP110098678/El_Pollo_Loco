@@ -231,11 +231,11 @@ class World {
         }
             
 
-        if (object instanceof Character || object instanceof Chicken) {
+        if (object instanceof Character || object instanceof Chicken || object instanceof Collectable) {
             if (debugMode) {
-                this.createRect(object, object.height, 'red');
+                this.createRect(object, object.y, object.width, object.height, 'red');
                 if (object.hitboxHeight) {
-                    this.createRect(object, object.hitboxHeight);
+                    this.createRect(object, object.y - (object.bottomOffset || 0), object.hitboxWidth, object.hitboxHeight, 'blue');
                 }
                 if (object.detectionRange) {
                     this.createDetectionRange(object);
@@ -254,11 +254,11 @@ class World {
      * @param {number} height - The height of the rectangle.
      * @param {string} [color] - The color of the rectangle. Defaults to blue if not specified.
      */
-    createRect(object, height, color) {
+    createRect(object, posY, width, height, color) {
         this.ctx.beginPath();
         this.ctx.lineWidth = '2';
         this.ctx.strokeStyle = color || 'blue';
-        this.ctx.rect(object.x, object.y + (object.height - height), object.width, height);
+        this.ctx.rect(object.x + (object.width - width) / 2, posY + (object.height - height), width, height);
         this.ctx.stroke();
     }
 
@@ -376,7 +376,9 @@ class World {
     checkGroundCollisions() {
         let onGround = false;
         this.groundObjects.forEach(ground => {
-            if (this.character.isColliding(ground) && this.character.y < ground.y) {
+            let fallingDown = this.character.speedY <= 0;
+            let approachingFromAbove = this.character.y + this.character.height <= ground.y + 20;
+            if (this.character.isColliding(ground) && fallingDown && approachingFromAbove) {
                 this.character.currentFallingY = ground.y - this.character.height + this.character.bottomOffset;
                 onGround = true;
             }

@@ -28,15 +28,20 @@ class DrawableObject {
     
     /**
      * @method getHitbox
-     * @description Returns the hitbox of the object, which is used for collision detection. The hitbox is defined by the object's position and dimensions, and can be adjusted using the hitboxHeight property if specified.
+     * @description Returns the hitbox of the object used for collision detection. The hitbox is
+     * centered horizontally within the sprite. Its bottom edge sits `bottomOffset` pixels above
+     * the sprite's bottom edge, so the collision area always lies fully inside the visible sprite.
      * @returns {Object} An object representing the hitbox with properties x, y, width, and height.
      */
     getHitbox() {
         let hHeight = this.hitboxHeight || this.height;
+        let hWidth = this.hitboxWidth || this.width;
+        let bottomOff = this.bottomOffset || 0;
+        let offsetX = (this.width - hWidth) / 2;
         return {
-            x: this.x,
-            y: this.y + (this.height - hHeight),
-            width: this.width,
+            x: this.x + offsetX,
+            y: this.y + (this.height - hHeight - bottomOff),
+            width: hWidth,
             height: hHeight
         };
     }
