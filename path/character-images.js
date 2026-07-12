@@ -27,11 +27,13 @@ const characterImages = {
         "assets/img/2_character_pepe/2_walk/W-25.png",
         "assets/img/2_character_pepe/2_walk/W-26.png"
     ],
-    "JUMPING": [
+    "JUMPING_UP": [
         "assets/img/2_character_pepe/3_jump/J-31.png",
         "assets/img/2_character_pepe/3_jump/J-32.png",
         "assets/img/2_character_pepe/3_jump/J-33.png",
-        "assets/img/2_character_pepe/3_jump/J-34.png",
+        "assets/img/2_character_pepe/3_jump/J-34.png"
+    ],
+    "JUMPING_DOWN": [
         "assets/img/2_character_pepe/3_jump/J-35.png",
         "assets/img/2_character_pepe/3_jump/J-36.png",
         "assets/img/2_character_pepe/3_jump/J-37.png",

@@ -12,14 +12,16 @@ class Character extends Creature {
         this.loadImages(characterImages.IDLE);
         this.loadImages(characterImages.SLEEPING);
         this.loadImages(characterImages.WALKING);
-        this.loadImages(characterImages.JUMPING);
+        this.loadImages(characterImages.JUMPING_UP);
+        this.loadImages(characterImages.JUMPING_DOWN);
         this.loadImages(characterImages.HURT);
         this.loadImages(characterImages.DEAD);
         this.lastMoveTime = Date.now();
+        this.jumpFrameIndex = 0;
         this.width = 50;
         this.height = 150;
         this.hitboxWidth = 27;
-        this.hitboxHeight = 90;
+        this.hitboxHeight = 80;
         this.animate();
         this.applyGravity();
         this.move();
@@ -60,6 +62,7 @@ class Character extends Creature {
      */
     jump() {
         this.speedY = 16;
+        this.jumpFrameIndex = 0;
     }
 
     /**
@@ -119,16 +122,23 @@ class Character extends Creature {
                     }, j * 100);
                 }
                 clearInterval(this.animateInterval);
-            }
+            } else if (this.isAboveGround()) {
+                if (this.speedY > 0) {
+                    let i = Math.min(this.jumpFrameIndex, characterImages.JUMPING_UP.length - 1);
+                    this.img = this.imageCache[characterImages.JUMPING_UP[i]];
+                    this.jumpFrameIndex++;
+                } else {
+                    let i = this.currentImage % characterImages.JUMPING_DOWN.length;
+                    this.img = this.imageCache[characterImages.JUMPING_DOWN[i]];
+                    this.currentImage++;
+                }
+            } 
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 let i = this.currentImage % characterImages.WALKING.length;
                 this.img = this.imageCache[characterImages.WALKING[i]];
                 this.currentImage++;
-            } else if (this.world.keyboard.SPACE) {
-                let i = this.currentImage % characterImages.JUMPING.length;
-                this.img = this.imageCache[characterImages.JUMPING[i]];
-                this.currentImage++;
-            } else if (this.isHurt) {
+            } 
+            else if (this.isHurt) {
                 let i = this.currentImage % characterImages.HURT.length;
                 this.img = this.imageCache[characterImages.HURT[i]];
                 this.currentImage++;
