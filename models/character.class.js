@@ -25,22 +25,13 @@ class Character extends Creature {
         this.animate();
         this.applyGravity();
         this.move();
-        this.life = 5;
+        this.totalHealth = 50;
+        this.health = this.totalHealth;
         this.coins = 0;
         this.ammo = 5;
         this.bottle_throwed = false;
         this.throw_audio = new Audio('assets/sounds/throw.wav');
         this.bottomOffset = 7;
-    }
-
-
-    /**
-     * @method isAboveGround
-     * @description Checks if the character is above the ground level (y < 270). This is used to determine if the character can jump or if it should be affected by gravity.
-     * @returns {boolean} - Returns true if the character is above the ground, false otherwise.
-     */
-    isAboveGround() {
-        return this.y < this.currentFallingY;
     }
 
     /**

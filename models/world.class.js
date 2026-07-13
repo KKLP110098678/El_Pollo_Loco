@@ -190,7 +190,7 @@ class World {
      * @description Draws the status elements on the screen, including the health bar, coin counter, and ammo counter. It updates the health bar percentage based on the character's life and updates the coin and ammo counters with the current values.
      */
     drawStatusElements() {
-        this.healthBar.setPercentage((this.character.life / 5) * 100);
+        this.healthBar.setPercentage((this.character.health / this.character.totalHealth) * 100);
         this.addObjectToMap(this.healthBar);
         this.coinCounter.value = this.character.coins;
         this.addObjectToMap(this.coinCounter);
@@ -206,7 +206,7 @@ class World {
     drawBossHealthBar() {
         let nearBoss = this.bossChickens.find(boss => !boss.isDead && Math.abs(boss.x - this.character.x) < boss.detectionRange);
         if (nearBoss) {
-            this.bossHealthBar.setPercentage((nearBoss.health / 5) * 100);
+            this.bossHealthBar.setPercentage((nearBoss.health / nearBoss.totalHealth) * 100);
             this.addObjectToMap(this.bossHealthBar);
         }
     }

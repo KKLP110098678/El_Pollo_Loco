@@ -7,12 +7,15 @@ class BossChicken extends Chicken {
         this.loadImages(BossChickenImages.ATTACK);
         this.loadImages(BossChickenImages.HURT);
         this.loadImages(BossChickenImages.DEAD);
+        this.currentFallingY = this.y;
+        this.applyGravity();
         this.width = 250;
         this.height = 250;
         this.hitboxHeight = 202;
         this.hitboxWidth = 240;
         this.bottomOffset = 5;
-        this.health = 5;
+        this.totalHealth = 5;
+        this.health = this.totalHealth;
         this.isBoss = true;
         this.detectionRange = 330;
         this.spawnAreaX = [x - 100, x + 100]; // Define the spawn area for the boss chicken
@@ -40,10 +43,14 @@ class BossChicken extends Chicken {
                 let i = this.currentImage % BossChickenImages.HURT.length;
                 this.img = this.imageCache[BossChickenImages.HURT[i]];
                 this.currentImage++;
+                this.resetHurtState(); // Reset the hurt state after the animation
             } else if (this.isAttacking) {
                 let i = this.currentImage % BossChickenImages.ATTACK.length;
                 this.img = this.imageCache[BossChickenImages.ATTACK[i]];
-                this.currentImage++;
+                setTimeout(() => {
+                    this.currentImage++;
+                }, 200);
+
             } else if (this.isAlert) {
                 let i = this.currentImage % BossChickenImages.ALERT.length;
                 this.img = this.imageCache[BossChickenImages.ALERT[i]];
@@ -54,5 +61,15 @@ class BossChicken extends Chicken {
                 this.currentImage++;
             }
         }, 1000 / 10);
+    }
+
+    jumpOnCharacter() {
+        if (this.isDead) return;
+        this.speedY = 15;
+        this.speedX = this.otherDirection ? -10 : 10;
+        this.isAttacking = true;
+        setTimeout(() => {
+            this.isAttacking = false;
+        }, 1600);
     }
 }

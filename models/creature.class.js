@@ -14,6 +14,15 @@ class Creature extends MovableObject {
     }
 
     /**
+     * @method isAboveGround
+     * @description Checks if the character is above the ground level (y < 270). This is used to determine if the character can jump or if it should be affected by gravity.
+     * @returns {boolean} - Returns true if the character is above the ground, false otherwise.
+     */
+    isAboveGround() {
+        return this.y < this.currentFallingY;
+    }
+
+    /**
      * 
      * @method isDead
      * @description Checks if the creature is dead by comparing its energy to zero. If the energy is less than or equal to zero, the creature is considered dead.
@@ -31,8 +40,8 @@ class Creature extends MovableObject {
         if (this.isDead) return;
         if (this.isHurt) return;
 
-        this.life -= 1;
-        if (this.life <= 0) {
+        this.health -= 1;
+        if (this.health <= 0) {
             this.isDead = true;
         } else {
             this.isHurt = true;
