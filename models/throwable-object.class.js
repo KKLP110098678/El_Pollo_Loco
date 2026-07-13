@@ -54,8 +54,8 @@ class ThrowableObject extends MovableObject {
      */
     animate() {
         let splashing = false;
-        setInterval(() => {
-            if (this.speedY == 0) {
+        let interval = setInterval(() => {
+            if (this.hasExploded || (this.speedY === 0 && !this.isAboveGround())) {
                 this.playAnimation(this.IMAGES_SPLASH);
                 if (!splashing) {
                     splashing = true;
@@ -63,6 +63,7 @@ class ThrowableObject extends MovableObject {
                         let index = world.throwableObjects.indexOf(this);
                         if (index >= 0) {
                             world.throwableObjects.splice(index, 1);
+                            interval = clearInterval(interval);
                         }
                     }, 1000);
                 }
