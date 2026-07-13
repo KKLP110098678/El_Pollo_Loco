@@ -55,10 +55,16 @@
                     <div class="settings-body">
                         <label for="fullscreenCheckbox">Fullscreen</label>
                         <input type="checkbox" id="fullscreenCheckbox" onchange="toggleFullscreen()">
-                        <label for="volumeSlider">Volume</label>
+                        <label for="volumeSlider">Effekte</label>
                         <div class="volume-slider-row">
                             <span>🔇</span>
                             <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="setGameVolume(this.value)">
+                            <span>🔊</span>
+                        </div>
+                        <label for="musicSlider">Musik</label>
+                        <div class="volume-slider-row">
+                            <span>🔇</span>
+                            <input type="range" id="musicSlider" min="0" max="1" step="0.05" value="0.3" oninput="setMusicVolume(this.value)">
                             <span>🔊</span>
                         </div>
                     </div>

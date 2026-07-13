@@ -3,6 +3,7 @@ class SmallChicken extends Chicken {
         super();
         this.x = x;
         this.y = y;
+        this.spawnAreaX = [this.x, this.x + 200];
         this.width = 40;
         this.height = 40;
         this.hitboxWidth = 36;

@@ -14,8 +14,10 @@ let completedLevels = new Set();
 /* Game settings */
 let isFullscreen = false;
 let gameVolume = 1;
+let musicVolume = 0.5;
 let debugMode = true;
 let isPausedByOrientation = false;
+let backgroundMusic = null;
 
 function checkOrientation() {
     const isPortrait = window.innerHeight > window.innerWidth;
@@ -46,6 +48,30 @@ function setGameVolume(value) {
     gameVolume = parseFloat(value);
 }
 
+function setMusicVolume(value) {
+    musicVolume = parseFloat(value);
+    if (backgroundMusic) {
+        backgroundMusic.volume = musicVolume;
+    }
+}
+
+function startBackgroundMusic() {
+    if (!backgroundMusic) {
+        backgroundMusic = new Audio('assets/music/Fartes-de-Taco.mp3');
+        backgroundMusic.loop = true;
+    }
+    backgroundMusic.volume = musicVolume;
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play();
+}
+
+function stopBackgroundMusic() {
+    if (backgroundMusic) {
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0;
+    }
+}
+
 function showSettings() {
     document.getElementById('settingsModal').style.display = 'flex';
 }
@@ -71,14 +97,17 @@ function togglePause() {
         world.draw();
         if (btn) btn.textContent = '⏸';
         if (menu) menu.style.display = 'none';
+        if (backgroundMusic) backgroundMusic.play();
     } else {
         world.isPaused = true;
         if (btn) btn.textContent = '▶';
         if (menu) menu.style.display = 'flex';
+        if (backgroundMusic) backgroundMusic.pause();
     }
 }
 
 function returnToMainMenu() {
+    stopBackgroundMusic();
     for (let i = 1; i < 9999; i++) {
         window.clearInterval(i);
     }
@@ -111,6 +140,7 @@ function startGame(levelNumber) {
     } else if (levelNumber === 2) {
         initGame(createLevel2());
     }
+    startBackgroundMusic();
 }
 
 /**

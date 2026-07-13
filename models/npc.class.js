@@ -88,10 +88,10 @@ class Npc extends Creature {
      */
     walkTowardsCharacter(character) {
             if (character.x < this.x) {
-                this.moveLeft(1);
+                this.moveLeft(5);
                 this.isWalking = true;
             } else if (character.x > this.x) {
-                this.moveRight(1);
+                this.moveRight(5);
                 this.isWalking = true;
             }
     }

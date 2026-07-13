@@ -85,6 +85,7 @@ class World {
     }
     
     exitToStartScreen() {
+        stopBackgroundMusic();
         let pauseBtn = document.getElementById('pauseBtn');
         if (pauseBtn) {
             pauseBtn.style.display = 'none';
@@ -116,6 +117,10 @@ class World {
             npc.detectCharacter(this.character);
         });
         this.bossChickens.forEach(npc => {
+            npc.world = this;
+            npc.detectCharacter(this.character);
+        });
+        this.smallChickens.forEach(npc => {
             npc.world = this;
             npc.detectCharacter(this.character);
         });
