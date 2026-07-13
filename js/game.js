@@ -18,6 +18,9 @@ let musicVolume = 0.5;
 let debugMode = true;
 let isPausedByOrientation = false;
 let backgroundMusic = null;
+const coarsePointer = window.matchMedia('(pointer: coarse)');
+let isTouchMode = coarsePointer.matches;
+coarsePointer.addEventListener('change', (e) => { isTouchMode = e.matches; });
 
 function checkOrientation() {
     const isPortrait = window.innerHeight > window.innerWidth;
@@ -43,34 +46,6 @@ function checkOrientation() {
 }
 
 window.addEventListener('resize', checkOrientation);
-
-function setGameVolume(value) {
-    gameVolume = parseFloat(value);
-}
-
-function setMusicVolume(value) {
-    musicVolume = parseFloat(value);
-    if (backgroundMusic) {
-        backgroundMusic.volume = musicVolume;
-    }
-}
-
-function startBackgroundMusic() {
-    if (!backgroundMusic) {
-        backgroundMusic = new Audio('assets/music/Fartes-de-Taco.mp3');
-        backgroundMusic.loop = true;
-    }
-    backgroundMusic.volume = musicVolume;
-    backgroundMusic.currentTime = 0;
-    backgroundMusic.play();
-}
-
-function stopBackgroundMusic() {
-    if (backgroundMusic) {
-        backgroundMusic.pause();
-        backgroundMusic.currentTime = 0;
-    }
-}
 
 function showSettings() {
     document.getElementById('settingsModal').style.display = 'flex';

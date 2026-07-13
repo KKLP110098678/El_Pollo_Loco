@@ -163,7 +163,7 @@ class World {
     */
    drawGui() {
         this.ctx.translate(-this.camera_x, 0);
-        if ("ontouchstart" in window) {
+        if (isTouchMode) {
             this.addObjectToMap(this.move_left_button);
             this.addObjectToMap(this.move_right_button);
             this.addObjectToMap(this.jump_button);

@@ -1,3 +1,31 @@
+function setGameVolume(value) {
+    gameVolume = parseFloat(value);
+}
+
+function setMusicVolume(value) {
+    musicVolume = parseFloat(value);
+    if (backgroundMusic) {
+        backgroundMusic.volume = musicVolume;
+    }
+}
+
+function startBackgroundMusic() {
+    if (!backgroundMusic) {
+        backgroundMusic = new Audio('assets/music/Fartes-de-Taco.mp3');
+        backgroundMusic.loop = true;
+    }
+    backgroundMusic.volume = musicVolume;
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play();
+}
+
+function stopBackgroundMusic() {
+    if (backgroundMusic) {
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0;
+    }
+}
+
 function playVictorySoundWithDrums() {
   // 1. Initialize audio context
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
