@@ -66,6 +66,10 @@ class World {
         this.checkCollisions();
     }
 
+    /**
+     * @method handleGameOver
+     * @description Handles the game over state when the character dies. It plays the game over sound, shows the game over screen, and stops all intervals to end the game.
+     */
     handleGameOver() {
        if (this.gameLost) return;
         playGameOverSound();
@@ -84,6 +88,10 @@ class World {
         }, 1500); // 1.5 Sekunden warten, damit die Sterbeanimation des Bosses noch abspielen kann
     }
     
+    /**
+     * @method exitToStartScreen
+     * @description Exits the current game and returns to the start screen. It stops the background music, hides the pause button and menu, and resets the game state.
+     */
     exitToStartScreen() {
         stopBackgroundMusic();
         let pauseBtn = document.getElementById('pauseBtn');
@@ -163,37 +171,71 @@ class World {
     */
    drawGui() {
         this.ctx.translate(-this.camera_x, 0);
-        if (isTouchMode) {
-            this.addObjectToMap(this.move_left_button);
-            this.addObjectToMap(this.move_right_button);
-            this.addObjectToMap(this.jump_button);
-            this.addObjectToMap(this.throw_bottle_button);
+        this.drawTouchControls();
+        this.drawStatusElements();
+        this.drawWinScreen();
+        this.drawGameOverScreen();
+    }
+    
+    /**
+     * @method drawTouchControls
+     * @description Draws the touch controls on the screen if the game is in touch mode. It adds the move left, move right, jump, and throw bottle buttons to the map.
+    */
+   drawTouchControls() {
+       if (isTouchMode) {
+           this.addObjectToMap(this.move_left_button);
+           this.addObjectToMap(this.move_right_button);
+           this.addObjectToMap(this.jump_button);
+           this.addObjectToMap(this.throw_bottle_button);
         }
-        
-        // Berechne Prozentwert für das Leben (max 5)
+    }
+    
+    /**
+     * @method drawStatusElements
+     * @description Draws the status elements on the screen, including the health bar, coin counter, and ammo counter. It updates the health bar percentage based on the character's life and updates the coin and ammo counters with the current values.
+     */
+    drawStatusElements() {
         this.healthBar.setPercentage((this.character.life / 5) * 100);
         this.addObjectToMap(this.healthBar);
-
+        this.coinCounter.value = this.character.coins;
+        this.addObjectToMap(this.coinCounter);
+        this.ammoCounter.value = this.character.ammo;
+        this.addObjectToMap(this.ammoCounter);
+        this.drawBossHealthBar();
+    }
+    
+    /**
+     * @method drawBossHealthBar
+     * @description Draws the boss health bar on the screen if there is a nearby boss chicken. It checks for any boss chickens that are not dead and within the detection range of the character. If a nearby boss is found, it updates the boss health bar percentage based on the boss's health and adds it to the map.
+     */
+    drawBossHealthBar() {
         let nearBoss = this.bossChickens.find(boss => !boss.isDead && Math.abs(boss.x - this.character.x) < boss.detectionRange);
         if (nearBoss) {
             this.bossHealthBar.setPercentage((nearBoss.health / 5) * 100);
             this.addObjectToMap(this.bossHealthBar);
         }
-
-        this.coinCounter.value = this.character.coins;
-        this.addObjectToMap(this.coinCounter);
-        this.ammoCounter.value = this.character.ammo;
-        this.addObjectToMap(this.ammoCounter);
-
+    }
+    
+    /**
+     * @method drawWinScreen
+     * @description Draws the win screen on the canvas if the showWinScreenStatus flag is true. The win screen is displayed when the player defeats the final boss.
+     */
+    drawWinScreen() {
         if (this.showWinScreenStatus) {
             this.ctx.drawImage(this.winImage, 0, 0, this.canvas.width, this.canvas.height);
         }
+    }
 
+    /**
+     * @method drawGameOverScreen
+     * @description Draws the game over screen on the canvas if the showGameOverScreenStatus flag is true. The game over screen is displayed when the player loses.
+     */
+    drawGameOverScreen() {
         if (this.showGameOverScreenStatus) {
             this.ctx.drawImage(this.gameoverImage, 0, 0, this.canvas.width, this.canvas.height);
         }
     }
-
+        
     /**
      * @method addObjectToMap
      * Adds a single object to the map, handling its rendering and any transformations (e.g., flipping for direction).

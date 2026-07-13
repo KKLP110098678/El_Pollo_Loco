@@ -13,6 +13,10 @@ class SmallChicken extends Chicken {
         this.loadImages(smallChickenImages.DEAD);
     }
 
+    /**
+     * @method animate
+     * @description Animates the small chicken based on its current state (walking or dead). The method uses setInterval to continuously update the small chicken's image based on its state and current image index. If the small chicken is dead, it displays the dead image; if it's walking, it cycles through the walking images.
+     */
     animate() {
         setInterval(() => {
             if (this.isDead) {
