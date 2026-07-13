@@ -120,17 +120,12 @@ class World {
      */
     setWorld() {
         this.character.world = this;
-        this.chicken.forEach(npc => {
-            npc.world = this;
-            npc.detectCharacter(this.character);
-        });
-        this.bossChickens.forEach(npc => {
-            npc.world = this;
-            npc.detectCharacter(this.character);
-        });
-        this.smallChickens.forEach(npc => {
-            npc.world = this;
-            npc.detectCharacter(this.character);
+        this.npcArrays = [this.chicken, this.smallChickens, this.bossChickens];
+        this.npcArrays.forEach(npcArray => {
+            npcArray.forEach(npc => {
+                npc.world = this;
+                npc.detectCharacter(this.character);
+            });
         });
         this.clouds.forEach(cloud => {
             cloud.world = this;
@@ -243,57 +238,83 @@ class World {
      */
     addObjectToMap(object) {
         if (object.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(object.x + object.width / 2, 0);
-            this.ctx.scale(-1, 1);
-            this.ctx.translate(-object.x - object.width / 2, 0);
+            this.flipImage(object);
         }
         this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
-        
         if (object instanceof StatusBar) {
-            // Zeichne den gefüllten farbigen Balken als zweite Ebene basierend auf percentage
-            if (object.percentageBar && object.percentageBar.complete) {
-                let ratio = Math.max(0, Math.min(1, object.percentage / 100));
-                let sWidth = object.percentageBar.width * ratio;
-                let dWidth = object.width * ratio;
-                if (sWidth > 0 && dWidth > 0) {
-                    this.ctx.drawImage(
-                        object.percentageBar,
-                        0, 0, sWidth, object.percentageBar.height,
-                        object.x, object.y, dWidth, object.height
-                    );
-                }
-            }
-
-            if (object.iconInfo) {
-                // Zeichne das Icon leicht versetzt über der Statusbar
-                this.ctx.drawImage(object.iconInfo, object.x - 15, object.y , 50, 50);
-            }
+            this.addInformationToStatusBar(object);
         }
-
         if (object instanceof StatusCounter) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillStyle = "white";
-            this.ctx.fillText(object.value, object.x + 60, object.y + 30);
+            this.drawCounter(object);
         }
-            
-
-        if (object instanceof Character || object instanceof Chicken || object instanceof Collectable) {
-            if (debugMode) {
-                this.createRect(object, object.y, object.width, object.height, 'red');
-                if (object.hitboxHeight) {
-                    this.createRect(object, object.y - (object.bottomOffset || 0), object.hitboxWidth, object.hitboxHeight, 'blue');
-                }
-                if (object.detectionRange) {
-                    this.createDetectionRange(object);
-                }
-            }
+        if (debugMode) {
+            this.visualizeHitboxes(object);
         }
         if (object.otherDirection) {
             this.ctx.restore();
         }
     }
+
+    flipImage(object) {
+        this.ctx.save();
+        this.ctx.translate(object.x + object.width / 2, 0);
+        this.ctx.scale(-1, 1);
+        this.ctx.translate(-object.x - object.width / 2, 0);
+    }
     
+    /**
+     * @method addInformationToStatusBar
+     * @param
+     * @description Draws the filled colored bar as a second layer based on the percentage of the status bar. It calculates the width of the filled bar based on the percentage and draws it on top of the status bar.
+    */
+   addInformationToStatusBar(object) {
+       // Zeichne den gefüllten farbigen Balken als zweite Ebene basierend auf percentage
+       if (object.percentageBar && object.percentageBar.complete) {
+           let ratio = Math.max(0, Math.min(1, object.percentage / 100));
+           let sWidth = object.percentageBar.width * ratio;
+           let dWidth = object.width * ratio;
+           if (sWidth > 0 && dWidth > 0) {
+               this.ctx.drawImage(
+                   object.percentageBar,
+                   0, 0, sWidth, object.percentageBar.height,
+                   object.x, object.y, dWidth, object.height
+                );
+            }
+        }
+        if (object.iconInfo) {
+            // Zeichne das Icon leicht versetzt über der Statusbar
+            this.ctx.drawImage(object.iconInfo, object.x - 15, object.y , 50, 50);
+        }
+    }
+
+    /**
+     * @method drawCounter
+     * @description Draws the value of a StatusCounter object on the canvas. It sets the font and fill style, and then uses fillText to display the value at the specified position.
+     * @param {StatusCounter} object - The StatusCounter object whose value is to be drawn.
+     */
+    drawCounter(object) {
+        this.ctx.font = "23px Arial";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(object.value, object.x + 60, object.y + 33);
+    }
+    
+    /**
+     * @method visualizeHitboxes
+     * @description Visualizes the hitboxes of various game objects (Character, Chicken, Collectable) by drawing rectangles around them. It also visualizes the detection range for objects that have a detection range property.
+     * @param {MovableObject} object - The object for which to visualize the hitbox.
+     */
+    visualizeHitboxes(object) {
+        if (object instanceof Character || object instanceof Chicken || object instanceof Collectable) {
+            this.createRect(object, object.y, object.width, object.height, 'red');
+            if (object.hitboxHeight) {
+                this.createRect(object, object.y - (object.bottomOffset || 0), object.hitboxWidth, object.hitboxHeight, 'blue');
+            }
+            if (object.detectionRange) {
+                this.createDetectionRange(object);
+            }
+        }
+    }
+
     /**
      * @method createRect
      * @description Draws a rectangle around the specified object, indicating its hitbox or other relevant area.
@@ -342,7 +363,7 @@ class World {
         setInterval(() => {
             if (this.isPaused) return;
             this.checkEnemyCollisions();
-            this.checkThrowableCollisions();
+            this.checkThrowableCollisions([this.chicken, this.smallChickens, this.bossChickens]);
             this.checkGroundCollisions();
             this.checkItemCollisions();
         }, 1000 / 60);
@@ -353,65 +374,58 @@ class World {
      * @description Checks for collisions between the main character and chickens. If a collision is detected, the character is hit. The method also checks for collisions with boss chickens and handles the win condition if the final boss is defeated.
      */
     checkEnemyCollisions() {
-        this.chicken.forEach(chicken => {
-            if (this.character.isColliding(chicken) && !chicken.isDead) {
-                if (this.character.isStomping(chicken)) {
-                    chicken.hit();
-                    this.character.speedY = 12;
-                } else {
-                    this.character.hit();
-                }
-            }
-        });
-        this.smallChickens.forEach(smallChicken => {
-            if (this.character.isColliding(smallChicken) && !smallChicken.isDead) {
-                if (this.character.isStomping(smallChicken)) {
-                    smallChicken.hit();
-                    this.character.speedY = 12;
-                } else {
-                    this.character.hit();
-                }
-            }
-        });
-        this.bossChickens.forEach(bossChicken => {
-            if (this.character.isColliding(bossChicken) && !bossChicken.isDead) {
-                this.character.hit();
-            }
-            if (bossChicken.isFinalBoss && bossChicken.isDead) {
-                this.showWinScreen();
-            }
-        });
+        this.checkNormalEnemyCollisions(this.chicken);
+        this.checkNormalEnemyCollisions(this.smallChickens);
+        this.checkbossCollisions(this.bossChickens);
         if (this.character.isDead) {
             this.handleGameOver();
         }
     }
 
+    checkNormalEnemyCollisions(enemyArray) {
+        enemyArray.forEach(enemy => {
+            if (this.character.isColliding(enemy) && !enemy.isDead) {
+                if (this.character.isStomping(enemy)) {
+                    enemy.hit();
+                    this.character.speedY = 12;
+                } else {
+                    this.character.hit();
+                }
+            }
+        });
+    }
+    /**
+     * @method checkbossCollisions
+     * @description Checks for collisions between the main character and boss chickens. If a collision is detected, the character is hit. If the final boss is defeated, the win screen is displayed.
+     * @param {BossChicken[]} boss - An array of boss chickens to check for collisions with the main character.
+     */
+    checkbossCollisions(bossArray) {
+        bossArray.forEach(boss => {
+            if (this.character.isColliding(boss) && !boss.isDead) {
+                this.character.hit();
+            }
+            if (boss.isFinalBoss && boss.isDead) {
+                this.showWinScreen();
+            }
+        });
+    }
+
+
     /**
      * @method checkThrowableCollisions
+     * @param {Array} enemyArrays - An array of arrays containing enemy objects (chickens, small chickens, boss chickens) to check for collisions with throwable objects (bottles).
      * @description Checks for collisions between throwable objects (bottles) and chickens. If a collision is detected, the chicken is hit, and the bottle explodes. The method also checks for collisions with boss chickens.
      */
-    checkThrowableCollisions() {
+    checkThrowableCollisions(enemyArrays) {
         this.throwableObjects.forEach(bottle => {
-            if (bottle.hasExploded) return;
-            this.chicken.forEach(chicken => {
-                if (bottle.isColliding(chicken) && !chicken.isDead) {
-                    chicken.hit();
-                    bottle.explode();
-                }
-            });
-            if (bottle.hasExploded) return;
-            this.smallChickens.forEach(smallChicken => {
-                if (bottle.isColliding(smallChicken) && !smallChicken.isDead) {
-                    smallChicken.hit();
-                    bottle.explode();
-                }
-            });
-            if (bottle.hasExploded) return;
-            this.bossChickens.forEach(bossChicken => {
-                if (bottle.isColliding(bossChicken) && !bossChicken.isDead) {
-                    bossChicken.hit();
-                    bottle.explode();
-                }
+            enemyArrays.forEach(enemyArray => {
+                if (bottle.hasExploded) return;
+                enemyArray.forEach(enemy => {
+                    if (bottle.isColliding(enemy) && !enemy.isDead) {
+                        enemy.hit();
+                        bottle.explode();
+                    }
+                });
             });
         });
     }
@@ -441,24 +455,21 @@ class World {
      * @description Checks for collisions between the main character and collectible items (coins and collectable objects). If a collision is detected, the character's coin or ammo count is increased, and the item is removed from the world.
      */
     checkItemCollisions() {
-        this.coins.forEach((coin, index) => {
-            if (this.character.isColliding(coin)) {
-                this.character.coins += 1;
-                this.coinCounter.increase(1);
-                this.coins.splice(index, 1);
-                coin.audio.volume = typeof gameVolume !== 'undefined' ? gameVolume : 1;
-                coin.audio.play();
+        [this.coins, this.collectableObjects].forEach(itemArray => {
+            itemArray.forEach((item, index) => {
+                if (this.character.isColliding(item)) {
+                    if (item instanceof Coin) {
+                        this.character.coins += 1;
+                        this.coinCounter.increase(1);
+                    } else if (item instanceof Collectable) {
+                        this.character.ammo += 1;
+                        this.ammoCounter.increase(1);
             }
-        });
-
-        this.collectableObjects.forEach((collectable, index) => {
-            if (this.character.isColliding(collectable)) {
-                this.character.ammo += 1;
-                this.ammoCounter.increase(1);
-                this.collectableObjects.splice(index, 1);
-                collectable.audio.volume = typeof gameVolume !== 'undefined' ? gameVolume : 1;
-                collectable.audio.play();
-            }
+                    item.audio.volume = typeof gameVolume !== 'undefined' ? gameVolume : 1;
+                    item.audio.play();
+                    itemArray.splice(index, 1);
+    }
+            });
         });
     }
 
