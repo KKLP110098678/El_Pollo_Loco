@@ -36,9 +36,8 @@ class Creature extends MovableObject {
      * @method hit
      * @description Reduces the creature's life by one and sets the isHurt property to true. After a short delay, the isHurt property is reset to false, allowing the creature to be hit again.
      */
-    hit(damage = 1) {
-        if (this.isDead) return;
-        if (this.isHurt) return;
+    hit(damage = 1, isContactDamage = false) {
+        if (this.isDead || (isContactDamage && this.isHurt)) return;
 
         this.health -= damage;
         if (this.health <= 0) {

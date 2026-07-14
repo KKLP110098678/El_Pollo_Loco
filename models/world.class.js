@@ -389,7 +389,7 @@ class World {
                     enemy.hit();
                     this.character.speedY = 12;
                 } else {
-                    this.character.hit();
+                    this.character.hit(1, true); // Contact damage from normal enemies
                 }
             }
         });
@@ -406,7 +406,7 @@ class World {
                     this.character.hit(5); // Reduce character's health by 5 when stomping on a boss
                     boss.speedY = 12;
                 } else {
-                    this.character.hit();
+                    this.character.hit(1, true); // Contact damage from boss chicken
                 }
             }
             if (boss.isFinalBoss && boss.isDead) {
