@@ -8,6 +8,7 @@ class BossChicken extends Chicken {
         this.loadImages(BossChickenImages.HURT);
         this.loadImages(BossChickenImages.DEAD);
         this.applyGravity();
+        this.throwEggBomb();
         this.width = 250;
         this.height = 250;
         this.hitboxHeight = 202;
@@ -79,4 +80,25 @@ class BossChicken extends Chicken {
             this.isAttacking = false;
         }, 1600);
     }
+    
+    detect(character) {
+        let distanceX = Math.abs(this.x - character.x);
+        let distanceY = Math.abs(this.y - character.y);
+        this.isDetected = distanceX < this.detectionRange && distanceY < this.detectionRange && character.isDead === false;
+    }
+
+    throwEggBomb() {
+        setInterval(() => {
+            if (this.isDead) return;
+            this.detect(world.character);
+            if (this.isDetected) {
+                let eggBomb = new EggBomb(this.x + this.width / 2, this.y);
+                world.addObjectToMap(eggBomb);
+                eggBomb.throw(this.otherDirection);
+                this.world.throwableObjects.push(eggBomb);
+            }
+
+        }, 1000); // Throw an egg bomb every 1 second
+    }
+
 }

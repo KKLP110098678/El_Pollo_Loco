@@ -4,21 +4,6 @@
  */
 
 class ThrowableObject extends MovableObject {
-    IMAGES_ROTATION = [
-        'assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
-    ];
-
-    IMAGES_SPLASH = [
-        'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
-    ];
 
     constructor(x, y) {
         super();
@@ -26,16 +11,13 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.width = 50;
         this.height = 50;
-        this.loadImage('assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
-        this.loadImages(this.IMAGES_ROTATION);
-        this.loadImages(this.IMAGES_SPLASH);
     }
 
     /**
      * @method throw
      * @description Throws the bottle in a specified direction by setting its horizontal and vertical speeds. The bottle will move in the air and eventually fall to the ground, where it will play the splash animation.
      * @param {boolean} direction - The direction to throw the bottle (true for left, false for right).
-     */
+     */dfa
     throw(direction) {
         this.speedY = 10;
         if (direction) {
@@ -53,7 +35,7 @@ class ThrowableObject extends MovableObject {
      * @description Animates the bottle based on its current state (rotation or splash). The method uses setInterval to continuously update the bottle's image based on its speed and position.
      */
     animate() {
-        let splashing = false;
+        let splashing = false;5
         let interval = setInterval(() => {
             if (this.hasExploded || (this.speedY === 0 && !this.isAboveGround())) {
                 this.playAnimation(this.IMAGES_SPLASH);

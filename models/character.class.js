@@ -89,7 +89,7 @@ class Character extends Creature {
         this.lastMoveTime = Date.now();
         this.throw_audio.volume = typeof gameVolume !== 'undefined' ? gameVolume : 1;
         this.throw_audio.play();
-        let bottle = new ThrowableObject(this.x, this.y + 50);
+        let bottle = new Bottle(this.x, this.y + 50);
         this.bottle_throwed = true;
         bottle.throw(this.otherDirection);
         this.world.throwableObjects.push(bottle);

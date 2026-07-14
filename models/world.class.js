@@ -363,7 +363,7 @@ class World {
         setInterval(() => {
             if (this.isPaused) return;
             this.checkEnemyCollisions();
-            this.checkThrowableCollisions([this.chicken, this.smallChickens, this.bossChickens]);
+            this.checkThrowableCollisions([this.chicken, this.smallChickens, this.bossChickens, [this.character]]);
             this.checkGroundCollisions();
             this.checkItemCollisions();
         }, 1000 / 60);
@@ -403,7 +403,7 @@ class World {
         bossArray.forEach(boss => {
             if (boss.isColliding(this.character) && !this.character.isDead) {
                 if (boss.isStomping(this.character)) {
-                    this.character.health -= 5;
+                    this.character.hit(5); // Reduce character's health by 5 when stomping on a boss
                     boss.speedY = 12;
                 } else {
                     this.character.hit();
@@ -426,9 +426,16 @@ class World {
             enemyArrays.forEach(enemyArray => {
                 if (bottle.hasExploded) return;
                 enemyArray.forEach(enemy => {
-                    if (bottle.isColliding(enemy) && !enemy.isDead) {
-                        enemy.hit();
-                        bottle.explode();
+                    if (bottle instanceof EggBomb && enemy == this.character) {
+                        if (bottle.isColliding(this.character) && !this.character.isDead) {
+                            this.character.hit(5); // Reduce character's health by 5 when hit by an egg bomb
+                            bottle.explode();
+                        }
+                    } else if (bottle instanceof Bottle && enemy instanceof BossChicken) {
+                        if (bottle.isColliding(enemy) && !enemy.isDead) {
+                            enemy.hit();
+                            bottle.explode();
+                        }
                     }
                 });
             });
