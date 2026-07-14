@@ -51,7 +51,11 @@ class Npc extends Creature {
             this.havingABreak = true;
         }
         else if (isDetected) {
-            this.walkTowardsCharacter(character);
+            if (this instanceof BossChicken) {
+                Math.random() < 0.5 ? this.walkTowardsCharacter(character) : this.jumpOnCharacter();
+            } else {
+                this.walkTowardsCharacter(character);
+            }
         }
         else if (this.havingABreak) {
             this.isWalking = false;

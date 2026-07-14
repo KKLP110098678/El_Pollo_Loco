@@ -7,7 +7,6 @@ class BossChicken extends Chicken {
         this.loadImages(BossChickenImages.ATTACK);
         this.loadImages(BossChickenImages.HURT);
         this.loadImages(BossChickenImages.DEAD);
-        this.currentFallingY = this.y;
         this.applyGravity();
         this.width = 250;
         this.height = 250;
@@ -21,7 +20,14 @@ class BossChicken extends Chicken {
         this.spawnAreaX = [x - 100, x + 100]; // Define the spawn area for the boss chicken
         this.x = x;
         this.y = y;
+        this.currentFallingY = this.y;
         this.isFinalBoss = isFinalBoss; // Flag to indicate that this is the final boss
+    }
+
+    isStomping(character) {
+        let enemyFeet = this.y + this.height;
+        let charMid = character.y + character.height * 0.5;
+        return this.speedY < 0 && enemyFeet <= charMid;
     }
 
     /**
@@ -64,8 +70,9 @@ class BossChicken extends Chicken {
     }
 
     jumpOnCharacter() {
-        if (this.isDead) return;
+        if (this.isDead || this.isAboveGround()) return;
         this.speedY = 15;
+        this.jumpFrameIndex = 0;
         this.speedX = this.otherDirection ? -10 : 10;
         this.isAttacking = true;
         setTimeout(() => {

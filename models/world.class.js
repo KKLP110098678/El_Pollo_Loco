@@ -401,8 +401,13 @@ class World {
      */
     checkbossCollisions(bossArray) {
         bossArray.forEach(boss => {
-            if (this.character.isColliding(boss) && !boss.isDead) {
-                this.character.hit();
+            if (boss.isColliding(this.character) && !this.character.isDead) {
+                if (boss.isStomping(this.character)) {
+                    this.character.health -= 5;
+                    boss.speedY = 12;
+                } else {
+                    this.character.hit();
+                }
             }
             if (boss.isFinalBoss && boss.isDead) {
                 this.showWinScreen();
@@ -435,6 +440,32 @@ class World {
      * @description Checks for collisions between the main character and the ground. If a collision is detected, the character's falling position is adjusted accordingly.
      */
     checkGroundCollisions() {
+        this.checkCharacterGroundCollisions();
+        this.checkBossGroundCollisions(); // Check for boss chicken ground collisions as well
+    }
+
+    // Checks for collisions between the main character and boss chickens
+    checkBossGroundCollisions() {
+        let onGround = false;
+        this.bossChickens.forEach(boss => {
+            this.groundObjects.forEach(ground => {
+            let fallingDown = boss.speedY <= 0;
+            let approachingFromAbove = boss.y + boss.height <= ground.y + 20;
+                if (boss.isColliding(ground) && fallingDown && approachingFromAbove) {
+                    boss.currentFallingY = ground.y - boss.height + boss.bottomOffset;
+                    onGround = true;
+                }
+            });
+        });
+
+        if (!onGround) {
+            this.bossChickens.forEach(boss => {
+                boss.currentFallingY = 200 + boss.bottomOffset;
+            });
+        }
+    }
+    
+    checkCharacterGroundCollisions() {
         let onGround = false;
         this.groundObjects.forEach(ground => {
             let fallingDown = this.character.speedY <= 0;
@@ -444,12 +475,12 @@ class World {
                 onGround = true;
             }
         });
-
+    
         if (!onGround) {
             this.character.currentFallingY = 270 + this.character.bottomOffset;
         }
     }
-
+        
     /**
      * @method checkItemCollisions
      * @description Checks for collisions between the main character and collectible items (coins and collectable objects). If a collision is detected, the character's coin or ammo count is increased, and the item is removed from the world.
