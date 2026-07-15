@@ -42,7 +42,7 @@ class EggBomb extends ThrowableObject {
                     }, 400);
                 }
             } else {
-                this.playRepeatedAnimation(this.IMAGES_ROTATION);
+                this.playAnimation(this.IMAGES_ROTATION);
             }
         }, 100);
     }
@@ -57,12 +57,5 @@ class EggBomb extends ThrowableObject {
                 clearInterval(interval);
             }
         }, 100);
-    }
-
-    playRepeatedAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
     }
 }
