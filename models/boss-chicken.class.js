@@ -92,9 +92,10 @@ class BossChicken extends Chicken {
             if (this.isDead) return;
             this.detect(world.character);
             if (this.isDetected) {
+                let randomSpeedX = Math.random() * 15 + 25; // Random speedX between 20 and 40
                 let eggBomb = new EggBomb(this.x + this.width / 2, this.y);
                 world.addObjectToMap(eggBomb);
-                eggBomb.throw(this.otherDirection);
+                eggBomb.throw(this.otherDirection, 20, randomSpeedX); // Throw the egg bomb with specified speedX and speedY
                 this.world.throwableObjects.push(eggBomb);
             }
 

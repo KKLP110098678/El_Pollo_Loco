@@ -20,6 +20,9 @@ class Bottle extends ThrowableObject {
         super(x, y);
         this.width = 50;
         this.height = 50;
+        this.hitboxHeight = 50;
+        this.hitboxWidth = 50;
+        this.bottomOffset = 0;
         this.loadImage('assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES_ROTATION);
         this.loadImages(this.IMAGES_SPLASH);

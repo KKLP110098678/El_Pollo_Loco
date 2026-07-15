@@ -38,7 +38,6 @@ class Creature extends MovableObject {
      */
     hit(damage = 1, isContactDamage = false) {
         if (this.isDead || (isContactDamage && this.isHurt)) return;
-
         this.health -= damage;
         if (this.health <= 0) {
             this.isDead = true;

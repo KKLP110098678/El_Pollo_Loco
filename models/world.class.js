@@ -304,7 +304,7 @@ class World {
      * @param {MovableObject} object - The object for which to visualize the hitbox.
      */
     visualizeHitboxes(object) {
-        if (object instanceof Character || object instanceof Chicken || object instanceof Collectable) {
+        if (object instanceof Character || object instanceof Chicken || object instanceof Collectable || object instanceof ThrowableObject) {
             this.createRect(object, object.y, object.width, object.height, 'red');
             if (object.hitboxHeight) {
                 this.createRect(object, object.y - (object.bottomOffset || 0), object.hitboxWidth, object.hitboxHeight, 'blue');

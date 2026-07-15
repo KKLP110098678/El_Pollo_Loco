@@ -17,13 +17,14 @@ class ThrowableObject extends MovableObject {
      * @method throw
      * @description Throws the bottle in a specified direction by setting its horizontal and vertical speeds. The bottle will move in the air and eventually fall to the ground, where it will play the splash animation.
      * @param {boolean} direction - The direction to throw the bottle (true for left, false for right).
-     */dfa
-    throw(direction) {
-        this.speedY = 10;
+     * @param {number} speedY - The vertical speed of the bottle when thrown.
+     */
+    throw(direction, speedY = 10, speedX = 20) {
+        this.speedY = speedY;
         if (direction) {
-            this.speedX = -20;
+            this.speedX = -speedX;
         } else {
-            this.speedX = 20;
+            this.speedX = speedX;
         }
         this.applyAcceleration();
         this.applyGravity();
@@ -35,7 +36,7 @@ class ThrowableObject extends MovableObject {
      * @description Animates the bottle based on its current state (rotation or splash). The method uses setInterval to continuously update the bottle's image based on its speed and position.
      */
     animate() {
-        let splashing = false;5
+        let splashing = false;
         let interval = setInterval(() => {
             if (this.hasExploded || (this.speedY === 0 && !this.isAboveGround())) {
                 this.playAnimation(this.IMAGES_SPLASH);
