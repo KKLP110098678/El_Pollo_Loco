@@ -17,7 +17,7 @@ class BossChicken extends Chicken {
         this.totalHealth = 5;
         this.health = this.totalHealth;
         this.isBoss = true;
-        this.detectionRange = 330;
+        this.detectionRange = 350;
         this.spawnAreaX = [x - 100, x + 100]; // Define the spawn area for the boss chicken
         this.x = x;
         this.y = y;
