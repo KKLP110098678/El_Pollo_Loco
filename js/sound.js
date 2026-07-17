@@ -1,11 +1,29 @@
+setVolumeFromLocalStorage();
+
 function setGameVolume(value) {
     gameVolume = parseFloat(value);
+    localStorage.setItem('gameVolume', gameVolume);
 }
 
 function setMusicVolume(value) {
     musicVolume = parseFloat(value);
+    localStorage.setItem('musicVolume', musicVolume);
     if (backgroundMusic) {
         backgroundMusic.volume = musicVolume;
+    }
+}
+
+function setVolumeFromLocalStorage() {
+    const storedGameVolume = localStorage.getItem('gameVolume');
+    const storedMusicVolume = localStorage.getItem('musicVolume');
+    const gameVolumeInput = document.getElementById('volumeSlider');
+    const musicVolumeInput = document.getElementById('musicSlider');
+
+    if (storedGameVolume !== null && gameVolumeInput) {
+        gameVolumeInput.value = storedGameVolume;
+    }
+    if (storedMusicVolume !== null && musicVolumeInput) {
+        musicVolumeInput.value = storedMusicVolume;
     }
 }
 

@@ -13,8 +13,8 @@ let completedLevels = new Set();
 
 /* Game settings */
 let isFullscreen = false;
-let gameVolume = 1;
-let musicVolume = 0.5;
+let gameVolume = localStorage.getItem('gameVolume') ? parseFloat(localStorage.getItem('gameVolume')) : 1;
+let musicVolume = localStorage.getItem('musicVolume') ? parseFloat(localStorage.getItem('musicVolume')) : 0.5;
 let debugMode = false;
 let isPausedByOrientation = false;
 let backgroundMusic = null;
