@@ -147,13 +147,13 @@ class World {
         this.addObjectToMap(this.sky);
         this.addObjectsToMap(this.backgroundObjects);
         this.addObjectsToMap(this.clouds);
-        this.addObjectToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.chicken);
         this.addObjectsToMap(this.smallChickens);
-        this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.coins);
         this.addObjectsToMap(this.bossChickens);
+        this.addObjectToMap(this.character);
+        this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.collectableObjects);
         this.drawGui();
         if (this.isPaused) return;
