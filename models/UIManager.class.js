@@ -28,10 +28,10 @@ class UIManager {
     */
    drawTouchControls() {
        if (isTouchMode) {
-           this.world.addObjectToMap(this.move_left_button);
-           this.world.addObjectToMap(this.move_right_button);
-           this.world.addObjectToMap(this.jump_button);
-           this.world.addObjectToMap(this.throw_bottle_button);
+           this.world.addObjectToMap(this.world.move_left_button);
+           this.world.addObjectToMap(this.world.move_right_button);
+           this.world.addObjectToMap(this.world.jump_button);
+           this.world.addObjectToMap(this.world.throw_bottle_button);
         }
     }
     
