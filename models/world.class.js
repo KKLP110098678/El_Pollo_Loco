@@ -162,10 +162,10 @@ class World {
         }
         this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
         if (object instanceof StatusBar) {
-            this.addInformationToStatusBar(object);
+            this.uiManager.addInformationToStatusBar(object);
         }
         if (object instanceof StatusCounter) {
-            this.drawCounter(object);
+            this.uiManager.drawCounter(object);
         }
         if (debugMode) {
             this.visualizeHitboxes(object);
@@ -180,42 +180,6 @@ class World {
         this.ctx.translate(object.x + object.width / 2, 0);
         this.ctx.scale(-1, 1);
         this.ctx.translate(-object.x - object.width / 2, 0);
-    }
-    
-    /**
-     * @method addInformationToStatusBar
-     * @param
-     * @description Draws the filled colored bar as a second layer based on the percentage of the status bar. It calculates the width of the filled bar based on the percentage and draws it on top of the status bar.
-    */
-   addInformationToStatusBar(object) {
-       // Zeichne den gefüllten farbigen Balken als zweite Ebene basierend auf percentage
-       if (object.percentageBar && object.percentageBar.complete) {
-           let ratio = Math.max(0, Math.min(1, object.percentage / 100));
-           let sWidth = object.percentageBar.width * ratio;
-           let dWidth = object.width * ratio;
-           if (sWidth > 0 && dWidth > 0) {
-               this.ctx.drawImage(
-                   object.percentageBar,
-                   0, 0, sWidth, object.percentageBar.height,
-                   object.x, object.y, dWidth, object.height
-                );
-            }
-        }
-        if (object.iconInfo) {
-            // Zeichne das Icon leicht versetzt über der Statusbar
-            this.ctx.drawImage(object.iconInfo, object.x - 15, object.y , 50, 50);
-        }
-    }
-
-    /**
-     * @method drawCounter
-     * @description Draws the value of a StatusCounter object on the canvas. It sets the font and fill style, and then uses fillText to display the value at the specified position.
-     * @param {StatusCounter} object - The StatusCounter object whose value is to be drawn.
-     */
-    drawCounter(object) {
-        this.ctx.font = "23px Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText(object.value, object.x + 60, object.y + 33);
     }
     
     /**
