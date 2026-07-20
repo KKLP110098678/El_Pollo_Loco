@@ -3,9 +3,9 @@
  * @author: Ramon Kunz
  * @description: This file initializes the game and creates a new world.
  * @version: 1.0
- */
+*/
 
-let canvas;
+let canvas = document.getElementById('gameCanvas');
 let world;
 let keyboard = new Keyboard();
 let currentLevelNumber = null;
@@ -187,7 +187,6 @@ window.addEventListener("keypress", (event) => {
 })();
 
 function toggleFullscreen() {
-    let canvas = document.getElementById('gameCanvas');
     if (!isFullscreen) {
         isFullscreen = true;
         document.documentElement.requestFullscreen();
@@ -198,3 +197,7 @@ function toggleFullscreen() {
         document.getElementById('startScreen').classList.remove('fullscreen-container');
     }
 }
+
+canvas.addEventListener('contextmenu', (event) => {
+  event.preventDefault();
+});
