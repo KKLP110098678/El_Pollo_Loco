@@ -66,8 +66,8 @@ class UIManager {
      * @description Draws the win screen on the canvas if the showWinScreenStatus flag is true. The win screen is displayed when the player defeats the final boss.
      */
     drawWinScreen() {
-        if (this.showWinScreenStatus) {
-            this.ctx.drawImage(this.winImage, 0, 0, this.world.canvas.width, this.world.canvas.height);
+        if (this.world.showWinScreenStatus) {
+            this.ctx.drawImage(this.world.winImage, 0, 0, this.world.canvas.width, this.world.canvas.height);
         }
     }
 
@@ -76,8 +76,8 @@ class UIManager {
      * @description Draws the game over screen on the canvas if the showGameOverScreenStatus flag is true. The game over screen is displayed when the player loses.
      */
     drawGameOverScreen() {
-        if (this.showGameOverScreenStatus) {
-            this.ctx.drawImage(this.gameoverImage, 0, 0, this.canvas.width, this.canvas.height);
+        if (this.world.showGameOverScreenStatus) {
+            this.ctx.drawImage(this.world.gameoverImage, 0, 0, this.world.canvas.width, this.world.canvas.height);
         }
     }
 }
