@@ -23,10 +23,12 @@
             </div>
             <div id="introScreen" class="overlay">
                 <p class="intro-text">Press a key to continue</p>
+                <button class="legal-btn" onclick="window.location.href='legal.html'" title="Impressum">&#9878;</button>
             </div>
             <div id="startScreen" class="overlay" style="display:none;" id="startScreen">
                 <button class="keybindings-btn" onclick="showKeybindings()" title="Tastenbelegung">!</button>
                 <button class="settings-btn" onclick="showSettings()" title="Einstellungen">⚙</button>
+                <button class="legal-btn" onclick="window.location.href='legal.html'" title="Impressum">&#9878;</button>
                 <h2>Select Level</h2>
                 <div class="level-button-wrapper">
                     <button onclick="startGame(1)">Level 1</button>
@@ -74,10 +76,6 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <p>© 2024 Ramon Kunz. All rights reserved.</p>
-            <p><a href="legal.html">Impressum</a></p>
-        </footer>
     </div>
     <div id="orientationHint" class="orientation-hint" style="display:none;">
         <div class="orientation-hint-content">
