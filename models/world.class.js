@@ -29,7 +29,7 @@ class World {
     healthBar = new StatusBar(20, 'assets/img/7_statusbars/3_icons/icon_health.png', 'assets/img/7_statusbars/4_bar_elements/statusbar_green.png');
     bossHealthBar = new StatusBar(20, 'assets/img/7_statusbars/3_icons/icon_health_endboss.png', 'assets/img/7_statusbars/4_bar_elements/statusbar_orange.png');
     coinCounter = new StatusCounter(60, 'assets/img/7_statusbars/3_icons/icon_coin.png');
-    ammoCounter = new StatusCounter(100, 'assets/img/7_statusbars/3_icons/icon_salsa_bottle.png');
+    ammoCounter = new StatusCounter(108, 'assets/img/7_statusbars/3_icons/icon_salsa_bottle.png');
     
 
     move_left_button = new MobileButton('move_left', 'assets/img/11_mobile_controls/left_arrow.png', 580, 400);
@@ -294,7 +294,7 @@ class World {
      */
     drawCounter(object) {
         this.ctx.font = "23px Arial";
-        this.ctx.fillStyle = "white";
+        this.ctx.fillStyle = "black";
         this.ctx.fillText(object.value, object.x + 60, object.y + 33);
     }
     

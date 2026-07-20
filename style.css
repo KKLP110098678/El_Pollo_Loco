@@ -22,6 +22,7 @@ body {
 #gameCanvas {
     background-color: #87CEEB;
     border: 2px solid black;
+    user-select: none;
 }
 
 @media (max-width: 720px) {
