@@ -26,10 +26,7 @@ class World {
     keyboard;
     camera_x = -100;
 
-    healthBar = new StatusBar(20, 'assets/img/7_statusbars/3_icons/icon_health.png', 'assets/img/7_statusbars/4_bar_elements/statusbar_green.png');
-    bossHealthBar = new StatusBar(20, 'assets/img/7_statusbars/3_icons/icon_health_endboss.png', 'assets/img/7_statusbars/4_bar_elements/statusbar_orange.png');
-    coinCounter = new StatusCounter(60, 'assets/img/7_statusbars/3_icons/icon_coin.png');
-    ammoCounter = new StatusCounter(108, 'assets/img/7_statusbars/3_icons/icon_salsa_bottle.png');
+    
     
 
     move_left_button = new MobileButton('move_left', 'assets/img/11_mobile_controls/left_arrow.png', 580, 400);
@@ -54,16 +51,15 @@ class World {
         this.collectableObjects = level.collectableObjects;
         this.coins = level.coins;
         this.bossChickens = level.bossChickens;
-        
         this.winImage.src = 'assets/img/You won, you lost/You won A.png';
         this.gameoverImage.src = 'assets/img/9_intro_outro_screens/game_over/game over!.png';
-        this.bossHealthBar.x = canvas.width - 220;
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.keyboard = keyboard;
         this.setWorld();
+        this.uiManager = new UIManager(this);
         this.draw();
-        this.checkCollisions();
+        this.collisionManager = new CollisionManager(this);
     }
 
     /**
@@ -155,80 +151,11 @@ class World {
         this.addObjectToMap(this.character);
         this.addObjectsToMap(this.groundObjects);
         this.addObjectsToMap(this.collectableObjects);
-        this.drawGui();
+        if (this.uiManager) {
+            this.uiManager.drawGui();
+        }
         if (this.isPaused) return;
         requestAnimationFrame(() => this.draw());
-    }
-    
-    /**
-     * @method drawGui
-     * @description Draws the graphical user interface (GUI) elements on the screen, such as the health bar, coin counter, ammo counter, and mobile control buttons. It updates the health bar percentage based on the character's life and updates the coin and ammo counters with the current values.
-    */
-   drawGui() {
-        this.ctx.translate(-this.camera_x, 0);
-        this.drawTouchControls();
-        this.drawStatusElements();
-        this.drawWinScreen();
-        this.drawGameOverScreen();
-    }
-    
-    /**
-     * @method drawTouchControls
-     * @description Draws the touch controls on the screen if the game is in touch mode. It adds the move left, move right, jump, and throw bottle buttons to the map.
-    */
-   drawTouchControls() {
-       if (isTouchMode) {
-           this.addObjectToMap(this.move_left_button);
-           this.addObjectToMap(this.move_right_button);
-           this.addObjectToMap(this.jump_button);
-           this.addObjectToMap(this.throw_bottle_button);
-        }
-    }
-    
-    /**
-     * @method drawStatusElements
-     * @description Draws the status elements on the screen, including the health bar, coin counter, and ammo counter. It updates the health bar percentage based on the character's life and updates the coin and ammo counters with the current values.
-     */
-    drawStatusElements() {
-        this.healthBar.setPercentage((this.character.health / this.character.totalHealth) * 100);
-        this.addObjectToMap(this.healthBar);
-        this.coinCounter.value = this.character.coins;
-        this.addObjectToMap(this.coinCounter);
-        this.ammoCounter.value = this.character.ammo;
-        this.addObjectToMap(this.ammoCounter);
-        this.drawBossHealthBar();
-    }
-    
-    /**
-     * @method drawBossHealthBar
-     * @description Draws the boss health bar on the screen if there is a nearby boss chicken. It checks for any boss chickens that are not dead and within the detection range of the character. If a nearby boss is found, it updates the boss health bar percentage based on the boss's health and adds it to the map.
-     */
-    drawBossHealthBar() {
-        let nearBoss = this.bossChickens.find(boss => !boss.isDead && Math.abs(boss.x - this.character.x) < boss.detectionRange);
-        if (nearBoss) {
-            this.bossHealthBar.setPercentage((nearBoss.health / nearBoss.totalHealth) * 100);
-            this.addObjectToMap(this.bossHealthBar);
-        }
-    }
-    
-    /**
-     * @method drawWinScreen
-     * @description Draws the win screen on the canvas if the showWinScreenStatus flag is true. The win screen is displayed when the player defeats the final boss.
-     */
-    drawWinScreen() {
-        if (this.showWinScreenStatus) {
-            this.ctx.drawImage(this.winImage, 0, 0, this.canvas.width, this.canvas.height);
-        }
-    }
-
-    /**
-     * @method drawGameOverScreen
-     * @description Draws the game over screen on the canvas if the showGameOverScreenStatus flag is true. The game over screen is displayed when the player loses.
-     */
-    drawGameOverScreen() {
-        if (this.showGameOverScreenStatus) {
-            this.ctx.drawImage(this.gameoverImage, 0, 0, this.canvas.width, this.canvas.height);
-        }
     }
         
     /**
@@ -355,161 +282,6 @@ class World {
         });
     }
 
-    /**
-     * @method checkCollisions
-     * @description Checks for collisions between the main character and chickens, as well as between throwable objects and chickens. If a collision is detected, the appropriate hit or explode methods are called on the involved objects.
-     */
-    checkCollisions() {
-        setInterval(() => {
-            if (this.isPaused) return;
-            this.checkEnemyCollisions();
-            this.checkThrowableCollisions([this.chicken, this.smallChickens, this.bossChickens, [this.character]]);
-            this.checkGroundCollisions();
-            this.checkItemCollisions();
-        }, 1000 / 60);
-    }
-
-    /**
-     * @method checkEnemyCollisions
-     * @description Checks for collisions between the main character and chickens. If a collision is detected, the character is hit. The method also checks for collisions with boss chickens and handles the win condition if the final boss is defeated.
-     */
-    checkEnemyCollisions() {
-        this.checkNormalEnemyCollisions(this.chicken);
-        this.checkNormalEnemyCollisions(this.smallChickens);
-        this.checkbossCollisions(this.bossChickens);
-        if (this.character.isDead) {
-            this.handleGameOver();
-        }
-    }
-
-    checkNormalEnemyCollisions(enemyArray) {
-        enemyArray.forEach(enemy => {
-            if (this.character.isColliding(enemy) && !enemy.isDead) {
-                if (this.character.isStomping(enemy)) {
-                    enemy.hit();
-                    this.character.speedY = 12;
-                } else {
-                    this.character.hit(1, true); // Contact damage from normal enemies
-                }
-            }
-        });
-    }
-    /**
-     * @method checkbossCollisions
-     * @description Checks for collisions between the main character and boss chickens. If a collision is detected, the character is hit. If the final boss is defeated, the win screen is displayed.
-     * @param {BossChicken[]} boss - An array of boss chickens to check for collisions with the main character.
-     */
-    checkbossCollisions(bossArray) {
-        bossArray.forEach(boss => {
-            if (boss.isColliding(this.character) && !this.character.isDead) {
-                if (boss.isStomping(this.character)) {
-                    this.character.hit(5); // Reduce character's health by 5 when stomping on a boss
-                    boss.speedY = 12;
-                } else {
-                    this.character.hit(1, true); // Contact damage from boss chicken
-                }
-            }
-            if (boss.isFinalBoss && boss.isDead) {
-                this.showWinScreen();
-            }
-        });
-    }
-
-
-    /**
-     * @method checkThrowableCollisions
-     * @param {Array} enemyArrays - An array of arrays containing enemy objects (chickens, small chickens, boss chickens) to check for collisions with throwable objects (bottles).
-     * @description Checks for collisions between throwable objects (bottles) and chickens. If a collision is detected, the chicken is hit, and the bottle explodes. The method also checks for collisions with boss chickens.
-     */
-    checkThrowableCollisions(enemyArrays) {
-        this.throwableObjects.forEach(bottle => {
-            enemyArrays.forEach(enemyArray => {
-                if (bottle.hasExploded) return;
-                enemyArray.forEach(enemy => {
-                    if (bottle instanceof EggBomb && enemy == this.character) {
-                        if (bottle.isColliding(this.character) && !this.character.isDead) {
-                            this.character.hit(5); // Reduce character's health by 5 when hit by an egg bomb
-                            bottle.explode();
-                        }
-                    } else if (bottle instanceof Bottle && enemy instanceof BossChicken) {
-                        if (bottle.isColliding(enemy) && !enemy.isDead) {
-                            enemy.hit();
-                            bottle.explode();
-                        }
-                    }
-                });
-            });
-        });
-    }
-
-    /**
-     * @method checkGroundCollisions
-     * @description Checks for collisions between the main character and the ground. If a collision is detected, the character's falling position is adjusted accordingly.
-     */
-    checkGroundCollisions() {
-        this.checkCharacterGroundCollisions();
-        this.checkBossGroundCollisions(); // Check for boss chicken ground collisions as well
-    }
-
-    // Checks for collisions between the main character and boss chickens
-    checkBossGroundCollisions() {
-        let onGround = false;
-        this.bossChickens.forEach(boss => {
-            this.groundObjects.forEach(ground => {
-            let fallingDown = boss.speedY <= 0;
-            let approachingFromAbove = boss.y + boss.height <= ground.y + 20;
-                if (boss.isColliding(ground) && fallingDown && approachingFromAbove) {
-                    boss.currentFallingY = ground.y - boss.height + boss.bottomOffset;
-                    onGround = true;
-                }
-            });
-        });
-
-        if (!onGround) {
-            this.bossChickens.forEach(boss => {
-                boss.currentFallingY = 200 + boss.bottomOffset;
-            });
-        }
-    }
-    
-    checkCharacterGroundCollisions() {
-        let onGround = false;
-        this.groundObjects.forEach(ground => {
-            let fallingDown = this.character.speedY <= 0;
-            let approachingFromAbove = this.character.y + this.character.height <= ground.y + 20;
-            if (this.character.isColliding(ground) && fallingDown && approachingFromAbove) {
-                this.character.currentFallingY = ground.y - this.character.height + this.character.bottomOffset;
-                onGround = true;
-            }
-        });
-    
-        if (!onGround) {
-            this.character.currentFallingY = 270 + this.character.bottomOffset;
-        }
-    }
-        
-    /**
-     * @method checkItemCollisions
-     * @description Checks for collisions between the main character and collectible items (coins and collectable objects). If a collision is detected, the character's coin or ammo count is increased, and the item is removed from the world.
-     */
-    checkItemCollisions() {
-        [this.coins, this.collectableObjects].forEach(itemArray => {
-            itemArray.forEach((item, index) => {
-                if (this.character.isColliding(item)) {
-                    if (item instanceof Coin) {
-                        this.character.coins += 1;
-                        this.coinCounter.increase(1);
-                    } else if (item instanceof Collectable) {
-                        this.character.ammo += 1;
-                        this.ammoCounter.increase(1);
-            }
-                    item.audio.volume = typeof gameVolume !== 'undefined' ? gameVolume : 1;
-                    item.audio.play();
-                    itemArray.splice(index, 1);
-    }
-            });
-        });
-    }
 
     /**
      * @method showWinScreen

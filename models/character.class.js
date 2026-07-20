@@ -107,39 +107,63 @@ class Character extends Creature {
     animate() {
         this.animateInterval = setInterval(() => {
             if (this.isDead) {
-                for (let j = 0; j < characterImages.DEAD.length; j++) {
-                    setTimeout(() => {
-                        this.img = this.imageCache[characterImages.DEAD[j]];
-                    }, j * 100);
-                }
-                clearInterval(this.animateInterval);
+                this.animateDead();
             } else if (this.isAboveGround()) {
-                if (this.speedY > 0) {
-                    let i = Math.min(this.jumpFrameIndex, characterImages.JUMPING_UP.length - 1);
-                    this.img = this.imageCache[characterImages.JUMPING_UP[i]];
-                    this.jumpFrameIndex++;
-                } else {
-                    let i = this.currentImage % characterImages.JUMPING_DOWN.length;
-                    this.img = this.imageCache[characterImages.JUMPING_DOWN[i]];
-                    this.currentImage++;
-                }
+                this.animateJumping();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                let i = this.currentImage % characterImages.WALKING.length;
-                this.img = this.imageCache[characterImages.WALKING[i]];
-                this.currentImage++;
+                this.animateWalking();
             } else if (this.isHurt) {
-                let i = this.currentImage % characterImages.HURT.length;
-                this.img = this.imageCache[characterImages.HURT[i]];
-                this.currentImage++;
+                this.animateHurt();
             } else if (Date.now() - this.lastMoveTime > 20000) {
-                let i = this.currentImage % characterImages.SLEEPING.length;
-                this.img = this.imageCache[characterImages.SLEEPING[i]];
-                this.currentImage++;
+                this.animateSleeping();
             } else {
-                let i = this.currentImage % characterImages.IDLE.length;
-                this.img = this.imageCache[characterImages.IDLE[i]];
-                this.currentImage++;
+                this.animateIdle();
             }
         }, 1000 / 10);
+    }
+
+    animateDead() {
+        for (let j = 0; j < characterImages.DEAD.length; j++) {
+            setTimeout(() => {
+                this.img = this.imageCache[characterImages.DEAD[j]];
+            }, j * 100);
+        }
+        clearInterval(this.animateInterval);
+    }
+
+    animateJumping() {
+        if (this.speedY > 0) {
+            let i = Math.min(this.jumpFrameIndex, characterImages.JUMPING_UP.length - 1);
+            this.img = this.imageCache[characterImages.JUMPING_UP[i]];
+            this.jumpFrameIndex++;
+        } else {
+            let i = this.currentImage % characterImages.JUMPING_DOWN.length;
+            this.img = this.imageCache[characterImages.JUMPING_DOWN[i]];
+            this.currentImage++;
+        }
+    }
+
+    animateWalking() {
+        let i = this.currentImage % characterImages.WALKING.length;
+        this.img = this.imageCache[characterImages.WALKING[i]];
+        this.currentImage++;
+    }
+
+    animateHurt() {
+        let i = this.currentImage % characterImages.HURT.length;
+        this.img = this.imageCache[characterImages.HURT[i]];
+        this.currentImage++;
+    }
+
+    animateSleeping() {
+        let i = this.currentImage % characterImages.SLEEPING.length;
+        this.img = this.imageCache[characterImages.SLEEPING[i]];
+        this.currentImage++;
+    }
+
+    animateIdle() {
+        let i = this.currentImage % characterImages.IDLE.length;
+        this.img = this.imageCache[characterImages.IDLE[i]];
+        this.currentImage++;
     }
 }
