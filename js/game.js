@@ -47,20 +47,12 @@ function checkOrientation() {
 
 window.addEventListener('resize', checkOrientation);
 
-function showSettings() {
-    document.getElementById('settingsModal').style.display = 'flex';
+function showMenu(id) {
+    document.getElementById(id).style.display = 'flex';
 }
 
-function hideSettings() {
-    document.getElementById('settingsModal').style.display = 'none';
-}
-
-function showKeybindings() {
-    document.getElementById('keybindingsModal').style.display = 'flex';
-}
-
-function hideKeybindings() {
-    document.getElementById('keybindingsModal').style.display = 'none';
+function hideMenu(id) {
+    document.getElementById(id).style.display = 'none';
 }
 
 function togglePause() {
