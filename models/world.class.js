@@ -61,7 +61,7 @@ class World {
      */
     handleGameOver() {
        if (this.gameLost) return;
-        playGameOverSound();
+        playGameSound(gameVolume, 'gameover');
         this.gameLost = true;
         setTimeout(() => {
             this.showGameOverScreenStatus = true;
@@ -247,7 +247,7 @@ class World {
     showWinScreen() {
         if (this.gameWon) return;
         this.gameWon = true;
-        playVictorySoundWithDrums(gameVolume);
+        playGameSound(gameVolume, 'victory');
 
         setTimeout(() => {
             this.showWinScreenStatus = true;
