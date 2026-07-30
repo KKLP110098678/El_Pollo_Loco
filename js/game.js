@@ -47,6 +47,13 @@ function checkOrientation() {
 
 window.addEventListener('resize', checkOrientation);
 
+window.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        isFullscreen = false;
+        document.getElementById('fullscreenCheckbox').checked = false;
+    }
+});
+
 function showMenu(id) {
     document.getElementById(id).style.display = 'flex';
 }
