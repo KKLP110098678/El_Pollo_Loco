@@ -12,23 +12,25 @@
     <div class="content">
         <h1>El Pollo Loco</h1>
         <div style="position: relative; display: inline-block;">
-            <canvas id="gameCanvas" width="720" height="480"></canvas>
+            <canvas id="gameCanvas" width="720" height="480">
+                <p>Your browser does not support the canvas element.</p>
+            </canvas>
             <button id="pauseBtn" class="pause-btn" style="display:none;" onclick="togglePause(); this.blur();">⏸</button>
             <div id="pauseMenu" class="pause-menu" style="display:none;">
                 <div class="pause-menu-content">
                     <h2>Pause</h2>
-                    <button onclick="togglePause()">Weiter spielen</button>
-                    <button onclick="returnToMainMenu()">Hauptmenü</button>
+                    <button onclick="togglePause()">Resume</button>
+                    <button onclick="returnToMainMenu()">Main Menu</button>
                 </div>
             </div>
             <div id="introScreen" class="overlay">
                 <p class="intro-text">Press a key to continue</p>
-                <button class="legal-btn" onclick="window.location.href='legal.html'" title="Impressum">&#9878;</button>
+                <button class="legal-btn" onclick="window.location.href='legal.html'" title="legal notice">&#9878;</button>
             </div>
             <div id="startScreen" class="overlay" style="display:none;" id="startScreen">
-                <button class="keybindings-btn" onclick="showKeybindings()" title="Tastenbelegung">!</button>
-                <button class="settings-btn" onclick="showSettings()" title="Einstellungen">⚙</button>
-                <button class="legal-btn" onclick="window.location.href='legal.html'" title="Impressum">&#9878;</button>
+                <button class="keybindings-btn" onclick="showKeybindings()" title="Keybindings">!</button>
+                <button class="settings-btn" onclick="showSettings()" title="Settings">⚙</button>
+                <button class="legal-btn" onclick="window.location.href='legal.html'" title="legal notice">&#9878;</button>
                 <h2>Select Level</h2>
                 <div class="level-button-wrapper">
                     <button onclick="startGame(1)">Level 1</button>
@@ -41,29 +43,29 @@
             </div>
             <div id="keybindingsModal" class="keybindings-modal" style="display:none;">
                 <div class="keybindings-content">
-                    <h3>Tastenbelegung</h3>
+                    <h3>Keybindings</h3>
                     <table class="keybindings-table">
-                        <tr><td><kbd>A</kbd></td><td>Nach links laufen</td></tr>
-                        <tr><td><kbd>D</kbd></td><td>Nach rechts laufen</td></tr>
-                        <tr><td><kbd>Space</kbd></td><td>Springen</td></tr>
-                        <tr><td><kbd>F</kbd></td><td>Flasche werfen</td></tr>
+                        <tr><td><kbd>A</kbd></td><td>Move left</td></tr>
+                        <tr><td><kbd>D</kbd></td><td>Move right</td></tr>
+                        <tr><td><kbd>Space</kbd></td><td>Jump</td></tr>
+                        <tr><td><kbd>F</kbd></td><td>Throw bottle</td></tr>
                     </table>
-                    <button class="btn-close" onclick="hideKeybindings()">Schließen</button>
+                    <button class="btn-close" onclick="hideKeybindings()">Close</button>
                 </div>
             </div>
             <div id="settingsModal" class="keybindings-modal" style="display:none;">
                 <div class="keybindings-content">
-                    <h3>Einstellungen</h3>
+                    <h3>Settings</h3>
                     <div class="settings-body">
                         <label for="fullscreenCheckbox">Fullscreen</label>
                         <input type="checkbox" id="fullscreenCheckbox" onchange="toggleFullscreen()">
-                        <label for="volumeSlider">Effekte</label>
+                        <label for="volumeSlider">Effects</label>
                         <div class="volume-slider-row">
                             <span>🔇</span>
                             <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="setGameVolume(this.value)">
                             <span>🔊</span>
                         </div>
-                        <label for="musicSlider">Musik</label>
+                        <label for="musicSlider">Music</label>
                         <div class="volume-slider-row">
                             <span>🔇</span>
                             <input type="range" id="musicSlider" min="0" max="1" step="0.05" value="0.3" oninput="setMusicVolume(this.value)">
@@ -71,7 +73,7 @@
                         </div>
                     </div>
                     <div class="settings-footer">
-                        <button class="btn-close" onclick="hideSettings()">Schließen</button>
+                        <button class="btn-close" onclick="hideSettings()">Close</button>
                     </div>
                 </div>
             </div>
@@ -80,7 +82,7 @@
     <div id="orientationHint" class="orientation-hint" style="display:none;">
         <div class="orientation-hint-content">
             <div class="orientation-icon">&#8635;</div>
-            <p>Bitte drehe dein Gerät ins Querformat</p>
+            <p>Please rotate your device to landscape mode</p>
         </div>
     </div>
     <script src="./models/level.class.js"></script>

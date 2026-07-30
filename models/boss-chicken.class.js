@@ -38,38 +38,81 @@ class BossChicken extends Chicken {
     animate() {
         this.animateInterval = setInterval(() => {
             if (this.isDead) {
-                this.img = this.imageCache[BossChickenImages.DEAD[0]];
-                setTimeout(() => {
-                    this.img = this.imageCache[BossChickenImages.DEAD[1]];
-                }, 500);
-                setTimeout(() => {                    
-                    this.img = this.imageCache[BossChickenImages.DEAD[2]];
-                }, 1000);
-                clearInterval(this.animateInterval);
+                this.animateDead();
             } else if (this.isHurt) {
-                let i = this.currentImage % BossChickenImages.HURT.length;
-                this.img = this.imageCache[BossChickenImages.HURT[i]];
-                this.currentImage++;
-                this.resetHurtState(); // Reset the hurt state after the animation
+                this.animateHurt();
             } else if (this.isAttacking) {
-                let i = this.currentImage % BossChickenImages.ATTACK.length;
-                this.img = this.imageCache[BossChickenImages.ATTACK[i]];
-                setTimeout(() => {
-                    this.currentImage++;
-                }, 200);
-
+                this.animateAttack();
             } else if (this.isAlert) {
-                let i = this.currentImage % BossChickenImages.ALERT.length;
-                this.img = this.imageCache[BossChickenImages.ALERT[i]];
-                this.currentImage++;
+                this.animateAlert();
             } else {
-                let i = this.currentImage % BossChickenImages.WALKING.length;
-                this.img = this.imageCache[BossChickenImages.WALKING[i]];
-                this.currentImage++;
+                this.animateWalking();
             }
         }, 1000 / 10);
     }
+    
+    /**
+     * @method animateDead
+     * @description Animates the boss chicken's dead state by displaying the dead images in sequence. It uses setTimeout to change the image at specific intervals and clears the animation interval to stop further animations.
+    */
+   animateDead() {
+       this.img = this.imageCache[BossChickenImages.DEAD[0]];
+       setTimeout(() => {
+           this.img = this.imageCache[BossChickenImages.DEAD[1]];
+        }, 500);
+        setTimeout(() => {                    
+            this.img = this.imageCache[BossChickenImages.DEAD[2]];
+        }, 1000);
+        clearInterval(this.animateInterval);
+    }
+    
+    /**
+     * @method animateHurt
+     * @description Animates the boss chicken's hurt state by cycling through the hurt images. It resets the hurt state after the animation is complete.
+    */
+   animateHurt() {
+       let i = this.currentImage % BossChickenImages.HURT.length;
+       this.img = this.imageCache[BossChickenImages.HURT[i]];
+       this.currentImage++;
+       this.resetHurtState(); // Reset the hurt state after the animation
+    }
+    
+    /**
+     * @method animateAttack
+     * @description Animates the boss chicken's attack state by cycling through the attack images. It uses setTimeout to change the image at specific intervals and increments the current image index after a delay.
+    */
+   animateAttack() {
+       let i = this.currentImage % BossChickenImages.ATTACK.length;
+       this.img = this.imageCache[BossChickenImages.ATTACK[i]];
+       setTimeout(() => {
+           this.currentImage++;
+        }, 200);
+    }
+    
+    /**
+     * @method animateAlert
+     * @description Animates the boss chicken's alert state by cycling through the alert images. It increments the current image index to create a looping animation effect.
+    */
+    animateAlert() {
+        let i = this.currentImage % BossChickenImages.ALERT.length;
+        this.img = this.imageCache[BossChickenImages.ALERT[i]];
+        this.currentImage++;
+    }
 
+    /**
+     * @method animateWalking
+     * @description Animates the boss chicken's walking movement by cycling through the walking images. It increments the current image index to create a looping animation effect.
+    */
+    animateWalking() {
+        let i = this.currentImage % BossChickenImages.WALKING.length;
+        this.img = this.imageCache[BossChickenImages.WALKING[i]];
+        this.currentImage++;
+    }
+
+    /**
+     * @method jumpOnCharacter
+     * @description Makes the boss chicken jump on the character when it is detected. The method sets the vertical speed (speedY) to make the boss chicken jump, and it also sets the horizontal speed (speedX) based on the direction of the character. The isAttacking flag is set to true during the jump, and it is reset after a specified duration.
+     */
     jumpOnCharacter() {
         if (this.isDead || this.isAboveGround()) return;
         this.speedY = 15;
@@ -81,12 +124,21 @@ class BossChicken extends Chicken {
         }, 1600);
     }
     
+    /**
+     * @method detect
+     * @param {Character} character - The character object to detect.
+     * @description Detects if the character is within the detection range of the boss chicken. It calculates the distance between the boss chicken and the character in both X and Y directions. If the character is within the detection range and is not dead, the isDetected flag is set to true; otherwise, it is set to false.
+     */
     detect(character) {
         let distanceX = Math.abs(this.x - character.x);
         let distanceY = Math.abs(this.y - character.y);
         this.isDetected = distanceX < this.detectionRange && distanceY < this.detectionRange && character.isDead === false;
     }
 
+    /**
+     * @method throwEggBomb
+     * @description Throws an egg bomb towards the character if the boss chicken is detected. The method uses setInterval to continuously check for detection and throw egg bombs at random intervals. The egg bomb is created and added to the world, and its throw method is called with specified speed values.
+     */
     throwEggBomb() {
         setInterval(() => {
             if (this.isDead) return;

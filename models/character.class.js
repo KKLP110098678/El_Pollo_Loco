@@ -122,6 +122,20 @@ class Character extends Creature {
         }, 1000 / 10);
     }
 
+    /**
+     * @method animateIdle
+     * @description Animates the character's idle state by cycling through the idle images.
+     */
+    animateIdle() {
+        let i = this.currentImage % characterImages.IDLE.length;
+        this.img = this.imageCache[characterImages.IDLE[i]];
+        this.currentImage++;
+    }
+
+    /**
+     * @method animateDead
+     * @description Animates the character's dead state by cycling through the dead images. It clears the animation interval to stop further animations.
+     */
     animateDead() {
         for (let j = 0; j < characterImages.DEAD.length; j++) {
             setTimeout(() => {
@@ -131,6 +145,10 @@ class Character extends Creature {
         clearInterval(this.animateInterval);
     }
 
+    /**
+     * @method animateJumping
+     * @description Animates the character's jumping movement by cycling through the jumping images based on the vertical speed (upward or downward).
+     */
     animateJumping() {
         if (this.speedY > 0) {
             let i = Math.min(this.jumpFrameIndex, characterImages.JUMPING_UP.length - 1);
@@ -143,24 +161,40 @@ class Character extends Creature {
         }
     }
 
+    /**
+     * @method animateWalking
+     * @description Animates the character's walking movement by cycling through the walking images.
+     */
     animateWalking() {
         let i = this.currentImage % characterImages.WALKING.length;
         this.img = this.imageCache[characterImages.WALKING[i]];
         this.currentImage++;
     }
 
+    /**
+     * @method animateHurt
+     * @description Animates the character's hurt state by cycling through the hurt images.
+     */
     animateHurt() {
         let i = this.currentImage % characterImages.HURT.length;
         this.img = this.imageCache[characterImages.HURT[i]];
         this.currentImage++;
     }
 
+    /**
+     * @method animateSleeping
+     * @description Animates the character's sleeping state by cycling through the sleeping images.
+     */
     animateSleeping() {
         let i = this.currentImage % characterImages.SLEEPING.length;
         this.img = this.imageCache[characterImages.SLEEPING[i]];
         this.currentImage++;
     }
 
+    /**
+     * @method animateIdle
+     * @description Animates the character's idle state by cycling through the idle images.
+     */
     animateIdle() {
         let i = this.currentImage % characterImages.IDLE.length;
         this.img = this.imageCache[characterImages.IDLE[i]];

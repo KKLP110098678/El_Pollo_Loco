@@ -262,6 +262,6 @@ class World {
                 this.showWinScreenStatus = false;
                 this.exitToStartScreen();
             }, 3000);
-        }, 1500); // 1.5 Sekunden warten, damit die Sterbeanimation des Bosses noch abspielen kann
+        }, 1500);
     }
 }
